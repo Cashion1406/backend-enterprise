@@ -27,11 +27,15 @@ public class Topic {
     private String name;
 
     @Column(name = "topic_closure_date", length = 50)
-    private String date;
+    private String idea_closure_date;
 
     @Column(name = "topic_final_date", length = 50)
-    private String finaldate;
+    private String final_closure_date;
 
+    @Column(name ="modify_date")
+    private String modifyDate;
+    @Column(name ="isDeleted")
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "topic")
     private Set<Idea> ideas = new HashSet<>();

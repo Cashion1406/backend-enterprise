@@ -12,5 +12,7 @@ import lombok.Setter;
 public enum ERole {
     ROLE_USER,
     ROLE_MOD,
-    ROLE_ADMIN
+    ROLE_ADMIN,
+    ROLE_QA_DE,
+    ROLE_QA_ALL
 }

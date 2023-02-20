@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -19,4 +22,12 @@ public class Category {
 
     @Column(name = "cate_name", length = 45)
     private String name;
+
+
+    @ManyToMany()
+    @JoinTable(name = "idea_cate_tbl",
+    joinColumns = @JoinColumn(name = "idea_id"),
+    inverseJoinColumns = @JoinColumn(name = "cate_id")
+    )
+    private Set<Idea> idea = new HashSet<>();
 }

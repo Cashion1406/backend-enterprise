@@ -37,11 +37,11 @@ public class ClientController {
         return clientService.getClientByid(id);
     }
 
-    @GetMapping("/searchbyname")
-    public Optional<Client> getClientbyName(@RequestParam String name) {
-        return clientService.getClientByname(name);
-
-    }
+//    @GetMapping("/searchbyname")
+//    public Optional<Client> getClientbyName(@RequestParam String name) {
+//        return clientService.getClientByname(name);
+//
+//    }
 
     @DeleteMapping("/delete")
     public ClientDeleteResponse delete(@RequestParam Long id) {
@@ -49,10 +49,10 @@ public class ClientController {
         return clientService.delete(id);
     }
 
-    @PutMapping("/update")
-    public Client update(@RequestBody Client client) {
-        return clientService.updateClient(client);
-    }
+//    @PutMapping("/update")
+//    public Client update(@RequestBody Client client) {
+//        return clientService.updateClient(client);
+//    }
 
     @PostMapping("/deleteall")
     public String deleteall(){

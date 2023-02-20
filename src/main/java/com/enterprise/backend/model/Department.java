@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -25,5 +28,11 @@ public class Department {
 
     @Column(name = "department_info")
     private String client_info;
+
+    @Column(name = "isDeleted")
+    private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "department")
+    private Set<Client> clients = new HashSet<>();
 
 }

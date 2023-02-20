@@ -5,10 +5,7 @@ import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.service.TopicServce;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class TopicController {
     }
 
     @PostMapping("/create")
-    public Topic createtopic(Topic topic) {
+    public Topic createtopic(@RequestBody Topic topic) {
         return topicServce.createtopic(topic);
     }
 

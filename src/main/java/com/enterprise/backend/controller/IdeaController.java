@@ -1,10 +1,7 @@
 package com.enterprise.backend.controller;
 
-import com.enterprise.backend.model.FileUpload;
 import com.enterprise.backend.model.Idea;
-import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.service.IdeaService;
-import com.enterprise.backend.service.TopicServce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +28,5 @@ public class IdeaController {
 
 
         return ideaService.createidea(idea);
-    }
-
-    @PostMapping("/upload")
-    public ResponseEntity<FileUpload> upload (@RequestParam("file") MultipartFile file) throws IOException {
-
-        return  ideaService.upload(file);
     }
    }

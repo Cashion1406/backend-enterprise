@@ -17,30 +17,47 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "client_tbl", uniqueConstraints = {@UniqueConstraint(columnNames = "client_email"),
-        @UniqueConstraint(columnNames = "client_name")})
+@Table(name = "client_tbl")
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
-    @Column(name = "client_name", length = 45)
-    private String name;
+    @Column(name = "client_firstname", length = 45)
+    private String firstname;
 
-    @Column(name = "client_email", length = 50)
-    private String email;
+    @Column(name = "client_lastname", length = 45)
+    private String lastname;
+
+    @Column(name = "client_age", length = 45)
+    private String age;
 
     @Column(name = "client_info")
     private String client_info;
 
+    @Column(name = "client_role")
+    @Enumerated(EnumType.STRING)
+    private ERole role;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role_tbl", joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @Column(name = "client_pronoun")
+    @Enumerated(EnumType.STRING)
+    private EPronoun pronoun;
 
-    @Transient
-    private Set<String> mockrole;
+    @Column(name = "client_isDeleted")
+    private Boolean isDeleted;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department;
+
+    @OneToMany(mappedBy = "client")
+    private Set<Idea> ideas = new HashSet<>();
+
+    @OneToMany(mappedBy = "client")
+    private Set<Reaction> reactions = new HashSet<>();
+
+    @OneToMany(mappedBy = "comment")
+    private Set<Comment> comments = new HashSet<>();
+
 
 }
