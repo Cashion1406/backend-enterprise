@@ -21,6 +21,7 @@ import java.util.Set;
 public class Client {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
