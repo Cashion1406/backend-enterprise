@@ -26,8 +26,8 @@ public class TopicController {
         return topicServce.createtopic(topic);
     }
 
-    @GetMapping("/gettopicbyid")
-    public Optional<Topic> gettopic(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public Optional<Topic> gettopic(@PathVariable Long id) {
         return topicServce.gettopicbyid(id);
     }
 
