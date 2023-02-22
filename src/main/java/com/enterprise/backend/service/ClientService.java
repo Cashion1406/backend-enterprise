@@ -61,4 +61,11 @@ public class ClientService {
     }
 
 
+    public List<Client> getClientByname(String name) {
+        if (name.isEmpty()){
+
+            return clientRepo.findAll();
+        }
+        return clientRepo.findBylastnameContaining(name);
+    }
 }

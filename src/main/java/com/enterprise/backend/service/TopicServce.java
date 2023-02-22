@@ -1,6 +1,5 @@
 package com.enterprise.backend.service;
 
-import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,10 @@ public class TopicServce {
     public Topic createtopic(Topic topic) {
 
         return topicRepo.saveAndFlush(topic);
+    }
+
+    public Optional<Topic> gettopicbyid(Long id){
+        return topicRepo.findById(id);
     }
 
 

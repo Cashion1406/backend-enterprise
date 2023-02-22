@@ -56,3 +56,11 @@ commit;
 INSERT INTO idea_tbl(
 	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
 	VALUES ('1', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing flutter', '1','2');
+
+INSERT INTO idea_tbl(
+	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	VALUES ('2', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing Spring boot ', '3','1');
+
+INSERT INTO idea_tbl(
+	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	VALUES ('3', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing React', '2','3');
