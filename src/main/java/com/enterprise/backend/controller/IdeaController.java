@@ -24,9 +24,9 @@ public class IdeaController {
     }
 
     @PostMapping("/create")
-    public Idea createtopic(Idea idea, @RequestPart("file")MultipartFile file) {
+    public Idea createtopic(Idea idea) {
 
 
         return ideaService.createidea(idea);
     }
-   }
+}
