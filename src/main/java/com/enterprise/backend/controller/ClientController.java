@@ -25,7 +25,7 @@ public class ClientController {
         return clientService.getallClient();
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup")
     public ResponseEntity addClient(@RequestBody Client client) {
         return clientService.saveClient(client);
     }

@@ -1,5 +1,8 @@
 package com.enterprise.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +27,7 @@ public class Category {
     private String name;
 
 
-    @ManyToMany()
-    @JoinTable(name = "idea_cate_tbl",
-    joinColumns = @JoinColumn(name = "idea_id"),
-    inverseJoinColumns = @JoinColumn(name = "cate_id")
-    )
+    @ManyToMany(mappedBy = "category")
+    //@JsonIgnoreProperties(value = "category")
     private Set<Idea> idea = new HashSet<>();
 }

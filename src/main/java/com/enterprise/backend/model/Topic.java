@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class Topic {
     @Column(name ="isDeleted")
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Idea> ideas = new HashSet<>();
 }

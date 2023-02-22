@@ -1,8 +1,10 @@
 package com.enterprise.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +23,6 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
@@ -49,15 +50,17 @@ public class Client {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
+    @JsonBackReference
     private Department department;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "client_idea")
     private Set<Idea> ideas = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
     private Set<Reaction> reactions = new HashSet<>();
 
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "client")
     private Set<Comment> comments = new HashSet<>();
 
 

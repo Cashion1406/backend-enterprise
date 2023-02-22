@@ -44,16 +44,16 @@ public class ClientService {
         return new ClientDeleteResponse("Deleted user " + id, timestamp, true);
     }
 
-//    public Client updateClient(Client client) {
-//        Client existClient = clientRepo.findById(client.getId()).get();
-//        existClient.setClient_info(client.getClient_info());
-//        return clientRepo.save(existClient);
-//    }
+    public Client updateClient(Client client) {
+        Client existClient = clientRepo.findById(Long.valueOf(client.getId())).get();
+        existClient.setClient_info(client.getClient_info());
+        return clientRepo.save(existClient);
+    }
 
-//    public Optional<Client> getClientByname(String firstname) {
-//
-//        return clientRepo.findBynameContaining(firstname);
-//    }
+/*    public Optional<Client> getClientByname(String firstname) {
+
+        return clientRepo.findBynameContaining(firstname);
+    }*/
 
     public String deleteAllClient() {
         clientRepo.deleteAll();

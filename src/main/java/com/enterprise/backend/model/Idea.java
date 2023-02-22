@@ -1,6 +1,9 @@
 package com.enterprise.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,18 +43,24 @@ public class Idea {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    @JsonBackReference
     private Topic topic;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JsonBackReference(value = "client_idea")
     private Client client;
 
     @OneToMany(mappedBy = "idea")
     private Set<Reaction> reactions = new HashSet<>();
 
 
-    @ManyToMany
+    @ManyToMany(fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "idea_cate_tbl",
+            joinColumns = @JoinColumn(name = "idea_id"),
+            inverseJoinColumns = @JoinColumn(name = "cate_id")
+    )
+    //@JsonIgnoreProperties(value = "idea")
     private Set<Category> category = new HashSet<>();
-
 
 }

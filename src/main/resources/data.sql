@@ -52,3 +52,7 @@ INSERT INTO topic_tbl(
 	id, topic_final_date, topic_closure_date, is_deleted, modify_date, topic_name)
 	VALUES ('3', '10/20/2023', '15/20/2023', 'FALSE', '02/20/2023', 'Deploy handwritten OCR');
 commit;
+
+INSERT INTO idea_tbl(
+	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	VALUES ('1', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing flutter', '1','2');
