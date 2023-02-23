@@ -32,4 +32,8 @@ public class Category {
     //@JsonIgnoreProperties(value = "category")
     private Set<Idea> idea = new HashSet<>();
 
+    @OneToMany(mappedBy = "cate_id")
+    @JsonManagedReference
+    private  Set<Idea_cate> idea_cate;
+
 }

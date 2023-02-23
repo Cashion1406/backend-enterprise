@@ -56,12 +56,8 @@ public class Idea {
     private Set<Reaction> reactions = new HashSet<>();
 
 
-    @ManyToMany(fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "idea_cate_tbl",
-            joinColumns = @JoinColumn(name = "idea_id"),
-            inverseJoinColumns = @JoinColumn(name = "cate_id")
-    )
-    //@JsonIgnoreProperties(value = "idea")
-    private Set<Category> category = new HashSet<>();
+    @OneToMany(mappedBy = "idea_id")
+    @JsonManagedReference
+    private Set<Idea_cate> idea_cate;
 
 }
