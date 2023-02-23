@@ -24,9 +24,10 @@ public class IdeaController {
     }
 
     @PostMapping("/create")
-    public Idea createtopic(Idea idea) {
+    public Idea createtopic(@RequestBody Idea idea) {
 
 
         return ideaService.createidea(idea);
     }
+
    }

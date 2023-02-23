@@ -26,21 +26,12 @@ public class IdeaService {
 
     public Idea createidea(Idea idea) {
 
-        idea.setCategory(idea.getCategory().stream().map(catecontent -> {
 
-       Optional<Category> cate = Optional.ofNullable(catecontent);
-            if (cate.get().getId() > 0) {
-
-                cate = cateRepo.findById(catecontent.getId());
-
-            }
-            cate.get().getIdea().add(idea);
-
-            return catecontent;
-        }).collect(Collectors.toSet()));
 
         return ideaRepo.save(idea);
     }
+
+
 
 
 }

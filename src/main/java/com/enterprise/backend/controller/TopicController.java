@@ -21,7 +21,7 @@ public class TopicController {
         return topicServce.getalltopic();
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public Topic createtopic(@RequestBody Topic topic) {
         return topicServce.createtopic(topic);
     }
