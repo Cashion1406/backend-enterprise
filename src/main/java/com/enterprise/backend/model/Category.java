@@ -28,12 +28,8 @@ public class Category {
     private String name;
 
 
-    @ManyToMany(mappedBy = "category")
-    //@JsonIgnoreProperties(value = "category")
-    private Set<Idea> idea = new HashSet<>();
-
     @OneToMany(mappedBy = "cate_id")
     @JsonManagedReference
-    private  Set<Idea_cate> idea_cate;
+    private  Set<Idea_cate> idea_cate = new HashSet<>();
 
 }

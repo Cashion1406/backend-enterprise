@@ -58,6 +58,6 @@ public class Idea {
 
     @OneToMany(mappedBy = "idea_id")
     @JsonManagedReference
-    private Set<Idea_cate> idea_cate;
+    private Set<Idea_cate> idea_cate = new HashSet<>();
 
 }

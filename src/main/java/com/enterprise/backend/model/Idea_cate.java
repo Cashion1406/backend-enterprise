@@ -17,15 +17,12 @@ import lombok.Setter;
 public class Idea_cate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name = "cate_id",referencedColumnName = "id")
     @JsonBackReference
     private Category cate_id;
 
+    @Id
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name = "idea_id",referencedColumnName = "id")
     @JsonBackReference
