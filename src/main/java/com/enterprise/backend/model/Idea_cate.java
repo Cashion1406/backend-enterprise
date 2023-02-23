@@ -2,6 +2,8 @@ package com.enterprise.backend.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +21,7 @@ public class Idea_cate {
     @Id
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name = "cate_id",referencedColumnName = "id")
-    @JsonBackReference
+    @JsonIncludeProperties("name")
     private Category cate_id;
 
     @Id
