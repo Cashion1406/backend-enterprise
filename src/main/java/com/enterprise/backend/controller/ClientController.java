@@ -27,6 +27,7 @@ public class ClientController {
 
     @PostMapping(value = "/signup")
     public ResponseEntity addClient(@RequestBody Client client) {
+
         return clientService.saveClient(client);
     }
 
@@ -41,7 +42,7 @@ public class ClientController {
     public List<Client> getClientbyName(@RequestParam String name) {
         return clientService.getClientByname(name);
 
-  }
+    }
 
     @DeleteMapping("/delete")
     public ClientDeleteResponse delete(@RequestParam Long id) {
@@ -55,7 +56,7 @@ public class ClientController {
     }
 
     @PostMapping("/deleteall")
-    public String deleteall(){
+    public String deleteall() {
 
         return clientService.deleteAllClient();
     }

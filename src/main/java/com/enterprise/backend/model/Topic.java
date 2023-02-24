@@ -39,6 +39,6 @@ public class Topic {
     private Boolean isDeleted;
 
     @OneToMany(mappedBy = "topic", fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "idea_topic")
     private Set<Idea> ideas = new HashSet<>();
 }

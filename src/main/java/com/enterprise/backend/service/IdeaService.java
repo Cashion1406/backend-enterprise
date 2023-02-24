@@ -26,12 +26,21 @@ public class IdeaService {
 
     public Idea createidea(Idea idea) {
 
-
-
         return ideaRepo.save(idea);
     }
 
+    public List<Idea> get(String id){
+
+        return ideaRepo.getideabyid(id);
+    }
+
+    public int gettotalview(Long id){
+
+        return ideaRepo.gettotalview(id);
+    }
 
 
-
+    public List<Idea> getupvote(){
+        return ideaRepo.getupvote();
+    }
 }

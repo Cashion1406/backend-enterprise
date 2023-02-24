@@ -5,7 +5,6 @@ import com.enterprise.backend.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +27,23 @@ public class IdeaController {
 
 
         return ideaService.createidea(idea);
+    }
+    @GetMapping("{id}")
+    public List<Idea> getallidea(@PathVariable String id) {
+
+        return ideaService.get(id);
+    }
+
+    @GetMapping("/gettotalview/{id}")
+    public Integer getallidea(@PathVariable Long id) {
+
+        return ideaService.gettotalview(id);
+    }
+
+    @GetMapping("/getupvote")
+    public List<Idea> upvote (){
+
+        return ideaService.getupvote();
     }
 
    }

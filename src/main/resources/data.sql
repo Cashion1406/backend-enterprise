@@ -64,3 +64,15 @@ INSERT INTO idea_tbl(
 INSERT INTO idea_tbl(
 	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
 	VALUES ('3', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing React', '2','3');
+
+commit ;
+
+INSERT INTO reaction_tbl(
+	id, reaction, client_id, idea_id)
+	VALUES ('1', 'true', '1', '1');
+INSERT INTO reaction_tbl(
+	id, reaction, client_id, idea_id)
+	VALUES ('2', 'false', '2', '1');
+INSERT INTO reaction_tbl(
+	id, reaction, client_id, idea_id)
+	VALUES ('3', 'null', '3', '1');

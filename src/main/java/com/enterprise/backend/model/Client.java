@@ -58,6 +58,7 @@ public class Client {
     private Set<Idea> ideas = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
+    @JsonManagedReference
     private Set<Reaction> reactions = new HashSet<>();
 
     @OneToMany(mappedBy = "client")

@@ -1,9 +1,6 @@
 package com.enterprise.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +26,7 @@ public class Category {
 
 
     @OneToMany(mappedBy = "cate_id")
-    @JsonManagedReference
+    @JsonIgnore
     private  Set<Idea_cate> idea_cate = new HashSet<>();
 
 }

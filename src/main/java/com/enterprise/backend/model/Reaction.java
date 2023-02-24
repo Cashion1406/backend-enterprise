@@ -1,5 +1,7 @@
 package com.enterprise.backend.model;
 
+import com.enterprise.backend.response.ReactionResponse;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,16 +17,19 @@ import lombok.Setter;
 public class Reaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JsonBackReference
     private Client client;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idea_id", referencedColumnName = "id")
+    @JsonBackReference(value = "idea_reaction")
     private Idea idea;
+
 
     @Column(name = "reaction")
     private Boolean reaction;
