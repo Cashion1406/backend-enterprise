@@ -3,6 +3,7 @@ package com.enterprise.backend.controller;
 import com.enterprise.backend.DTO.IdeaRequest;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Idea;
+import com.enterprise.backend.model.Idea_cate;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.service.IdeaService;
@@ -57,6 +58,7 @@ public class IdeaController {
         Idea created_idea = ideaService.createidea(newIdea);
         return newIdea;
     }
+
     @GetMapping("{id}")
     public List<Idea> getallidea(@PathVariable String id) {
 
@@ -70,9 +72,16 @@ public class IdeaController {
     }
 
     @GetMapping("/getupvote")
-    public List<Idea> upvote (){
+    public List<Idea> upvote() {
 
         return ideaService.getupvote();
     }
 
-   }
+
+    @PostMapping("/cate_idea")
+    public String insertidea_catev2(@RequestParam long cate_id,@RequestParam long idea_id) {
+        ideaService.insertv2(cate_id,idea_id);
+        return  "OK ADDED";
+    }
+
+}

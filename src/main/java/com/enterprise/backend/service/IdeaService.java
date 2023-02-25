@@ -2,6 +2,7 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.model.Category;
 import com.enterprise.backend.model.Idea;
+import com.enterprise.backend.model.Idea_cate;
 import com.enterprise.backend.repo.CateRepo;
 import com.enterprise.backend.repo.IdeaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,10 @@ public class IdeaService {
     public List<Idea> getupvote(){
         return ideaRepo.getupvote();
     }
+
+    public String insertv2(long cate_id, long idea_id){
+
+        return ideaRepo.insertideacatev2(cate_id,idea_id);
+    }
+
 }

@@ -62,6 +62,7 @@ public class Client {
     private Set<Reaction> reactions = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
+    @JsonManagedReference(value = "client_comment")
     private Set<Comment> comments = new HashSet<>();
 
 

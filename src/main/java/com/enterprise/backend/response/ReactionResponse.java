@@ -15,28 +15,18 @@ import java.util.HashSet;
 import java.util.Set;
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "response_reaction_tbl")
 public class ReactionResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
 
-    @Column(name = "upvote_count")
+
     private Long upvote;
 
-/*
-    @OneToMany(mappedBy = "reactionresponse")
-    @JsonManagedReference
-    private Set<Reaction> reactions = new HashSet<>();
-*/
 
-    @Column(name = "downvote_count")
     private Long downvote;
 
-    @Column(name = "view_count")
+
     private Boolean view;
 }
