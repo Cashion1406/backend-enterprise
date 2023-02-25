@@ -40,6 +40,7 @@ public class IdeaController {
     }
 
     @Transactional
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public Idea createtopic(@RequestBody IdeaRequest idea) {
         logger.info("create topic logger ==>" + idea.getName());
