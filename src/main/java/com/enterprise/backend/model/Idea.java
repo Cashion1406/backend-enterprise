@@ -1,7 +1,6 @@
 package com.enterprise.backend.model;
 
 
-import com.enterprise.backend.response.ReactionResponse;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Embeddable
 @Table(name = "idea_tbl")
 public class Idea {
     @Id

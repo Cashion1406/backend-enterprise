@@ -32,23 +32,23 @@ public class ClientService {
         return clientRepo.findAll();
     }
 
-    public Optional<Client> getClientByid(long id) {
+    public Optional<Client> getClientByid(String id) {
 
         return clientRepo.findById(id);
     }
 
 
-    public ClientDeleteResponse delete(long id) {
+    public ClientDeleteResponse delete(String id) {
         clientRepo.deleteById(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return new ClientDeleteResponse("Deleted user " + id, timestamp, true);
     }
 
-    public Client updateClient(Client client) {
-        Client existClient = clientRepo.findById(Long.valueOf(client.getId())).get();
-        existClient.setClient_info(client.getClient_info());
-        return clientRepo.save(existClient);
-    }
+//    public Client updateClient(Client client) {
+//        Client existClient = clientRepo.findById(Long.valueOf(client.getId())).get();
+//        existClient.setClient_info(client.getClient_info());
+//        return clientRepo.save(existClient);
+//    }
 
 /*    public Optional<Client> getClientByname(String firstname) {
 

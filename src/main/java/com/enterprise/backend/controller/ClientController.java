@@ -4,6 +4,7 @@ package com.enterprise.backend.controller;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.response.ClientDeleteResponse;
 import com.enterprise.backend.service.ClientService;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,11 +33,11 @@ public class ClientController {
     }
 
 
-    @GetMapping("/searchbyid")
-    public Optional<Client> getClientByid(@RequestParam Long id) {
-
-        return clientService.getClientByid(id);
-    }
+//    @GetMapping("/searchbyid")
+//    public Optional<Client> getClientByid(@RequestParam Long id) {
+//
+//        return clientService.getClientByid(id);
+//    }
 
     @GetMapping("/searchbyname")
     public List<Client> getClientbyName(@RequestParam String name) {
@@ -45,15 +46,15 @@ public class ClientController {
     }
 
     @DeleteMapping("/delete")
-    public ClientDeleteResponse delete(@RequestParam Long id) {
+    public ClientDeleteResponse delete(@RequestParam String id) {
 
         return clientService.delete(id);
     }
 
-    @PutMapping("/update")
-    public Client update(@RequestBody Client client) {
-        return clientService.updateClient(client);
-    }
+//    @PutMapping("/update")
+//    public Client update(@RequestBody Client client) {
+//        return clientService.updateClient(client);
+//    }
 
     @PostMapping("/deleteall")
     public String deleteall() {

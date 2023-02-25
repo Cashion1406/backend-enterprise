@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClientRepo extends JpaRepository<Client, Long> {
+public interface ClientRepo extends JpaRepository<Client, String> {
     List<Client> findBylastnameContaining(String firstname);
 
 
