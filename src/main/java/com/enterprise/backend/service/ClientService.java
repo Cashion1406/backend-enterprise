@@ -2,6 +2,7 @@ package com.enterprise.backend.service;
 
 
 
+import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.repo.ClientRepo;
@@ -23,7 +24,10 @@ public class ClientService {
     private ClientRepo clientRepo;
 
 
+
+
     public ResponseEntity saveClient(Client client) {
+
         return ResponseEntity.ok(clientRepo.save(client));
     }
 
@@ -38,17 +42,19 @@ public class ClientService {
     }
 
 
+
+
     public ClientDeleteResponse delete(String id) {
         clientRepo.deleteById(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return new ClientDeleteResponse("Deleted user " + id, timestamp, true);
     }
 
-//    public Client updateClient(Client client) {
-//        Client existClient = clientRepo.findById(Long.valueOf(client.getId())).get();
-//        existClient.setClient_info(client.getClient_info());
-//        return clientRepo.save(existClient);
-//    }
+    public Client updateClient(Client client) {
+        Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
+        existClient.setClient_info(client.getClient_info());
+        return clientRepo.save(existClient);
+    }
 
 /*    public Optional<Client> getClientByname(String firstname) {
 

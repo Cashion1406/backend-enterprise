@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "comment_tbl")
+@Embeddable
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +30,7 @@ public class Comment {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idea_id", referencedColumnName = "id")
+    @JsonBackReference(value = "idea_comment")
     private Idea idea;
 
 

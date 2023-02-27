@@ -24,7 +24,8 @@ public class CateCotroller {
     }
 
     @PostMapping("/create")
-    public Category addClient(@RequestBody Category category ) {
+    @CrossOrigin(origins = "http://localhost:3000")
+        public Category addClient(@RequestBody Category category ) {
         return cateService.savecate(category);
     }
 

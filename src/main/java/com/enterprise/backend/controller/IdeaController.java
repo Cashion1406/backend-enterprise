@@ -16,24 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Optional;
-
-import static java.sql.DriverManager.println;
 
 
 @RestController
 @RequestMapping("/idea")
 public class IdeaController {
 
-    Logger logger = LoggerFactory.getLogger(IdeaController.class);
     @Autowired
     private IdeaService ideaService;
-    @Autowired
-    private ClientService clientService;
-    @Autowired
-    private TopicServce topicServce;
+
 
     @GetMapping()
     public List<Idea> getallidea() {
@@ -44,19 +38,7 @@ public class IdeaController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public Idea createtopic(@RequestBody IdeaRequest idea) {
-        logger.info("create topic logger ==>" + idea.getName());
-        Optional<Client> client = clientService.getClientByid(idea.getClient_id());
-        Optional<Topic> topic = topicServce.gettopicbyid(idea.getTopic_id());
-        Idea newIdea = new Idea();
-        newIdea.setBody(idea.getBody());
-        newIdea.setName(idea.getName());
-        newIdea.setDate(idea.getDate());
-        newIdea.setAttached_path(idea.getAttached_path());
-        newIdea.setModify_date(idea.getModify_date());
-        newIdea.setClient(client.get());
-        newIdea.setTopic(topic.get());
-        Idea created_idea = ideaService.createidea(newIdea);
-        return newIdea;
+        return ideaService.createidea(idea);
     }
 
     @GetMapping("{id}")
@@ -79,9 +61,10 @@ public class IdeaController {
 
 
     @PostMapping("/cate_idea")
-    public String insertidea_catev2(@RequestParam long cate_id,@RequestParam long idea_id) {
-        ideaService.insertv2(cate_id,idea_id);
-        return  "OK ADDED";
+    public String insertidea_catev2(@RequestParam long cate_id, @RequestParam long idea_id) {
+        ideaService.insertv2(cate_id, idea_id);
+        return "OK ADDED";
     }
+
 
 }

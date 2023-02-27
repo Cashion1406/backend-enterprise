@@ -31,4 +31,7 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
 
     @Query(value = "insert into idea_cate_tbl (cate_id,idea_id) values (:cate_id,:idea_id)", nativeQuery = true)
     String insertideacatev2(@Param("cate_id") long cate_id, @Param("idea_id") long idea_id);
+
+    @Query(value = "insert into comment_tbl (comment, client_id, idea_id) values (:cate_id,:idea_id)", nativeQuery = true)
+    String insertcomment(@Param("cate_id") long cate_id, @Param("idea_id") long idea_id);
 }

@@ -55,6 +55,10 @@ public class Idea {
     private Set<Reaction> reactions = new HashSet<>();
 
 
+    @OneToMany(mappedBy = "idea")
+    @JsonManagedReference(value = "idea_comment")
+    private Set<Comment> comments = new HashSet<>();
+
     @OneToMany(mappedBy = "idea_id")
     private Set<Idea_cate> idea_cate = new HashSet<>();
 

@@ -22,7 +22,7 @@ public class TopicServce {
 
     public Topic createtopic(Topic topic) {
 
-        return topicRepo.saveAndFlush(topic);
+        return topicRepo.save(topic);
     }
 
     public Optional<Topic> gettopicbyid(Long id){
@@ -30,4 +30,15 @@ public class TopicServce {
     }
 
 
+    public Topic updateTopic (Topic topic){
+
+        Topic existtopic = topicRepo.findById(topic.getId()).get();
+        existtopic.setName(topic.getName());
+        existtopic.setIdea_closure_date(topic.getIdea_closure_date());
+        existtopic.setFinal_closure_date(topic.getFinal_closure_date());
+        existtopic.setModifyDate(topic.getModifyDate());
+        existtopic.setIsDeleted(topic.getIsDeleted());
+
+        return topicRepo.save(existtopic);
+    }
 }

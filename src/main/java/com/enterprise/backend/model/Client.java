@@ -55,6 +55,7 @@ public class Client {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
     @JsonManagedReference(value = "client_idea")
+    @JsonIgnore
     private Set<Idea> ideas = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
@@ -64,6 +65,7 @@ public class Client {
     @OneToMany(mappedBy = "client")
     @JsonManagedReference(value = "client_comment")
     private Set<Comment> comments = new HashSet<>();
+
 
 
 }

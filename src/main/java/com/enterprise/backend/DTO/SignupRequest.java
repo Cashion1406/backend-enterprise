@@ -2,6 +2,7 @@ package com.enterprise.backend.DTO;
 
 import java.util.Set;
 
+
 public class SignupRequest {
 
     private String username;

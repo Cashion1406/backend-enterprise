@@ -2,6 +2,7 @@ package com.enterprise.backend.controller;
 
 
 import com.enterprise.backend.model.Client;
+import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.response.ClientDeleteResponse;
 import com.enterprise.backend.service.ClientService;
 import lombok.extern.java.Log;
@@ -27,17 +28,25 @@ public class ClientController {
     }
 
     @PostMapping(value = "/signup")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity addClient(@RequestBody Client client) {
 
+        if (client.getIsDeleted() ==null ){
+            client.setIsDeleted(false);
+        }
+        if (client.getRole() ==null){
+
+            client.setRole(ERole.ROLE_USER);
+        }
         return clientService.saveClient(client);
     }
 
 
-//    @GetMapping("/searchbyid")
-//    public Optional<Client> getClientByid(@RequestParam Long id) {
-//
-//        return clientService.getClientByid(id);
-//    }
+    @GetMapping("/{id}")
+    public Optional<Client> getClientByid(@PathVariable String id) {
+
+        return clientService.getClientByid(id);
+    }
 
     @GetMapping("/searchbyname")
     public List<Client> getClientbyName(@RequestParam String name) {
@@ -51,10 +60,10 @@ public class ClientController {
         return clientService.delete(id);
     }
 
-//    @PutMapping("/update")
-//    public Client update(@RequestBody Client client) {
-//        return clientService.updateClient(client);
-//    }
+    @PutMapping("/update")
+    public Client update(@RequestBody Client client) {
+        return clientService.updateClient(client);
+    }
 
     @PostMapping("/deleteall")
     public String deleteall() {

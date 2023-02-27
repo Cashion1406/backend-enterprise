@@ -22,13 +22,20 @@ public class TopicController {
     }
 
     @PostMapping()
-    public Topic createtopic(@RequestBody Topic topic) {
+    @CrossOrigin(origins = "http://localhost:3000")
+        public Topic createtopic(@RequestBody Topic topic) {
         return topicServce.createtopic(topic);
     }
 
     @GetMapping("/{id}")
     public Optional<Topic> gettopic(@PathVariable Long id) {
         return topicServce.gettopicbyid(id);
+    }
+
+
+    @PutMapping("/update")
+    public Topic updatetopic (@RequestBody Topic topic){
+        return topicServce.updateTopic(topic);
     }
 
 
