@@ -90,3 +90,18 @@ INSERT INTO comment_tbl(
 INSERT INTO comment_tbl(
 	id, comment, client_id, idea_id, modify_date)
 	VALUES ('3', 'Need some adjustment', '2', '1', '2023-02-27 15:25');
+
+
+INSERT INTO department_tbl(
+	id, department_info, is_deleted, depart_name)
+	VALUES ('1', 'About Health', 'false', 'Health Department');
+
+INSERT INTO department_tbl(
+	id, department_info, is_deleted, depart_name)
+	VALUES ('2', 'About Money', 'false', 'Money Department');
+
+INSERT INTO public.department_tbl(
+	id, department_info, is_deleted, depart_name)
+	VALUES ('3', 'About Staff', false, 'Staff Department');
+
+commit;
