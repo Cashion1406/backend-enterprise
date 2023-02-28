@@ -1,13 +1,15 @@
 package com.enterprise.backend.controller;
 
 
+import com.enterprise.backend.DTO.ClientDepartmentRequest;
+
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.ERole;
-import com.enterprise.backend.response.ClientDeleteResponse;
+import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.service.ClientService;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +17,30 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/client")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
 
 
+    //get list of all user
     @GetMapping()
     public List<Client> getallClient() {
 
         return clientService.getallClient();
     }
 
-    @PostMapping(value = "/signup")
+
+    //create user info
+    @PostMapping("/signup")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity addClient(@RequestBody Client client) {
+    @Transactional
+    public Client addClient(@RequestBody ClientDepartmentRequest client) {
 
-        if (client.getIsDeleted() ==null ){
-            client.setIsDeleted(false);
-        }
-        if (client.getRole() ==null){
 
-            client.setRole(ERole.ROLE_USER);
-        }
         return clientService.saveClient(client);
     }
-
 
     @GetMapping("/{id}")
     public Optional<Client> getClientByid(@PathVariable String id) {
@@ -55,7 +55,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/delete")
-    public ClientDeleteResponse delete(@RequestParam String id) {
+    public DeleteResponse delete(@RequestParam String id) {
 
         return clientService.delete(id);
     }
@@ -70,4 +70,5 @@ public class ClientController {
 
         return clientService.deleteAllClient();
     }
+
 }

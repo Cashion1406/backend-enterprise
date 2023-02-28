@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -27,6 +29,9 @@ public class Comment {
     @JsonBackReference(value = "client_comment")
     private Client client;
 
+
+    @Column(name = "modify_date")
+    private String modify_date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idea_id", referencedColumnName = "id")

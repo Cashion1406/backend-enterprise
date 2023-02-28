@@ -1,7 +1,6 @@
 package com.enterprise.backend.response;
 
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDeleteResponse {
+public class DeleteResponse {
 
     private String message;
 

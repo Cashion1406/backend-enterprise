@@ -76,3 +76,17 @@ INSERT INTO reaction_tbl(
 INSERT INTO reaction_tbl(
 	id, reaction, client_id, idea_id)
 	VALUES ('3', 'null', '3', '1');
+
+commit
+
+INSERT INTO comment_tbl(
+	id, comment, client_id, idea_id, modify_date)
+	VALUES ('1', 'This idea is briliant', '1', '1', '2023-02-27 15:25');
+
+INSERT INTO comment_tbl(
+	id, comment, client_id, idea_id, modify_date)
+	VALUES ('2', 'I honestly dont know about this', '2', '1', '2023-02-27 15:25');
+
+INSERT INTO comment_tbl(
+	id, comment, client_id, idea_id, modify_date)
+	VALUES ('3', 'Need some adjustment', '2', '1', '2023-02-27 15:25');

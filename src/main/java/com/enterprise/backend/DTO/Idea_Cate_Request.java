@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,6 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Idea_Cate_Request {
 
-    private List<Category> categories;
+    private List<Long> categories;
     private long idea_id;
 }

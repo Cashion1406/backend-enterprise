@@ -1,6 +1,8 @@
 package com.enterprise.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "department_tbl")
-public class Department {
+public class    Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,13 +30,13 @@ public class Department {
     private String name;
 
     @Column(name = "department_info")
-    private String client_info;
+    private String department_info;
 
     @Column(name = "isDeleted")
     private Boolean isDeleted;
 
     @OneToMany(mappedBy = "department",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference(value = "client_department")
     private Set<Client> clients = new HashSet<>();
 
 }

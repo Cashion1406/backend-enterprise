@@ -50,7 +50,7 @@ public class Client {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonManagedReference(value = "client_department")
     private Department department;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)

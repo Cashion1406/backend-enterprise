@@ -1,10 +1,10 @@
 package com.enterprise.backend.controller;
 
+import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.DTO.IdeaRequest;
-import com.enterprise.backend.model.Client;
-import com.enterprise.backend.model.Idea;
-import com.enterprise.backend.model.Idea_cate;
-import com.enterprise.backend.model.Topic;
+import com.enterprise.backend.DTO.Idea_Cate_Request;
+import com.enterprise.backend.DTO.ReactionRequest;
+import com.enterprise.backend.model.*;
 import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.service.IdeaService;
 import com.enterprise.backend.service.TopicServce;
@@ -17,13 +17,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/idea")
+@CrossOrigin(origins = "http://localhost:3000")
 public class IdeaController {
+
+    Logger logger = LoggerFactory.getLogger(IdeaController.class);
 
     @Autowired
     private IdeaService ideaService;
@@ -60,10 +64,44 @@ public class IdeaController {
     }
 
 
-    @PostMapping("/cate_idea")
+/*    @PostMapping("/cate_idea")
     public String insertidea_catev2(@RequestParam long cate_id, @RequestParam long idea_id) {
         ideaService.insertv2(cate_id, idea_id);
         return "OK ADDED";
+    }*/
+
+    @PostMapping("/cate_idea")
+    public String add(@RequestBody Idea_Cate_Request ideaCateRequest) {
+
+        logger.info("cate_id logger ==>" + ideaCateRequest.getCategories());
+
+        for (long cateid : ideaCateRequest.getCategories()) {
+            logger.info("cate_id logger ==>" + cateid);
+            try {
+                ideaService.insertv2(cateid, ideaCateRequest.getIdea_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+        logger.info("cate_id logger 123 ==>");
+
+        return "OK ADDED";
+    }
+
+
+    @PostMapping("/comment")
+    public Comment addcomment(@RequestBody CommentRequest commentRequest) {
+
+        return ideaService.insertcomment(commentRequest);
+    }
+
+    @PostMapping("/reaction")
+    public  Reaction addreaction (@RequestBody ReactionRequest reactionRequest){
+
+        return ideaService.insertreaction(reactionRequest);
     }
 
 
