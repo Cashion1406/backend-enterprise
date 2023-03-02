@@ -3,12 +3,12 @@ package com.enterprise.backend.controller;
 
 import com.enterprise.backend.DTO.ClientDepartmentRequest;
 
+import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
-import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.response.DeleteResponse;
+import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +25,12 @@ public class ClientController {
 
 
     //get list of all user
+
     @GetMapping()
     public List<Client> getallClient() {
 
         return clientService.getallClient();
     }
-
 
     //create user info
     @PostMapping("/signup")
@@ -55,7 +55,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/delete")
-    public DeleteResponse delete(@RequestParam String id) {
+    public DeleteResponse delete(@PathVariable String id) {
 
         return clientService.delete(id);
     }
@@ -70,5 +70,21 @@ public class ClientController {
 
         return clientService.deleteAllClient();
     }
+
+    @PostMapping("/topic")
+    public String insertfollowtopic(@RequestBody Client_Topic_Request clientTopicRequest) {
+        clientService.followtopic(clientTopicRequest);
+        return "Added topics to Client " + clientService.getClientname(clientTopicRequest.getClient_id());
+
+    }
+
+    @GetMapping("/topic/{id}")
+    public List<FollowTopic> followTopic (@PathVariable String id ){
+
+
+        return clientService.followTopic(id);
+
+    }
+
 
 }

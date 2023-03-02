@@ -28,7 +28,7 @@ public class DepartmentController {
         return departmentService.create(department);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public DeleteResponse deletedepartment(long id){
 
         return departmentService.deletedepartment(id);

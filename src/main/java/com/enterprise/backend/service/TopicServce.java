@@ -2,6 +2,7 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,19 @@ public class TopicServce {
         existtopic.setIsDeleted(topic.getIsDeleted());
 
         return topicRepo.save(existtopic);
+    }
+
+    public String deleteTopic (Long id){
+        String topicname = topicRepo.getTopicname(id);
+        topicRepo.deleteById(id);
+
+        return "Successfully deleted "+topicname  ;
+    }
+
+    public String softdelete(Long id ){
+        String topicname = topicRepo.getTopicname(id);
+
+        topicRepo.softdeletetopic(id);
+        return "Temporary deleted" + topicname;
     }
 }

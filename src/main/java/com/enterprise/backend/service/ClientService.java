@@ -1,17 +1,19 @@
 package com.enterprise.backend.service;
 
 
-
 import com.enterprise.backend.DTO.ClientDepartmentRequest;
 
+import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.repo.ClientRepo;
 import com.enterprise.backend.repo.DepartmentRepo;
 import com.enterprise.backend.response.DeleteResponse;
+import com.enterprise.backend.response.FollowTopic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -28,6 +30,8 @@ public class ClientService {
     private DepartmentRepo departmentRepo;
 
 
+    Logger logger = LoggerFactory.getLogger(ClientService.class);
+
     //Create User
     public Client saveClient(ClientDepartmentRequest clientDepartmentRequest) {
 
@@ -39,10 +43,10 @@ public class ClientService {
         newClient.setClient_info(clientDepartmentRequest.getClient_info());
         newClient.setAge(clientDepartmentRequest.getAge());
         newClient.setDepartment(department.get());
-        if (clientDepartmentRequest.getIsDeleted() ==null ){
+        if (clientDepartmentRequest.getIsDeleted() == null) {
             newClient.setIsDeleted(false);
         }
-        if (clientDepartmentRequest.getRole() ==null){
+        if (clientDepartmentRequest.getRole() == null) {
 
             newClient.setRole(ERole.ROLE_USER);
         }
@@ -61,6 +65,11 @@ public class ClientService {
     public Optional<Client> getClientByid(String id) {
 
         return clientRepo.findById(id);
+    }
+
+    public String getClientname(String id){
+
+        return clientRepo.getClientname(id);
     }
 
 
@@ -92,11 +101,30 @@ public class ClientService {
 
     //Get list User by last name
     public List<Client> getClientByname(String name) {
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
 
             return clientRepo.findAll();
         }
         return clientRepo.findBylastnameContaining(name);
+    }
+
+    public void followtopic(Client_Topic_Request clientTopicRequest) {
+
+
+        try {
+            clientRepo.insertfollowtopic(clientTopicRequest.getTopic_id(), clientTopicRequest.getClient_id());
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public List<FollowTopic> followTopic (String client_id){
+
+        return clientRepo.findfollowtopic(client_id);
     }
 
 }

@@ -45,8 +45,8 @@ public class IdeaController {
         return ideaService.createidea(idea);
     }
 
-    @GetMapping("{id}")
-    public List<Idea> getallidea(@PathVariable String id) {
+    @GetMapping("/{id}")
+    public Idea getallidea(@PathVariable long id) {
 
         return ideaService.get(id);
     }
@@ -73,22 +73,10 @@ public class IdeaController {
     @PostMapping("/cate_idea")
     public String add(@RequestBody Idea_Cate_Request ideaCateRequest) {
 
-        logger.info("cate_id logger ==>" + ideaCateRequest.getCategories());
 
-        for (long cateid : ideaCateRequest.getCategories()) {
-            logger.info("cate_id logger ==>" + cateid);
-            try {
-                ideaService.insertv2(cateid, ideaCateRequest.getIdea_id());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        ideaService.insertIdeaCate(ideaCateRequest);
 
-        }
-
-
-        logger.info("cate_id logger 123 ==>");
-
-        return "OK ADDED";
+        return "Added Category to Idea: " + ideaService.get(ideaCateRequest.getIdea_id());
     }
 
 

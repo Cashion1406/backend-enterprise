@@ -1,6 +1,5 @@
 package com.enterprise.backend.model;
 
-import com.enterprise.backend.response.ReactionResponse;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -57,7 +57,7 @@ public class IdeaService {
         return ideaRepo.save(newIdea);
     }
 
-    public List<Idea> get(String id) {
+    public Idea get(long id) {
 
         return ideaRepo.getideabyid(id);
     }
@@ -71,12 +71,20 @@ public class IdeaService {
         return ideaRepo.getupvote();
     }
 
-    public void insertv2(long cate_id, long idea_id) {
+    public void insertIdeaCate(Idea_Cate_Request ideaCateRequest) {
 
-         ideaRepo.insertideacatev2(cate_id, idea_id);
+        for (long cateid : ideaCateRequest.getCategories()) {
+
+            try {
+                ideaRepo.insertideacatev2(cateid, ideaCateRequest.getIdea_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
-    public Comment insertcomment(CommentRequest commentRequest){
+    public Comment insertcomment(CommentRequest commentRequest) {
 
         Optional<Client> client = clientService.getClientByid(commentRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(commentRequest.getIdea_id());
@@ -92,7 +100,7 @@ public class IdeaService {
         return commentRepo.save(newComment);
     }
 
-    public Reaction insertreaction (ReactionRequest reactionRequest){
+    public Reaction insertreaction(ReactionRequest reactionRequest) {
 
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
 
@@ -106,7 +114,6 @@ public class IdeaService {
         return reactionRepo.save(newReaction);
 
     }
-
 
 
 }

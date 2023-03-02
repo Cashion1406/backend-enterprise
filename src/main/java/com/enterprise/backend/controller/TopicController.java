@@ -21,7 +21,7 @@ public class TopicController {
         return topicServce.getalltopic();
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     @CrossOrigin(origins = "http://localhost:3000")
         public Topic createtopic(@RequestBody Topic topic) {
         return topicServce.createtopic(topic);
@@ -39,4 +39,16 @@ public class TopicController {
     }
 
 
+    @DeleteMapping("/delete/{id}")
+    public String delete (@PathVariable Long id){
+
+        return topicServce.deleteTopic(id);
+
+    }
+
+    @DeleteMapping("/softdelete/{id}")
+    public String softdelete (@PathVariable Long id){
+
+        return topicServce.softdelete(id);
+    }
 }

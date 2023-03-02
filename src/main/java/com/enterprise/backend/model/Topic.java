@@ -1,5 +1,6 @@
 package com.enterprise.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -38,7 +39,14 @@ public class Topic {
     @Column(name ="isDeleted")
     private Boolean isDeleted;
 
+    @Column(name = "image_url")
+    private String imageURL;
+
     @OneToMany(mappedBy = "topic", fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference(value = "idea_topic")
     private Set<Idea> ideas = new HashSet<>();
+
+    @OneToMany(mappedBy = "topic_id")
+    @JsonManagedReference
+    private Set<Client_Topic> clientTopics = new HashSet<>();
 }
