@@ -29,8 +29,8 @@ public class DepartmentService {
 
     public List<Department> getall (){
 
-
-        return departmentRepo.findAll();
+        //use departmentRepo.findAll() to get all current department
+        return departmentRepo.findByisDeletedFalse();
     }
 
     public DeleteResponse deletedepartment (long id){

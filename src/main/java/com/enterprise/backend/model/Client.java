@@ -69,7 +69,7 @@ public class Client {
     @JsonView(View.Sum.class)
     private Boolean isDeleted;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @JsonManagedReference(value = "client_department")
     @JsonView(View.SumwithDepartment.class)
