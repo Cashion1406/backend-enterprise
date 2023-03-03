@@ -103,9 +103,7 @@ public class IdeaService {
     public Reaction insertreaction(ReactionRequest reactionRequest) {
 
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
-
         Optional<Idea> idea = ideaRepo.findById(reactionRequest.getIdea_id());
-
         Reaction newReaction = new Reaction();
         newReaction.setIdea(idea.get());
         newReaction.setClient(client.get());

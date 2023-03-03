@@ -5,9 +5,12 @@ import com.enterprise.backend.DTO.ClientDepartmentRequest;
 
 import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
+import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.service.ClientService;
+import com.enterprise.backend.view.View;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +28,7 @@ public class ClientController {
 
 
     //get list of all user
-
+    @JsonView(View.SumwithDepartment.class)
     @GetMapping()
     public List<Client> getallClient() {
 
@@ -35,13 +38,12 @@ public class ClientController {
     //create user info
     @PostMapping("/signup")
     @CrossOrigin(origins = "http://localhost:3000")
-    @Transactional
     public Client addClient(@RequestBody ClientDepartmentRequest client) {
 
 
         return clientService.saveClient(client);
     }
-
+    @JsonView(View.SumwithDepartment.class)
     @GetMapping("/{id}")
     public Optional<Client> getClientByid(@PathVariable String id) {
 
@@ -86,5 +88,10 @@ public class ClientController {
 
     }
 
+    @GetMapping("/idea/{id}")
+    public List<Idea> getideawithclient(@PathVariable String id) {
+
+        return clientService.getideabyclientid(id);
+    }
 
 }

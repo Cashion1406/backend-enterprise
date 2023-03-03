@@ -18,6 +18,9 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     @Query("select i from Idea i where i.id = :id  ")
     Idea getideabyid(@Param("id") long id);
 
+    @Query("select i from Idea i where i.client.id = :id  ")
+    List<Idea> getideabyclientid(@Param("id") String id);
+
     @Query("select size(i.reactions) from Idea i where i.id=:id")
     int gettotalview(@Param("id") Long id);
 

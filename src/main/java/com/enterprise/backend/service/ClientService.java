@@ -7,10 +7,13 @@ import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.model.ERole;
+import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.repo.ClientRepo;
 import com.enterprise.backend.repo.DepartmentRepo;
+import com.enterprise.backend.repo.IdeaRepo;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
+import jakarta.persistence.Id;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +33,17 @@ public class ClientService {
     private DepartmentRepo departmentRepo;
 
 
-    Logger logger = LoggerFactory.getLogger(ClientService.class);
+    @Autowired
+    private IdeaRepo ideaRepo;
 
     //Create User
     public Client saveClient(ClientDepartmentRequest clientDepartmentRequest) {
 
         Optional<Department> department = departmentRepo.findById(clientDepartmentRequest.getDepartment_id());
-
         Client newClient = new Client();
+        newClient.setId(clientDepartmentRequest.getId());
         newClient.setFirstname(clientDepartmentRequest.getFirstname());
+        newClient.setPronoun(clientDepartmentRequest.getPronoun());
         newClient.setLastname(clientDepartmentRequest.getLastname());
         newClient.setClient_info(clientDepartmentRequest.getClient_info());
         newClient.setAge(clientDepartmentRequest.getAge());
@@ -50,7 +55,6 @@ public class ClientService {
 
             newClient.setRole(ERole.ROLE_USER);
         }
-
 
         return clientRepo.save(newClient);
     }
@@ -67,7 +71,7 @@ public class ClientService {
         return clientRepo.findById(id);
     }
 
-    public String getClientname(String id){
+    public String getClientname(String id) {
 
         return clientRepo.getClientname(id);
     }
@@ -114,17 +118,21 @@ public class ClientService {
         try {
             clientRepo.insertfollowtopic(clientTopicRequest.getTopic_id(), clientTopicRequest.getClient_id());
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
 
-    public List<FollowTopic> followTopic (String client_id){
+    public List<FollowTopic> followTopic(String client_id) {
 
         return clientRepo.findfollowtopic(client_id);
     }
 
+
+    public List<Idea> getideabyclientid(String id) {
+
+        return ideaRepo.getideabyclientid(id);
+    }
 }

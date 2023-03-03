@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClientDepartmentRequest {
 
-
+    public String id;
     public String firstname;
 
     public String lastname;

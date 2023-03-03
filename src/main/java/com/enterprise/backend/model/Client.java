@@ -2,10 +2,8 @@ package com.enterprise.backend.model;
 
 
 import com.enterprise.backend.response.FollowTopic;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.enterprise.backend.view.View;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,34 +36,43 @@ import java.util.Set;
 public class Client {
 
     @Id
+    @JsonView(View.Sum.class)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
+    @JsonView(View.Sum.class)
     private String firstname;
 
     @Column(name = "client_lastname", length = 45)
+    @JsonView(View.Sum.class)
     private String lastname;
 
     @Column(name = "client_age", length = 45)
+    @JsonView(View.Sum.class)
     private String age;
 
     @Column(name = "client_info")
+    @JsonView(View.Sum.class)
     private String client_info;
 
     @Column(name = "client_role")
     @Enumerated(EnumType.STRING)
+    @JsonView(View.Sum.class)
     private ERole role;
 
     @Column(name = "client_pronoun")
     @Enumerated(EnumType.STRING)
+    @JsonView(View.Sum.class)
     private EPronoun pronoun;
 
     @Column(name = "client_isDeleted")
+    @JsonView(View.Sum.class)
     private Boolean isDeleted;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @JsonManagedReference(value = "client_department")
+    @JsonView(View.SumwithDepartment.class)
     private Department department;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
