@@ -3,7 +3,7 @@ package com.enterprise.backend.controller;
 import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
-import com.enterprise.backend.DTO.Reaction.ReactionUpdateRequest;
+
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.response.DeleteResponse;
@@ -99,7 +99,7 @@ public class IdeaController {
     }
 
     @PutMapping("/reaction/update")
-    public Reaction updatereaction(@RequestBody ReactionUpdateRequest reactionRequest){
+    public Reaction updatereaction(@RequestBody ReactionRequest reactionRequest){
 
         return ideaService.updatereaction(reactionRequest);
     }

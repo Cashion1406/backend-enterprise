@@ -3,7 +3,6 @@ package com.enterprise.backend.service;
 import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
-import com.enterprise.backend.DTO.Reaction.ReactionUpdateRequest;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.repo.CateRepo;
@@ -115,10 +114,10 @@ public class IdeaService {
     }
 
     //Update reaction
-    public Reaction updatereaction(ReactionUpdateRequest reactionUpdateRequest){
+    public Reaction updatereaction(ReactionRequest reactionRequest){
 
-        Reaction existReaction = reactionRepo.findById(reactionUpdateRequest.getReaction_id()).get();
-        existReaction.setReaction(reactionUpdateRequest.getReaction());
+        Reaction existReaction = reactionRepo.getReaction(reactionRequest.getClient_id(),reactionRequest.getIdea_id());
+        existReaction.setReaction(reactionRequest.getReaction());
         return reactionRepo.save(existReaction);
 
     }
