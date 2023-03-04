@@ -44,7 +44,6 @@ public class Topic {
 
     @OneToMany(mappedBy = "topic", fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference(value = "idea_topic")
-    @JsonIgnore
     private Set<Idea> ideas = new HashSet<>();
 
     @OneToMany(mappedBy = "topic_id")

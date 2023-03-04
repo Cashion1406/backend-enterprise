@@ -1,10 +1,10 @@
 package com.enterprise.backend.service;
 
 
-import com.enterprise.backend.DTO.ClientDepartmentRequest;
+import com.enterprise.backend.DTO.Client.ClientDepartmentRequest;
 
-import com.enterprise.backend.DTO.ClientUpdateRequest;
-import com.enterprise.backend.DTO.Client_Topic_Request;
+import com.enterprise.backend.DTO.Client.ClientUpdateRequest;
+import com.enterprise.backend.DTO.Client.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.model.ERole;
@@ -15,9 +15,6 @@ import com.enterprise.backend.repo.IdeaRepo;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
-import jakarta.persistence.Id;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

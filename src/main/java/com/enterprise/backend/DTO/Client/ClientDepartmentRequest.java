@@ -1,4 +1,4 @@
-package com.enterprise.backend.DTO;
+package com.enterprise.backend.DTO.Client;
 
 import com.enterprise.backend.model.EPronoun;
 import com.enterprise.backend.model.ERole;

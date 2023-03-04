@@ -1,13 +1,12 @@
 package com.enterprise.backend.controller;
 
 
-import com.enterprise.backend.DTO.ClientDepartmentRequest;
+import com.enterprise.backend.DTO.Client.ClientDepartmentRequest;
 
-import com.enterprise.backend.DTO.ClientUpdateRequest;
-import com.enterprise.backend.DTO.Client_Topic_Request;
+import com.enterprise.backend.DTO.Client.ClientUpdateRequest;
+import com.enterprise.backend.DTO.Client.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Idea;
-import com.enterprise.backend.model.Reaction;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
@@ -15,7 +14,6 @@ import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.view.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
