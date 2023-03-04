@@ -91,7 +91,6 @@ public class ClientService {
         existClient.setAge(client.getAge());
         existClient.setFirstname(client.getFirstname());
         existClient.setLastname(client.getLastname());
-
         return clientRepo.save(existClient);
     }
 

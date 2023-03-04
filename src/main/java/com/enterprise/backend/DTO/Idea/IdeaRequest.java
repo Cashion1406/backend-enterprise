@@ -1,4 +1,4 @@
-package com.enterprise.backend.DTO;
+package com.enterprise.backend.DTO.Idea;
 
 import com.enterprise.backend.model.Idea;
 import jakarta.persistence.*;

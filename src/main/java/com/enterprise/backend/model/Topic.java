@@ -48,5 +48,6 @@ public class Topic {
 
     @OneToMany(mappedBy = "topic_id")
     @JsonManagedReference
+    @JsonIgnore
     private Set<Client_Topic> clientTopics = new HashSet<>();
 }

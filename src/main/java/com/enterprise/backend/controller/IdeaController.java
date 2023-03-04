@@ -1,24 +1,18 @@
 package com.enterprise.backend.controller;
 
 import com.enterprise.backend.DTO.CommentRequest;
-import com.enterprise.backend.DTO.IdeaRequest;
-import com.enterprise.backend.DTO.Idea_Cate_Request;
+import com.enterprise.backend.DTO.Idea.IdeaRequest;
+import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
+import com.enterprise.backend.DTO.Reaction.ReactionUpdateRequest;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.response.DeleteResponse;
-import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.service.IdeaService;
-import com.enterprise.backend.service.TopicServce;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +40,7 @@ public class IdeaController {
     }
 
     @GetMapping("/{id}")
-    public Idea getallidea(@PathVariable long id) {
+    public Optional<Idea> getallidea(@PathVariable long id) {
 
         return ideaService.get(id);
     }
@@ -58,7 +52,7 @@ public class IdeaController {
         return ideaService.deleteidea(id);
     }
 
-    @GetMapping("/gettotalview/{id}")
+/*    @GetMapping("/gettotalview/{id}")
     public Integer getallidea(@PathVariable Long id) {
 
         return ideaService.gettotalview(id);
@@ -68,7 +62,7 @@ public class IdeaController {
     public List<Idea> upvote() {
 
         return ideaService.getupvote();
-    }
+    }*/
 
 
 /*    @PostMapping("/cate_idea")
@@ -85,7 +79,6 @@ public class IdeaController {
 
         return "Added Category to Idea: " + ideaService.getideaname(ideaCateRequest.getIdea_id());
     }
-
     @PutMapping("/update")
     public Idea updateidea(@RequestBody Idea idea){
 
@@ -103,6 +96,12 @@ public class IdeaController {
     public  Reaction addreaction (@RequestBody ReactionRequest reactionRequest){
 
         return ideaService.insertreaction(reactionRequest);
+    }
+
+    @PutMapping("/reaction/update")
+    public Reaction updatereaction(@RequestBody ReactionUpdateRequest reactionRequest){
+
+        return ideaService.updatereaction(reactionRequest);
     }
 
 

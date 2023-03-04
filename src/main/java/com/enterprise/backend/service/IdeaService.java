@@ -1,8 +1,9 @@
 package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.CommentRequest;
-import com.enterprise.backend.DTO.IdeaRequest;
-import com.enterprise.backend.DTO.Idea_Cate_Request;
+import com.enterprise.backend.DTO.Idea.IdeaRequest;
+import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
+import com.enterprise.backend.DTO.Reaction.ReactionUpdateRequest;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.repo.CateRepo;
@@ -12,13 +13,11 @@ import com.enterprise.backend.repo.ReactionRepo;
 import com.enterprise.backend.response.DeleteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class IdeaService {
@@ -60,18 +59,15 @@ public class IdeaService {
 
 
     //Get all available Idea
-    public Idea get(long id) {
+    public Optional<Idea> get(long id) {
 
-        return ideaRepo.getideabyid(id);
+
+        return ideaRepo.findById(id);
     }
 
     public int gettotalview(Long id) {
 
         return ideaRepo.gettotalview(id);
-    }
-
-    public List<Idea> getupvote() {
-        return ideaRepo.getupvote();
     }
 
 
@@ -94,8 +90,6 @@ public class IdeaService {
 
         Optional<Client> client = clientService.getClientByid(commentRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(commentRequest.getIdea_id());
-
-
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Comment newComment = new Comment();
         newComment.setClient(client.get());
@@ -116,8 +110,16 @@ public class IdeaService {
         newReaction.setIdea(idea.get());
         newReaction.setClient(client.get());
         newReaction.setReaction(reactionRequest.getReaction());
-
         return reactionRepo.save(newReaction);
+
+    }
+
+    //Update reaction
+    public Reaction updatereaction(ReactionUpdateRequest reactionUpdateRequest){
+
+        Reaction existReaction = reactionRepo.findById(reactionUpdateRequest.getReaction_id()).get();
+        existReaction.setReaction(reactionUpdateRequest.getReaction());
+        return reactionRepo.save(existReaction);
 
     }
 

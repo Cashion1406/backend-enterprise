@@ -29,7 +29,7 @@ public class ClientController {
 
 
     //get list of all user
-    @JsonView(View.SumwithDepartment.class)
+
     @GetMapping()
     public List<Client> getallClient() {
 
@@ -44,7 +44,7 @@ public class ClientController {
 
         return clientService.saveClient(client);
     }
-    @JsonView(View.SumwithDepartment.class)
+
     @GetMapping("/{id}")
     public Optional<Client> getClientByid(@PathVariable String id) {
 

@@ -46,43 +46,43 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @JsonView(View.Sum.class)
+  //  @JsonView(View.Sum.class)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
-    @JsonView(View.Sum.class)
+   // @JsonView(View.Sum.class)
     private String firstname;
 
     @Column(name = "client_lastname", length = 45)
-    @JsonView(View.Sum.class)
+  //  @JsonView(View.Sum.class)
     private String lastname;
 
     @Column(name = "client_age", length = 45)
-    @JsonView(View.Sum.class)
+   // @JsonView(View.Sum.class)
     private String age;
 
     @Column(name = "client_info")
-    @JsonView(View.Sum.class)
+    //@JsonView(View.Sum.class)
     private String client_info;
 
     @Column(name = "client_role")
     @Enumerated(EnumType.STRING)
-    @JsonView(View.Sum.class)
+   //@JsonView(View.Sum.class)
     private ERole role;
 
     @Column(name = "client_pronoun")
     @Enumerated(EnumType.STRING)
-    @JsonView(View.Sum.class)
+    //@JsonView(View.Sum.class)
     private EPronoun pronoun;
 
     @Column(name = "client_isDeleted")
-    @JsonView(View.Sum.class)
+    //@JsonView(View.Sum.class)
     private Boolean isDeleted;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @JsonManagedReference(value = "client_department")
-    @JsonView(View.SumwithDepartment.class)
+    //@JsonView(View.SumwithDepartment.class)
     private Department department;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
@@ -91,10 +91,12 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     @JsonManagedReference
+    //@JsonView(View.SumwithDepartment.class)
     private Set<Reaction> reactions = new HashSet<>();
 
     @OneToMany(mappedBy = "client")
     @JsonManagedReference(value = "client_comment")
+    @JsonView(View.SumwithDepartment.class)
     private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "client_id")

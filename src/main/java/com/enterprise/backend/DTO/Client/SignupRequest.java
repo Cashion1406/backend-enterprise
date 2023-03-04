@@ -1,4 +1,4 @@
-package com.enterprise.backend.DTO;
+package com.enterprise.backend.DTO.Client;
 
 import java.util.Set;
 

@@ -23,12 +23,10 @@ public class Reaction {
     @JsonBackReference
     private Client client;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idea_id", referencedColumnName = "id")
     @JsonBackReference(value = "idea_reaction")
     private Idea idea;
-
 
     @Column(name = "reaction")
     private Boolean reaction;
