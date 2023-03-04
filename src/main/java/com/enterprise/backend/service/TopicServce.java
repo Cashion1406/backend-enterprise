@@ -18,7 +18,9 @@ public class TopicServce {
 
     public List<Topic> getalltopic() {
 
-        return topicRepo.findAll();
+        //use topicRepo.findAll() to get all current topic
+
+        return topicRepo.findByisDeletedFalse();
     }
 
     public Topic createtopic(Topic topic) {

@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 
+import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.view.View;
 import com.fasterxml.jackson.annotation.*;
@@ -27,6 +28,15 @@ import java.util.Set;
         @ColumnResult(name = "topic_id")
 }))
 
+@NamedNativeQuery(name = "Client.findClientReaction",
+        query = "select r.idea_id as idea_id , r.reaction as reaction from reaction_tbl r inner join client_tbl c on c.id = r.client_id where c.id=:id",
+        resultSetMapping = "Mapping.ClientReaction"
+)
+
+@SqlResultSetMapping(name = "Mapping.ClientReaction",classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
+        @ColumnResult(name = "idea_id"),
+        @ColumnResult(name = "reaction")
+}))
 @Getter
 @Setter
 @Entity

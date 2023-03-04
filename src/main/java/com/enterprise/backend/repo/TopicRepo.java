@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface TopicRepo extends JpaRepository<Topic, Long> {
 
@@ -18,5 +20,7 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
     @Modifying
     @Query("update Topic t set t.isDeleted = true where t.id = :id")
     void softdeletetopic(@Param("id") Long id);
+
+    List<Topic> findByisDeletedFalse();
 
 }

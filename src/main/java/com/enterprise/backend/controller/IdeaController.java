@@ -5,6 +5,7 @@ import com.enterprise.backend.DTO.IdeaRequest;
 import com.enterprise.backend.DTO.Idea_Cate_Request;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
+import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.service.ClientService;
 import com.enterprise.backend.service.IdeaService;
 import com.enterprise.backend.service.TopicServce;
@@ -27,7 +28,6 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class IdeaController {
 
-    Logger logger = LoggerFactory.getLogger(IdeaController.class);
 
     @Autowired
     private IdeaService ideaService;
@@ -49,6 +49,13 @@ public class IdeaController {
     public Idea getallidea(@PathVariable long id) {
 
         return ideaService.get(id);
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public DeleteResponse deleteidea(@PathVariable Long id){
+
+        return ideaService.deleteidea(id);
     }
 
     @GetMapping("/gettotalview/{id}")
@@ -76,7 +83,13 @@ public class IdeaController {
 
         ideaService.insertIdeaCate(ideaCateRequest);
 
-        return "Added Category to Idea: " + ideaService.get(ideaCateRequest.getIdea_id());
+        return "Added Category to Idea: " + ideaService.getideaname(ideaCateRequest.getIdea_id());
+    }
+
+    @PutMapping("/update")
+    public Idea updateidea(@RequestBody Idea idea){
+
+        return ideaService.updateidea(idea);
     }
 
 

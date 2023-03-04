@@ -9,6 +9,7 @@ import com.enterprise.backend.repo.CateRepo;
 import com.enterprise.backend.repo.CommentRepo;
 import com.enterprise.backend.repo.IdeaRepo;
 import com.enterprise.backend.repo.ReactionRepo;
+import com.enterprise.backend.response.DeleteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,6 +58,8 @@ public class IdeaService {
         return ideaRepo.save(newIdea);
     }
 
+
+    //Get all available Idea
     public Idea get(long id) {
 
         return ideaRepo.getideabyid(id);
@@ -71,6 +74,8 @@ public class IdeaService {
         return ideaRepo.getupvote();
     }
 
+
+    //Add category to idea
     public void insertIdeaCate(Idea_Cate_Request ideaCateRequest) {
 
         for (long cateid : ideaCateRequest.getCategories()) {
@@ -84,6 +89,7 @@ public class IdeaService {
         }
     }
 
+    //Add comment to Idea
     public Comment insertcomment(CommentRequest commentRequest) {
 
         Optional<Client> client = clientService.getClientByid(commentRequest.getClient_id());
@@ -100,6 +106,8 @@ public class IdeaService {
         return commentRepo.save(newComment);
     }
 
+
+    //Add reaction to idea
     public Reaction insertreaction(ReactionRequest reactionRequest) {
 
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
@@ -113,5 +121,31 @@ public class IdeaService {
 
     }
 
+    public DeleteResponse deleteidea(Long id) {
+        String name = ideaRepo.getideaname(id);
+        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
+        ideaRepo.deleteById(id);
+        return new DeleteResponse("Delete idea " + name, timestamp, true);
+    }
+
+
+    //get idea name with ID
+    public String getideaname(Long id) {
+
+        return ideaRepo.getideaname(id);
+    }
+
+
+    //Update Idea
+    public Idea updateidea(Idea idea) {
+
+        Idea existIdea = ideaRepo.findById(idea.getId()).get();
+        existIdea.setBody(idea.getBody());
+        existIdea.setName(idea.getName());
+        existIdea.setDate(idea.getDate());
+        existIdea.setAttached_path(idea.getAttached_path());
+        return ideaRepo.save(existIdea);
+    }
 }

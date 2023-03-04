@@ -21,7 +21,7 @@ public class Idea_cate {
     @Id
     @ManyToOne(cascade =  CascadeType.ALL)
     @JoinColumn(name = "cate_id",referencedColumnName = "id")
-    @JsonIncludeProperties("name")
+    @JsonIncludeProperties({"name","id"})
     private Category cate_id;
 
     @Id

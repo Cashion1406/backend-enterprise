@@ -3,6 +3,7 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.ClientDepartmentRequest;
 
+import com.enterprise.backend.DTO.ClientUpdateRequest;
 import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
@@ -11,6 +12,7 @@ import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.repo.ClientRepo;
 import com.enterprise.backend.repo.DepartmentRepo;
 import com.enterprise.backend.repo.IdeaRepo;
+import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
 import jakarta.persistence.Id;
@@ -77,7 +79,7 @@ public class ClientService {
     }
 
 
-    //Get User by Id
+    //Delete User by Id
     public DeleteResponse delete(String id) {
         clientRepo.deleteById(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -86,9 +88,13 @@ public class ClientService {
 
 
     //Update User
-    public Client updateClient(Client client) {
+    public Client updateClient(ClientUpdateRequest client) {
         Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
         existClient.setClient_info(client.getClient_info());
+        existClient.setAge(client.getAge());
+        existClient.setFirstname(client.getFirstname());
+        existClient.setLastname(client.getLastname());
+
         return clientRepo.save(existClient);
     }
 
@@ -134,5 +140,9 @@ public class ClientService {
     public List<Idea> getideabyclientid(String id) {
 
         return ideaRepo.getideabyclientid(id);
+    }
+
+    public List<ClientReaction> getclientreaction(String id){
+        return clientRepo.findClientReaction(id);
     }
 }

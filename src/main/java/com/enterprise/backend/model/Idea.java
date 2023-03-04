@@ -40,26 +40,26 @@ public class Idea {
     private String attached_path;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     @JsonBackReference(value = "idea_topic")
     private Topic topic;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @JsonBackReference(value = "client_idea")
     private Client client;
 
-    @OneToMany(mappedBy = "idea")
+    @OneToMany(mappedBy = "idea",orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonManagedReference(value = "idea_reaction")
     private Set<Reaction> reactions = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "idea")
+    @OneToMany(mappedBy = "idea",orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonManagedReference(value = "idea_comment")
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "idea_id")
+    @OneToMany(mappedBy = "idea_id",orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<Idea_cate> idea_cate = new HashSet<>();
 
 

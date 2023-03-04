@@ -5,7 +5,8 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class FollowTopic {
 
     private String client_role;

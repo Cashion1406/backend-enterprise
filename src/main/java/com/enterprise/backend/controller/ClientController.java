@@ -3,9 +3,12 @@ package com.enterprise.backend.controller;
 
 import com.enterprise.backend.DTO.ClientDepartmentRequest;
 
+import com.enterprise.backend.DTO.ClientUpdateRequest;
 import com.enterprise.backend.DTO.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Idea;
+import com.enterprise.backend.model.Reaction;
+import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.service.ClientService;
@@ -56,14 +59,14 @@ public class ClientController {
 
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public DeleteResponse delete(@PathVariable String id) {
 
         return clientService.delete(id);
     }
 
     @PutMapping("/update")
-    public Client update(@RequestBody Client client) {
+    public Client update(@RequestBody ClientUpdateRequest client) {
         return clientService.updateClient(client);
     }
 
@@ -87,11 +90,19 @@ public class ClientController {
         return clientService.followTopic(id);
 
     }
+    @GetMapping("/reaction/{id}")
+    public List<ClientReaction> getreactionwithclient(@PathVariable String id){
+
+        return clientService.getclientreaction(id);
+    }
+
 
     @GetMapping("/idea/{id}")
     public List<Idea> getideawithclient(@PathVariable String id) {
 
         return clientService.getideabyclientid(id);
     }
+
+
 
 }
