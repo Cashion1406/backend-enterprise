@@ -10,5 +10,7 @@ import lombok.*;
 public class ClientReaction {
     private Long idea_id;
 
+    private long reaction_id;
+
     private Boolean reaction;
 }

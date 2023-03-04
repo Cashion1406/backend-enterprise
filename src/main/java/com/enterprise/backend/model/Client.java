@@ -29,11 +29,12 @@ import java.util.Set;
 }))
 
 @NamedNativeQuery(name = "Client.findClientReaction",
-        query = "select r.idea_id as idea_id , r.reaction as reaction from reaction_tbl r inner join client_tbl c on c.id = r.client_id where c.id=:id",
+        query = "select r.id as reaction_id ,r.idea_id as idea_id , r.reaction as reaction from reaction_tbl r inner join client_tbl c on c.id = r.client_id where c.id=:id",
         resultSetMapping = "Mapping.ClientReaction"
 )
 
 @SqlResultSetMapping(name = "Mapping.ClientReaction",classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
+        @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "idea_id"),
         @ColumnResult(name = "reaction")
 }))
