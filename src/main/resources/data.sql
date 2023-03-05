@@ -18,7 +18,7 @@ INSERT INTO client_tbl(
 
 INSERT INTO client_tbl(
 	id, client_age, client_info, client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
-	VALUES ('2', '21', 'STudent', 'NGUYEN', 'FALSE', 'LAM', 'SHE_HER','ROLE_ADMIN' , '1');
+	VALUES ('TSqB8CSA0sThm8Yo65AAqotQSTw2', '21', 'STudent', 'NGUYEN', 'FALSE', 'LAM', 'SHE_HER','ROLE_ADMIN' , '1');
 
 INSERT INTO client_tbl(
 	id, client_age, client_info, client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cate")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CateCotroller {
     @Autowired
     private CateService cateService;
@@ -24,7 +25,6 @@ public class CateCotroller {
     }
 
     @PostMapping("/create")
-    @CrossOrigin(origins = "http://localhost:3000")
         public Category addClient(@RequestBody Category category ) {
         return cateService.savecate(category);
     }
