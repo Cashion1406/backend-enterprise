@@ -21,7 +21,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "comment")
+    @Column(name = "comment_body")
     private String comment;
 
     @ManyToOne(cascade = CascadeType.ALL)
