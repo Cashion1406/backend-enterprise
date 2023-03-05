@@ -42,12 +42,12 @@ public class Idea {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
-    @JsonBackReference(value = "idea_topic")
+    @JsonIncludeProperties({"name","id"})
     private Topic topic;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
-    @JsonBackReference(value = "client_idea")
+    @JsonIncludeProperties({"firstname","lastname","id"})
     private Client client;
 
     @OneToMany(mappedBy = "idea",orphanRemoval = true, cascade = CascadeType.PERSIST)
