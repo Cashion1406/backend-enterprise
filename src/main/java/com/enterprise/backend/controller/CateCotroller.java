@@ -20,7 +20,7 @@ public class CateCotroller {
 
 
     @GetMapping()
-    public List<Category> getallClient() {
+    public List<Category> getallCate() {
 
         return cateService.getallcate();
     }
