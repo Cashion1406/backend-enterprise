@@ -2,10 +2,13 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
+import com.enterprise.backend.response.DeleteResponse;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,17 +48,19 @@ public class TopicServce {
         return topicRepo.save(existtopic);
     }
 
-    public String deleteTopic (Long id){
+    public DeleteResponse deleteTopic (Long id){
         String topicname = topicRepo.getTopicname(id);
         topicRepo.deleteById(id);
 
-        return "Successfully deleted "+topicname  ;
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        return new DeleteResponse("Delete topic " + topicname, timestamp, true);
     }
 
     public String softdelete(Long id ){
         String topicname = topicRepo.getTopicname(id);
 
         topicRepo.softdeletetopic(id);
-        return "Temporary deleted" + topicname;
+        return "Temporary deleted " + topicname;
     }
 }

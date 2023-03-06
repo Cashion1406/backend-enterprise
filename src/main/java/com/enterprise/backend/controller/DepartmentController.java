@@ -1,6 +1,7 @@
 package com.enterprise.backend.controller;
 
 
+import com.enterprise.backend.DTO.Department.DepartmentRequest;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.service.DepartmentService;
@@ -29,13 +30,16 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public DeleteResponse deletedepartment(long id){
+    public DeleteResponse deletedepartment(@PathVariable long id){
 
         return departmentService.deletedepartment(id);
     }
 
+    @PutMapping("/update")
+    public Department updatedepartment(@RequestBody DepartmentRequest departmente){
 
-
+        return departmentService.updatedepartment(departmente);
+    }
 
 
 }

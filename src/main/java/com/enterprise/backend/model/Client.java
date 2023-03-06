@@ -97,10 +97,10 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     @JsonManagedReference(value = "client_comment")
-    @JsonView(View.SumwithDepartment.class)
+    //@JsonView(View.SumwithDepartment.class)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "client_id")
+    @OneToMany(mappedBy = "client_id", orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonManagedReference
     @JsonIgnore
     private Set<Client_Topic> clientTopics = new HashSet<>();

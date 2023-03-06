@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class Comment {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
-    @JsonBackReference(value = "client_comment")
+    @JsonIncludeProperties({"id","lastname","firstname"})
     private Client client;
 
 

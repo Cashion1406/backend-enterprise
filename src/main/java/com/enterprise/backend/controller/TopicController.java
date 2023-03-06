@@ -1,6 +1,7 @@
 package com.enterprise.backend.controller;
 
 import com.enterprise.backend.model.Topic;
+import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.service.TopicServce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class TopicController {
 
 
     @DeleteMapping("/delete/{id}")
-    public String delete (@PathVariable Long id){
+    public DeleteResponse delete (@PathVariable Long id){
 
         return topicServce.deleteTopic(id);
 

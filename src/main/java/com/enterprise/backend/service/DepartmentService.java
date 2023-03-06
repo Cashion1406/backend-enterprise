@@ -1,5 +1,6 @@
 package com.enterprise.backend.service;
 
+import com.enterprise.backend.DTO.Department.DepartmentRequest;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.repo.DepartmentRepo;
 import com.enterprise.backend.response.DeleteResponse;
@@ -44,4 +45,14 @@ public class DepartmentService {
     }
 
 
+    public Department updatedepartment(DepartmentRequest departmentRequest) {
+
+        Department existDepartment = departmentRepo.findById(departmentRequest.getId()).get();
+
+        existDepartment.setDepartment_info(departmentRequest.getDepartment_info());
+        existDepartment.setName(departmentRequest.getName());
+
+        existDepartment.setDepartment_info(departmentRequest.getDepartment_info());
+        return departmentRepo.save(existDepartment);
+    }
 }

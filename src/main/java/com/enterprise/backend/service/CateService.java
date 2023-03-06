@@ -2,9 +2,11 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.model.Category;
 import com.enterprise.backend.repo.CateRepo;
+import com.enterprise.backend.response.DeleteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -30,9 +32,11 @@ public class CateService {
         return cateRepo.findAll();
     }
 
-    public String deletecate(long id) {
+    public DeleteResponse deletecate(long id) {
+        String name= cateRepo.getCateName(id);
         cateRepo.deleteById(id);
-        return "Category deleted";
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return  new DeleteResponse("Deleted Category " + name,timestamp,true);
     }
 
 
