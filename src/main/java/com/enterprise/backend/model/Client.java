@@ -34,8 +34,8 @@ import java.util.Set;
 )
 
 @SqlResultSetMapping(name = "Mapping.ClientReaction",classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
-        @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "idea_id"),
+        @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "reaction")
 }))
 @Getter
