@@ -20,5 +20,5 @@ public class CommentRequest {
 
     private String client_id;
 
-    private String date;
+    private Boolean anonymous;
 }

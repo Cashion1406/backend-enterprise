@@ -31,6 +31,10 @@ public class Comment {
     private Client client;
 
 
+    @Column(name = "anonymous")
+    private Boolean anonymous;
+
+
     @Column(name = "modify_date")
     private String modify_date;
 

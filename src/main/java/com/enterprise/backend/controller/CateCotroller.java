@@ -20,7 +20,7 @@ public class CateCotroller {
 
 
     @GetMapping()
-    public List<Category> getallCate() {
+    public List<Category> getAllCate() {
 
         return cateService.getallcate();
     }
@@ -37,7 +37,7 @@ public class CateCotroller {
     }
 
     @DeleteMapping("/delete/{id}")
-    public DeleteResponse deletecate(@PathVariable long id){
+    public DeleteResponse deleteCate(@PathVariable long id){
 
         return cateService.deletecate(id);
     }

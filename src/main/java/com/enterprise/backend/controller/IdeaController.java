@@ -28,26 +28,26 @@ public class IdeaController {
 
 
     @GetMapping()
-    public List<Idea> getallidea() {
+    public List<Idea> getAllIdea() {
         return ideaService.getallidea();
     }
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
-    public Idea createtopic(@RequestBody IdeaRequest idea) {
+    public Idea createIdea(@RequestBody IdeaRequest idea) {
         return ideaService.createidea(idea);
     }
 
     @GetMapping("/{id}")
-    public Optional<Idea> getallidea(@PathVariable long id) {
+    public Optional<Idea> getIdea(@PathVariable long id) {
 
         return ideaService.get(id);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public DeleteResponse deleteidea(@PathVariable Long id){
+    public DeleteResponse deleteIdea(@PathVariable Long id){
 
         return ideaService.deleteidea(id);
     }
@@ -65,14 +65,8 @@ public class IdeaController {
     }*/
 
 
-/*    @PostMapping("/cate_idea")
-    public String insertidea_catev2(@RequestParam long cate_id, @RequestParam long idea_id) {
-        ideaService.insertv2(cate_id, idea_id);
-        return "OK ADDED";
-    }*/
-
     @PostMapping("/cate_idea")
-    public String add(@RequestBody Idea_Cate_Request ideaCateRequest) {
+    public String addCateToIdea(@RequestBody Idea_Cate_Request ideaCateRequest) {
 
 
         ideaService.insertIdeaCate(ideaCateRequest);
@@ -80,26 +74,26 @@ public class IdeaController {
         return "Added Category to Idea: " + ideaService.getideaname(ideaCateRequest.getIdea_id());
     }
     @PutMapping("/update")
-    public Idea updateidea(@RequestBody Idea idea){
+    public Idea updateIdea(@RequestBody IdeaRequest idea){
 
         return ideaService.updateidea(idea);
     }
 
 
     @PostMapping("/comment")
-    public Comment addcomment(@RequestBody CommentRequest commentRequest) {
+    public Comment addComment(@RequestBody CommentRequest commentRequest) {
 
         return ideaService.insertcomment(commentRequest);
     }
 
     @PostMapping("/reaction")
-    public  Reaction addreaction (@RequestBody ReactionRequest reactionRequest){
+    public  Reaction addReaction (@RequestBody ReactionRequest reactionRequest){
 
         return ideaService.insertreaction(reactionRequest);
     }
 
     @PutMapping("/reaction/update")
-    public Reaction updatereaction(@RequestBody ReactionRequest reactionRequest){
+    public Reaction updateReaction(@RequestBody ReactionRequest reactionRequest){
 
         return ideaService.updatereaction(reactionRequest);
     }

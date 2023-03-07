@@ -31,10 +31,10 @@ public class Idea {
     private String body;
 
     @Column(name = "date")
-    private Date date;
+    private String date;
 
     @Column(name = "modify_date")
-    private Date modify_date;
+    private String modify_date;
 
     @Column(name = "attached_path")
     private String attached_path;
@@ -62,5 +62,6 @@ public class Idea {
     @OneToMany(mappedBy = "idea_id",orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<Idea_cate> idea_cate = new HashSet<>();
 
-
+    @Column(name = "anonymous")
+    private Boolean anonymous;
 }

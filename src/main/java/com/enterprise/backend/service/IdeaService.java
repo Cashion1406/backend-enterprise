@@ -2,6 +2,7 @@ package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
+
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
@@ -38,22 +39,48 @@ public class IdeaService {
 
     public List<Idea> getallidea() {
 
-        return ideaRepo.findAll();
+        return ideaRepo.findByanonymousFalse();
     }
 
     public Idea createidea(IdeaRequest idea) {
 
-        Optional<Client> client = clientService.getClientByid(idea.getClient_id());
-        Optional<Topic> topic = topicServce.gettopicbyid(idea.getTopic_id());
+        Client client = clientService.getClientByid(idea.getClient_id()).get();
+        Topic topic = topicServce.gettopicbyid(idea.getTopic_id()).get();
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Idea newIdea = new Idea();
         newIdea.setBody(idea.getBody());
         newIdea.setName(idea.getName());
-        newIdea.setDate(idea.getDate());
+        newIdea.setDate(timeStamp);
         newIdea.setAttached_path(idea.getAttached_path());
-        newIdea.setModify_date(idea.getModify_date());
-        newIdea.setClient(client.get());
-        newIdea.setTopic(topic.get());
+        newIdea.setModify_date(timeStamp);
+        newIdea.setClient(client);
+        newIdea.setTopic(topic);
+        if (idea.getAnonymous() == null) {
+
+            newIdea.setAnonymous(false);
+        } else {
+            newIdea.setAnonymous(idea.getAnonymous());
+        }
         return ideaRepo.save(newIdea);
+    }
+
+
+    //Update Idea
+    public Idea updateidea(IdeaRequest ideaUpdateRequest) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        Idea existIdea = ideaRepo.findById(ideaUpdateRequest.getId()).get();
+        existIdea.setBody(ideaUpdateRequest.getBody());
+        existIdea.setName(ideaUpdateRequest.getName());
+        existIdea.setModify_date(timeStamp);
+        existIdea.setAttached_path(ideaUpdateRequest.getAttached_path());
+        if (ideaUpdateRequest.getAnonymous() == null) {
+
+            existIdea.setAnonymous(false);
+        } else {
+            existIdea.setAnonymous(ideaUpdateRequest.getAnonymous());
+        }
+
+        return ideaRepo.save(existIdea);
     }
 
 
@@ -95,6 +122,11 @@ public class IdeaService {
         newComment.setIdea(idea.get());
         newComment.setComment(commentRequest.getComment());
         newComment.setModify_date(timeStamp);
+        if (commentRequest.getAnonymous() == null) {
+            newComment.setAnonymous(false);
+        } else {
+            newComment.setAnonymous(commentRequest.getAnonymous());
+        }
 
         return commentRepo.save(newComment);
     }
@@ -114,9 +146,9 @@ public class IdeaService {
     }
 
     //Update reaction
-    public Reaction updatereaction(ReactionRequest reactionRequest){
+    public Reaction updatereaction(ReactionRequest reactionRequest) {
 
-        Reaction existReaction = reactionRepo.getReaction(reactionRequest.getClient_id(),reactionRequest.getIdea_id());
+        Reaction existReaction = reactionRepo.getReaction(reactionRequest.getClient_id(), reactionRequest.getIdea_id());
         existReaction.setReaction(reactionRequest.getReaction());
         return reactionRepo.save(existReaction);
 
@@ -139,14 +171,4 @@ public class IdeaService {
     }
 
 
-    //Update Idea
-    public Idea updateidea(Idea idea) {
-
-        Idea existIdea = ideaRepo.findById(idea.getId()).get();
-        existIdea.setBody(idea.getBody());
-        existIdea.setName(idea.getName());
-        existIdea.setDate(idea.getDate());
-        existIdea.setAttached_path(idea.getAttached_path());
-        return ideaRepo.save(existIdea);
-    }
 }

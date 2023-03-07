@@ -42,42 +42,42 @@ commit;
 
 insert into topic_tbl(
 	id, topic_final_date, topic_closure_date,image_url ,is_deleted, modify_date, topic_name)
-	values ('1', '02/20/2023', '03/20/2023','/download/imageURL' ,'FALSE', '02/20/2023', 'Create Spring Boot micro services');
+	values ('1', '2023-02-27 15:25', '2023-02-28 15:25','/download/imageURL' ,'FALSE', '02/20/2023', 'Create Spring Boot micro services');
 
 insert into topic_tbl(
 	id, topic_final_date, topic_closure_date,image_url ,is_deleted, modify_date, topic_name)
-	values ('2', '04/20/2023', '07/20/2023', '/download/imageURL','FALSE', '02/20/2023', 'Create cross-platform using Flutter');
+	values ('2', '2023-02-27 15:25', '2023-02-28 15:25', '/download/imageURL','FALSE', '02/20/2023', 'Create cross-platform using Flutter');
 
 insert into topic_tbl(
 	id, topic_final_date, topic_closure_date,image_url ,is_deleted, modify_date, topic_name)
-	values ('3', '10/20/2023', '15/20/2023','/download/imageURL' ,'FALSE', '02/20/2023', 'Deploy handwritten OCR');
+	values ('3', '2023-02-27 15:25', '2023-02-28 15:25','/download/imageURL' ,'FALSE', '02/20/2023', 'Deploy handwritten OCR');
 commit;
 
 insert into idea_tbl(
-	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('1', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing flutter', '1','2');
+	id, anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('1', 'false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing flutter', '1','2');
 
 insert into idea_tbl(
-	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('2', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing Spring boot ', '3','1');
+	id, anonymous,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('2','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing Spring boot ', '3','1');
 
 insert into idea_tbl(
-	id, attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('3', '/download/file', 'Just fixed','02/20/2023', '02/20/2023', 'Fixing React', '2','3');
+	id,anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('3','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing React', '2','3');
 
 commit ;
 
 insert into comment_tbl(
-	id, comment_body, modify_date, client_id, idea_id)
-	values ('1', 'This idea is briliant', '2023-02-27 15:25','1', '1' );
+	id, anonymous,comment_body, modify_date, client_id, idea_id)
+	values ('1', 'false','This idea is briliant', '2023-02-27 15:25','1', '1' );
 
 insert into comment_tbl(
-	id, comment_body, modify_date,client_id, idea_id )
-	values ('2', 'I honestly dont know about this','2023-02-27 15:26' ,'2', '1');
+	id, anonymous,comment_body, modify_date,client_id, idea_id )
+	values ('2', 'false','I honestly dont know about this','2023-02-27 15:26' ,'2', '1');
 
 insert into comment_tbl(
-	id, comment_body, modify_date, client_id, idea_id)
-	values ('3', 'Need some adjustment',  '2023-02-27 15:27','3', '1');
+	id, anonymous,comment_body, modify_date, client_id, idea_id)
+	values ('3', 'false','Need some adjustment',  '2023-02-27 15:27','3', '1');
 
 commit;
 
@@ -95,25 +95,25 @@ commit ;
 
 insert into follow_tbl(
 	topic_id, client_id)
-	VALUES ('1', '1');
+	values ('1', '1');
 insert into follow_tbl(
 	topic_id, client_id)
-	VALUES ('2', '1');
+	values ('2', '1');
 insert into follow_tbl(
 	topic_id, client_id)
-	VALUES ('3', '2');
+	values ('3', '2');
 commit ;
 
 insert into idea_cate_tbl(
 	cate_id, idea_id)
-	VALUES ('1', '1');
+	values ('1', '1');
 
 insert into idea_cate_tbl(
 	cate_id, idea_id)
-	VALUES ('1', '2');
+	values ('1', '2');
 
 insert into idea_cate_tbl(
 	cate_id, idea_id)
-	VALUES ('2', '3');
+	values ('2', '3');
 
 commit;

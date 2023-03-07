@@ -29,7 +29,7 @@ public class Topic {
     private String name;
 
     @Column(name = "topic_closure_date", length = 50)
-    private String idea_closure_date;
+    private String topic_closure_date;
 
     @Column(name = "topic_final_date", length = 50)
     private String final_closure_date;

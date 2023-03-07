@@ -1,5 +1,6 @@
 package com.enterprise.backend.service;
 
+import com.enterprise.backend.DTO.Topic.TopicRequest;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
 import com.enterprise.backend.response.DeleteResponse;
@@ -26,38 +27,57 @@ public class TopicServce {
         return topicRepo.findByisDeletedFalse();
     }
 
-    public Topic createtopic(Topic topic) {
+    public Topic createtopic(TopicRequest topicRequest) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
 
-        return topicRepo.save(topic);
+        Topic newtopic = new Topic();
+        newtopic.setName(topicRequest.getName());
+        newtopic.setImageURL(topicRequest.getImageURL());
+        newtopic.setFinal_closure_date(topicRequest.getFinal_closure_date());
+        newtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
+        newtopic.setModifyDate(timeStamp);
+        newtopic.setImageURL(topicRequest.getImageURL());
+        if (topicRequest.getIsDeleted() == null) {
+            newtopic.setIsDeleted(false);
+        }
+
+
+        return topicRepo.save(newtopic);
     }
 
-    public Optional<Topic> gettopicbyid(Long id){
+    public Optional<Topic> gettopicbyid(Long id) {
         return topicRepo.findById(id);
     }
 
 
-    public Topic updateTopic (Topic topic){
+    public Topic updateTopic(TopicRequest topicRequest) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
 
-        Topic existtopic = topicRepo.findById(topic.getId()).get();
-        existtopic.setName(topic.getName());
-        existtopic.setIdea_closure_date(topic.getIdea_closure_date());
-        existtopic.setFinal_closure_date(topic.getFinal_closure_date());
-        existtopic.setModifyDate(topic.getModifyDate());
-        existtopic.setIsDeleted(topic.getIsDeleted());
+        Topic existtopic = topicRepo.findById(topicRequest.getId()).get();
+        existtopic.setName(topicRequest.getName());
+        existtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
+        existtopic.setFinal_closure_date(topicRequest.getFinal_closure_date());
+        existtopic.setModifyDate(timeStamp);
+        if (topicRequest.getIsDeleted() == null) {
+            existtopic.setIsDeleted(false);
+        } else {
+
+            existtopic.setIsDeleted(topicRequest.getIsDeleted());
+        }
 
         return topicRepo.save(existtopic);
     }
 
-    public DeleteResponse deleteTopic (Long id){
+    public DeleteResponse deleteTopic(Long id) {
         String topicname = topicRepo.getTopicname(id);
         topicRepo.deleteById(id);
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        return new DeleteResponse("Delete topic " + topicname, timestamp, true);
+        return new DeleteResponse("Deleted topic " + topicname, timestamp, true);
     }
 
-    public String softdelete(Long id ){
+    public String softdelete(Long id) {
         String topicname = topicRepo.getTopicname(id);
 
         topicRepo.softdeletetopic(id);
