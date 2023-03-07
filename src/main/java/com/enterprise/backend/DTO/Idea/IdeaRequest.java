@@ -21,7 +21,6 @@ public class IdeaRequest {
 
     private String body;
 
-    private String date;
 
     private String modify_date;
 
@@ -29,5 +28,5 @@ public class IdeaRequest {
     private String client_id;
     private Long topic_id;
 
-    private Boolean anonymous;
+    private Boolean isAnonymous;
 }

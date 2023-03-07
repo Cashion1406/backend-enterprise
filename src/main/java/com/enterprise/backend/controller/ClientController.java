@@ -31,7 +31,7 @@ public class ClientController {
     @GetMapping()
     public List<Client> getAllClient() {
 
-        return clientService.getallClient();
+        return clientService.getAllClient();
     }
 
     //create user info
@@ -51,14 +51,14 @@ public class ClientController {
 
     @GetMapping("/searchbyname")
     public List<Client> getClientbyName(@RequestParam String name) {
-        return clientService.getClientByname(name);
+        return clientService.getClientByName(name);
 
     }
 
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteClient(@PathVariable String id) {
 
-        return clientService.delete(id);
+            return clientService.deleteClient(id);
     }
 
     @PutMapping("/update")
@@ -74,7 +74,7 @@ public class ClientController {
 
     @PostMapping("/topic")
     public String insertFollowTopic(@RequestBody Client_Topic_Request clientTopicRequest) {
-        clientService.followtopic(clientTopicRequest);
+        clientService.followTopic(clientTopicRequest);
         return "Added topics to Client " + clientService.getClientname(clientTopicRequest.getClient_id());
 
     }
@@ -90,14 +90,14 @@ public class ClientController {
     @GetMapping("/reaction/{id}")
     public List<ClientReaction> getReactionWithClient(@PathVariable String id) {
 
-        return clientService.getclientreaction(id);
+        return clientService.getClientReaction(id);
     }
 
 
     @GetMapping("/idea/{id}")
     public List<Idea> getIdeaWithClient(@PathVariable String id) {
 
-        return clientService.getideabyclientid(id);
+        return clientService.getIdeaByClientId(id);
     }
 
 

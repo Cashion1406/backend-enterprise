@@ -18,7 +18,7 @@ public class DepartmentService {
     private DepartmentRepo departmentRepo;
 
 
-    public Department create(Department department){
+    public Department createDepartment(Department department){
 
         if (department.getIsDeleted()==null){
 
@@ -28,13 +28,13 @@ public class DepartmentService {
 
     }
 
-    public List<Department> getall (){
+    public List<Department> getAllDepartment (){
 
         //use departmentRepo.findAll() to get all current department
         return departmentRepo.findByisDeletedFalse();
     }
 
-    public DeleteResponse deletedepartment (long id){
+    public DeleteResponse deletedDepartment (long id){
 
 
         departmentRepo.deleteById(id);
@@ -45,7 +45,7 @@ public class DepartmentService {
     }
 
 
-    public Department updatedepartment(DepartmentRequest departmentRequest) {
+    public Department updateDepartment(DepartmentRequest departmentRequest) {
 
         Department existDepartment = departmentRepo.findById(departmentRequest.getId()).get();
 

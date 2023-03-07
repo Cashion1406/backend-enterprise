@@ -1,0 +1,21 @@
+
+version: '3.8'
+services:
+  app:
+    container_name: docker-backend
+    image: postgres
+    build: ./
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - localhost
+  localhost:
+    image: postgres
+    ports:
+      - "5432:5432"
+
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_DB=postgres

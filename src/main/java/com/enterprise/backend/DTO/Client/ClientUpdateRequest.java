@@ -23,6 +23,8 @@ public class ClientUpdateRequest {
 
     private String age;
 
+    private String email;
+
     private String client_info;
 
 

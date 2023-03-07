@@ -4,7 +4,6 @@ import com.enterprise.backend.DTO.Topic.TopicRequest;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
 import com.enterprise.backend.response.DeleteResponse;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +13,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TopicServce {
+public class TopicService {
 
     @Autowired
     private TopicRepo topicRepo;
 
 
-    public List<Topic> getalltopic() {
+    public List<Topic> getAllTopic() {
 
         //use topicRepo.findAll() to get all current topic
 
-        return topicRepo.findByisDeletedFalse();
+        return topicRepo.findAll();
     }
 
-    public Topic createtopic(TopicRequest topicRequest) {
+    public Topic createTopic(TopicRequest topicRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
 
         Topic newtopic = new Topic();
@@ -45,7 +44,7 @@ public class TopicServce {
         return topicRepo.save(newtopic);
     }
 
-    public Optional<Topic> gettopicbyid(Long id) {
+    public Optional<Topic> getTopicById(Long id) {
         return topicRepo.findById(id);
     }
 
@@ -77,7 +76,7 @@ public class TopicServce {
         return new DeleteResponse("Deleted topic " + topicname, timestamp, true);
     }
 
-    public String softdelete(Long id) {
+    public String softDeleteTopic(Long id) {
         String topicname = topicRepo.getTopicname(id);
 
         topicRepo.softdeletetopic(id);

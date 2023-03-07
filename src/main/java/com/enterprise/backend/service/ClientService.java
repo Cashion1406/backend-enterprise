@@ -44,6 +44,7 @@ public class ClientService {
         newClient.setFirstname(clientDepartmentRequest.getFirstname());
         newClient.setPronoun(clientDepartmentRequest.getPronoun());
         newClient.setLastname(clientDepartmentRequest.getLastname());
+        newClient.setEmail(clientDepartmentRequest.getEmail());
         newClient.setClient_info(clientDepartmentRequest.getClient_info());
         newClient.setAge(clientDepartmentRequest.getAge());
         newClient.setDepartment(department.get());
@@ -60,7 +61,7 @@ public class ClientService {
 
 
     //Get list of Users
-    public List<Client> getallClient() {
+    public List<Client> getAllClient() {
 
         return clientRepo.findAll();
     }
@@ -77,7 +78,7 @@ public class ClientService {
 
 
     //Delete User by Id
-    public DeleteResponse delete(String id) {
+    public DeleteResponse deleteClient(String id) {
         clientRepo.deleteById(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return new DeleteResponse("Deleted user " + id, timestamp, true);
@@ -89,6 +90,7 @@ public class ClientService {
         Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
         existClient.setClient_info(client.getClient_info());
         existClient.setAge(client.getAge());
+        existClient.setEmail(client.getEmail());
         existClient.setFirstname(client.getFirstname());
         existClient.setLastname(client.getLastname());
         return clientRepo.save(existClient);
@@ -106,7 +108,7 @@ public class ClientService {
     }
 
     //Get list User by last name
-    public List<Client> getClientByname(String name) {
+    public List<Client> getClientByName(String name) {
         if (name.isEmpty()) {
 
             return clientRepo.findAll();
@@ -114,7 +116,7 @@ public class ClientService {
         return clientRepo.findBylastnameContaining(name);
     }
 
-    public void followtopic(Client_Topic_Request clientTopicRequest) {
+    public void followTopic(Client_Topic_Request clientTopicRequest) {
 
 
         try {
@@ -133,12 +135,12 @@ public class ClientService {
     }
 
 
-    public List<Idea> getideabyclientid(String id) {
+    public List<Idea> getIdeaByClientId(String id) {
 
         return ideaRepo.getideabyclientid(id);
     }
 
-    public List<ClientReaction> getclientreaction(String id){
+    public List<ClientReaction> getClientReaction(String id) {
         return clientRepo.findClientReaction(id);
     }
 }
