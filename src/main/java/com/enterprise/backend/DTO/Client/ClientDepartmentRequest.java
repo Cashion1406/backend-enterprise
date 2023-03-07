@@ -32,6 +32,6 @@ public class ClientDepartmentRequest {
     public EPronoun pronoun;
 
     public Boolean isDeleted;
-
+    private String email;
     public long department_id;
 }

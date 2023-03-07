@@ -44,6 +44,7 @@ public class ClientService {
         newClient.setFirstname(clientDepartmentRequest.getFirstname());
         newClient.setPronoun(clientDepartmentRequest.getPronoun());
         newClient.setLastname(clientDepartmentRequest.getLastname());
+        newClient.setEmail(clientDepartmentRequest.getEmail());
         newClient.setClient_info(clientDepartmentRequest.getClient_info());
         newClient.setAge(clientDepartmentRequest.getAge());
         newClient.setDepartment(department.get());
