@@ -89,6 +89,7 @@ public class ClientService {
         Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
         existClient.setClient_info(client.getClient_info());
         existClient.setAge(client.getAge());
+        existClient.setEmail(client.getEmail());
         existClient.setFirstname(client.getFirstname());
         existClient.setLastname(client.getLastname());
         return clientRepo.save(existClient);
@@ -138,7 +139,7 @@ public class ClientService {
         return ideaRepo.getideabyclientid(id);
     }
 
-    public List<ClientReaction> getClientReaction(String id){
+    public List<ClientReaction> getClientReaction(String id) {
         return clientRepo.findClientReaction(id);
     }
 }
