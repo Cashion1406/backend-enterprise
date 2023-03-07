@@ -15,12 +15,12 @@ public class CateService {
     @Autowired
     private CateRepo cateRepo;
 
-    public Category savecate(Category category) {
+    public Category saveCate(Category category) {
 
         return cateRepo.save(category);
     }
 
-    public Category updatecate(Category category) {
+    public Category updateCate(Category category) {
 
         Category existcate = cateRepo.findById(category.getId()).get();
         existcate.setName(category.getName());
@@ -28,11 +28,11 @@ public class CateService {
         return cateRepo.save(category);
     }
 
-    public List<Category> getallcate() {
+    public List<Category> getAllCate() {
         return cateRepo.findAll();
     }
 
-    public DeleteResponse deletecate(long id) {
+    public DeleteResponse deleteCate(long id) {
         String name= cateRepo.getCateName(id);
         cateRepo.deleteById(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

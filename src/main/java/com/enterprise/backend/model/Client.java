@@ -76,6 +76,9 @@ public class Client {
     //@JsonView(View.Sum.class)
     private EPronoun pronoun;
 
+    @Column(name = "client_email")
+    private String email;
+
     @Column(name = "client_isDeleted")
     //@JsonView(View.Sum.class)
     private Boolean isDeleted;

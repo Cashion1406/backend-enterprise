@@ -13,16 +13,16 @@ insert into department_tbl(
 commit ;
 
 insert into client_tbl(
-	id, client_age, client_info, client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
-	values ('1', '21', 'STudent', 'DOAN', 'FALSE', 'AN', 'HE_HIM','ROLE_USER' , '2');
+	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
+	values ('1', '21', 'STudent', 'example@gmail.com', 'FALSE', 'AN', 'HE_HIM','ROLE_USER' , '2');
 
 insert into client_tbl(
-	id, client_age, client_info, client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
-	values ('2', '21', 'STudent', 'NGUYEN', 'FALSE', 'LAM', 'SHE_HER','ROLE_ADMIN' , '1');
+	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
+	values ('2', '21', 'STudent','example@gmail.com' ,'NGUYEN', 'FALSE', 'LAM', 'SHE_HER','ROLE_ADMIN' , '1');
 
 insert into client_tbl(
-	id, client_age, client_info, client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
-	values ('3', '21', 'STudent', 'NGUYEN', 'FALSE', 'MINH', 'HE_HIM','ROLE_MOD' , '3');
+	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
+	values ('3', '21', 'STudent', 'example@gmail.com','NGUYEN', 'FALSE', 'MINH', 'HE_HIM','ROLE_MOD' , '3');
 
 commit;
 
@@ -54,29 +54,29 @@ insert into topic_tbl(
 commit;
 
 insert into idea_tbl(
-	id, anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	id, is_anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
 	values ('1', 'false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing flutter', '1','2');
 
 insert into idea_tbl(
-	id, anonymous,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	id, is_anonymous,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
 	values ('2','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing Spring boot ', '3','1');
 
 insert into idea_tbl(
-	id,anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	id,is_anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
 	values ('3','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing React', '2','3');
 
 commit ;
 
 insert into comment_tbl(
-	id, anonymous,comment_body, modify_date, client_id, idea_id)
+	id, is_anonymous,comment_body, modify_date, client_id, idea_id)
 	values ('1', 'false','This idea is briliant', '2023-02-27 15:25','1', '1' );
 
 insert into comment_tbl(
-	id, anonymous,comment_body, modify_date,client_id, idea_id )
+	id, is_anonymous,comment_body, modify_date,client_id, idea_id )
 	values ('2', 'false','I honestly dont know about this','2023-02-27 15:26' ,'2', '1');
 
 insert into comment_tbl(
-	id, anonymous,comment_body, modify_date, client_id, idea_id)
+	id, is_anonymous,comment_body, modify_date, client_id, idea_id)
 	values ('3', 'false','Need some adjustment',  '2023-02-27 15:27','3', '1');
 
 commit;

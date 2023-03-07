@@ -31,8 +31,8 @@ public class Comment {
     private Client client;
 
 
-    @Column(name = "anonymous")
-    private Boolean anonymous;
+    @Column(name = "isAnonymous")
+    private Boolean isAnonymous;
 
 
     @Column(name = "modify_date")

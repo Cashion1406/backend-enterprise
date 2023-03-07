@@ -3,7 +3,8 @@ package com.enterprise.backend.controller;
 import com.enterprise.backend.DTO.Topic.TopicRequest;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.response.DeleteResponse;
-import com.enterprise.backend.service.TopicServce;
+
+import com.enterprise.backend.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,23 +16,23 @@ import java.util.Optional;
 public class TopicController {
 
     @Autowired
-    private TopicServce topicServce;
+    private TopicService topicServce;
 
     @GetMapping()
     public List<Topic> getAllTopic() {
 
-        return topicServce.getalltopic();
+        return topicServce.getAllTopic();
     }
 
     @PostMapping("/create")
     @CrossOrigin(origins = "http://localhost:3000")
     public Topic createTopic(@RequestBody TopicRequest topic) {
-        return topicServce.createtopic(topic);
+        return topicServce.createTopic(topic);
     }
 
     @GetMapping("/{id}")
     public Optional<Topic> getTopic(@PathVariable Long id) {
-        return topicServce.gettopicbyid(id);
+        return topicServce.getTopicById(id);
     }
 
 
@@ -49,8 +50,8 @@ public class TopicController {
     }
 
     @DeleteMapping("/softdelete/{id}")
-    public String softdeleteTopic(@PathVariable Long id) {
+    public String softDeleteTopic(@PathVariable Long id) {
 
-        return topicServce.softdelete(id);
+        return topicServce.softDeleteTopic(id);
     }
 }

@@ -35,17 +35,17 @@ public class IdeaService {
     @Autowired
     private ClientService clientService;
     @Autowired
-    private TopicServce topicServce;
+    private TopicService topicServce;
 
-    public List<Idea> getallidea() {
+    public List<Idea> getAllIdea() {
 
-        return ideaRepo.findByanonymousFalse();
+        return ideaRepo.findAll();
     }
 
-    public Idea createidea(IdeaRequest idea) {
+    public Idea createIdea(IdeaRequest idea) {
 
         Client client = clientService.getClientByid(idea.getClient_id()).get();
-        Topic topic = topicServce.gettopicbyid(idea.getTopic_id()).get();
+        Topic topic = topicServce.getTopicById(idea.getTopic_id()).get();
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Idea newIdea = new Idea();
         newIdea.setBody(idea.getBody());
@@ -55,37 +55,28 @@ public class IdeaService {
         newIdea.setModify_date(timeStamp);
         newIdea.setClient(client);
         newIdea.setTopic(topic);
-        if (idea.getAnonymous() == null) {
+        newIdea.setIsAnonymous(idea.getIsAnonymous());
 
-            newIdea.setAnonymous(false);
-        } else {
-            newIdea.setAnonymous(idea.getAnonymous());
-        }
         return ideaRepo.save(newIdea);
     }
 
 
     //Update Idea
-    public Idea updateidea(IdeaRequest ideaUpdateRequest) {
+    public Idea updateIdea(IdeaRequest ideaUpdateRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Idea existIdea = ideaRepo.findById(ideaUpdateRequest.getId()).get();
         existIdea.setBody(ideaUpdateRequest.getBody());
         existIdea.setName(ideaUpdateRequest.getName());
         existIdea.setModify_date(timeStamp);
         existIdea.setAttached_path(ideaUpdateRequest.getAttached_path());
-        if (ideaUpdateRequest.getAnonymous() == null) {
-
-            existIdea.setAnonymous(false);
-        } else {
-            existIdea.setAnonymous(ideaUpdateRequest.getAnonymous());
-        }
+        existIdea.setIsAnonymous(ideaUpdateRequest.getIsAnonymous());
 
         return ideaRepo.save(existIdea);
     }
 
 
     //Get all available Idea
-    public Optional<Idea> get(long id) {
+    public Optional<Idea> getIdeaById(long id) {
 
 
         return ideaRepo.findById(id);
@@ -112,7 +103,7 @@ public class IdeaService {
     }
 
     //Add comment to Idea
-    public Comment insertcomment(CommentRequest commentRequest) {
+    public Comment insertComment(CommentRequest commentRequest) {
 
         Optional<Client> client = clientService.getClientByid(commentRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(commentRequest.getIdea_id());
@@ -122,18 +113,15 @@ public class IdeaService {
         newComment.setIdea(idea.get());
         newComment.setComment(commentRequest.getComment());
         newComment.setModify_date(timeStamp);
-        if (commentRequest.getAnonymous() == null) {
-            newComment.setAnonymous(false);
-        } else {
-            newComment.setAnonymous(commentRequest.getAnonymous());
-        }
+
+        newComment.setIsAnonymous(commentRequest.getIsAnonymous());
 
         return commentRepo.save(newComment);
     }
 
-    //asd
+
     //Add reaction to idea
-    public Reaction insertreaction(ReactionRequest reactionRequest) {
+    public Reaction insertReaction(ReactionRequest reactionRequest) {
 
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(reactionRequest.getIdea_id());
@@ -146,7 +134,7 @@ public class IdeaService {
     }
 
     //Update reaction
-    public Reaction updatereaction(ReactionRequest reactionRequest) {
+    public Reaction updateReaction(ReactionRequest reactionRequest) {
 
         Reaction existReaction = reactionRepo.getReaction(reactionRequest.getClient_id(), reactionRequest.getIdea_id());
         existReaction.setReaction(reactionRequest.getReaction());
@@ -154,7 +142,7 @@ public class IdeaService {
 
     }
 
-    public DeleteResponse deleteidea(Long id) {
+    public DeleteResponse deleteIdea(Long id) {
         String name = ideaRepo.getideaname(id);
         //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -169,8 +157,6 @@ public class IdeaService {
 
         return ideaRepo.getideaname(id);
     }
-
-
 
 
 }

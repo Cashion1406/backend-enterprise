@@ -20,25 +20,25 @@ public class DepartmentController {
 
     @GetMapping()
     public List<Department> gellDeparment(){
-        return  departmentService.getall();
+        return  departmentService.getAllDepartment();
     }
 
     @PostMapping("/create")
     public  Department createDepartment(@RequestBody Department department){
 
-        return departmentService.create(department);
+        return departmentService.createDepartment(department);
     }
 
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteDepartment(@PathVariable long id){
 
-        return departmentService.deletedepartment(id);
+        return departmentService.deletedDepartment(id);
     }
 
     @PutMapping("/update")
     public Department updateDepartment(@RequestBody DepartmentRequest departmente){
 
-        return departmentService.updatedepartment(departmente);
+        return departmentService.updateDepartment(departmente);
     }
 
 

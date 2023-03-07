@@ -62,6 +62,6 @@ public class Idea {
     @OneToMany(mappedBy = "idea_id",orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Set<Idea_cate> idea_cate = new HashSet<>();
 
-    @Column(name = "anonymous")
-    private Boolean anonymous;
+    @Column(name = "isAnonymous")
+    private Boolean isAnonymous;
 }

@@ -29,27 +29,27 @@ public class IdeaController {
 
     @GetMapping()
     public List<Idea> getAllIdea() {
-        return ideaService.getallidea();
+        return ideaService.getAllIdea();
     }
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create")
     public Idea createIdea(@RequestBody IdeaRequest idea) {
-        return ideaService.createidea(idea);
+        return ideaService.createIdea(idea);
     }
 
     @GetMapping("/{id}")
     public Optional<Idea> getIdeaById(@PathVariable long id) {
 
-        return ideaService.get(id);
+        return ideaService.getIdeaById(id);
     }
 
 
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteIdea(@PathVariable Long id){
 
-        return ideaService.deleteidea(id);
+        return ideaService.deleteIdea(id);
     }
 
 /*    @GetMapping("/gettotalview/{id}")
@@ -76,26 +76,26 @@ public class IdeaController {
     @PutMapping("/update")
     public Idea updateIdea(@RequestBody IdeaRequest idea){
 
-        return ideaService.updateidea(idea);
+        return ideaService.updateIdea(idea);
     }
 
 
     @PostMapping("/comment")
     public Comment addComment(@RequestBody CommentRequest commentRequest) {
 
-        return ideaService.insertcomment(commentRequest);
+        return ideaService.insertComment(commentRequest);
     }
 
     @PostMapping("/reaction")
     public  Reaction addReaction (@RequestBody ReactionRequest reactionRequest){
 
-        return ideaService.insertreaction(reactionRequest);
+        return ideaService.insertReaction(reactionRequest);
     }
 
     @PutMapping("/reaction/update")
     public Reaction updateReaction(@RequestBody ReactionRequest reactionRequest){
 
-        return ideaService.updatereaction(reactionRequest);
+        return ideaService.updateReaction(reactionRequest);
     }
 
 

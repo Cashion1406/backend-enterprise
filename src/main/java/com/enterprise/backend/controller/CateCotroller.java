@@ -22,23 +22,24 @@ public class CateCotroller {
     @GetMapping()
     public List<Category> getAllCate() {
 
-        return cateService.getallcate();
+        return cateService.getAllCate();
     }
 
     @PostMapping("/create")
         public Category createCate(@RequestBody Category category ) {
-        return cateService.savecate(category);
+        return cateService.saveCate(category);
     }
 
 
     @PutMapping("/update")
     public Category updateCate(@RequestBody Category category){
-        return cateService.updatecate(category);
+
+        return cateService.updateCate(category);
     }
 
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteCate(@PathVariable long id){
 
-        return cateService.deletecate(id);
+        return cateService.deleteCate(id);
     }
 }
