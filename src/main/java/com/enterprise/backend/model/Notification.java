@@ -18,11 +18,11 @@ public class Notification {
     private String client_id;
 
     @Column(name = "noti_time")
-    private String createAt;
+    private String createdAt;
 
     @Column(name = "noti_status")
     private Boolean status;
 
     @Column(name = "isDeleted")
-    private Boolean idDelete;
+    private Boolean isDelete;
 }

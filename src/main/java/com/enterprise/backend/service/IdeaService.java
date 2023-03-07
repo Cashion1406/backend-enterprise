@@ -131,7 +131,7 @@ public class IdeaService {
         return commentRepo.save(newComment);
     }
 
-
+    //asd
     //Add reaction to idea
     public Reaction insertreaction(ReactionRequest reactionRequest) {
 
@@ -169,6 +169,8 @@ public class IdeaService {
 
         return ideaRepo.getideaname(id);
     }
+
+
 
 
 }

@@ -19,7 +19,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping()
-    public List<Department> gellDepament(){
+    public List<Department> gellDeparment(){
         return  departmentService.getall();
     }
 

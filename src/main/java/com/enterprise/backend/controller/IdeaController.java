@@ -40,7 +40,7 @@ public class IdeaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Idea> getIdea(@PathVariable long id) {
+    public Optional<Idea> getIdeaById(@PathVariable long id) {
 
         return ideaService.get(id);
     }
