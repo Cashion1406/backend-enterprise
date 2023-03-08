@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 
+import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.view.View;
@@ -38,6 +39,7 @@ import java.util.Set;
         @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "reaction")
 }))
+
 @Getter
 @Setter
 @Entity

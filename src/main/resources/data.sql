@@ -14,7 +14,7 @@ commit ;
 
 insert into client_tbl(
 	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
-	values ('1', '21', 'STudent', 'example@gmail.com', 'FALSE', 'AN', 'HE_HIM','ROLE_USER' , '2');
+	values ('1', '21', 'STudent', 'example@gmail.com','DOAN' ,'FALSE', 'AN', 'HE_HIM','ROLE_USER' , '2');
 
 insert into client_tbl(
 	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
