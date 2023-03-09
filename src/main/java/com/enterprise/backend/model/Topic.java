@@ -1,6 +1,5 @@
 package com.enterprise.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,11 +40,14 @@ public class Topic {
     @Column(name = "image_url")
     private String imageURL;
 
+    @Column(name = "topic_description")
+    private String description;
+
     @OneToMany(mappedBy = "topic", fetch =  FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference(value = "idea_topic")
     private Set<Idea> ideas = new HashSet<>();
 
-    @OneToMany(mappedBy = "topic_id")
+    @OneToMany(mappedBy = "topic_id",orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonManagedReference
     @JsonIgnore
     private Set<Client_Topic> clientTopics = new HashSet<>();
