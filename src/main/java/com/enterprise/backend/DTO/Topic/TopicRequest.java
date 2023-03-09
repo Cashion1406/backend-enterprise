@@ -24,4 +24,6 @@ public class TopicRequest {
     private Boolean isDeleted;
 
     private String imageURL;
+
+    private String description;
 }
