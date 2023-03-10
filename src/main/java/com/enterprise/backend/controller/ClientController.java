@@ -76,7 +76,6 @@ public class ClientController {
     public String insertFollowTopic(@RequestBody Client_Topic_Request clientTopicRequest) {
         clientService.followTopic(clientTopicRequest);
         return "Added topics to Client " + clientService.getClientLastName(clientTopicRequest.getClient_id());
-
     }
 
     @GetMapping("/topic/{id}")

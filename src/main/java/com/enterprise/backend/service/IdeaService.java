@@ -124,9 +124,7 @@ public class IdeaService {
         newComment.setIdea(idea.get());
         newComment.setComment(commentRequest.getComment());
         newComment.setModify_date(timeStamp);
-
         newComment.setIsAnonymous(commentRequest.getIsAnonymous());
-
         Notification notification = new Notification();
         notification.setIsDelete(false);
         notification.setStatus(false);
@@ -141,7 +139,6 @@ public class IdeaService {
     //Add reaction to idea
     public Reaction insertReaction(ReactionRequest reactionRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
-
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(reactionRequest.getIdea_id());
         Reaction newReaction = new Reaction();
