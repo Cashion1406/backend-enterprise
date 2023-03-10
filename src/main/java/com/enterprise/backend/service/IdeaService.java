@@ -1,16 +1,17 @@
 package com.enterprise.backend.service;
 
+import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.DTO.CommentRequest;
+import com.enterprise.backend.DTO.EmailMessage;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
-import com.enterprise.backend.repo.CateRepo;
-import com.enterprise.backend.repo.CommentRepo;
-import com.enterprise.backend.repo.IdeaRepo;
-import com.enterprise.backend.repo.ReactionRepo;
+import com.enterprise.backend.repo.*;
 import com.enterprise.backend.response.DeleteResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +22,19 @@ import java.util.Optional;
 
 @Service
 public class IdeaService {
+    Logger logger = LoggerFactory.getLogger(IdeaService.class);
+    @Autowired
+    MailService mailService;
     @Autowired
     private IdeaRepo ideaRepo;
-
     @Autowired
     private CateRepo cateRepo;
     @Autowired
     private ReactionRepo reactionRepo;
-
     @Autowired
     private CommentRepo commentRepo;
-
+    @Autowired
+    private NotificationRepo notificationRepo;
     @Autowired
     private ClientService clientService;
     @Autowired
@@ -56,6 +59,14 @@ public class IdeaService {
         newIdea.setClient(client);
         newIdea.setTopic(topic);
         newIdea.setIsAnonymous(idea.getIsAnonymous());
+        try {
+            //sendmail( String toEmailAddress, String Subject , String body )
+            Client client_QA = clientService.getClientQA(client.getDepartment().getId());
+            mailService.sendMail(client_QA.getEmail(), topic.getName(), client.getFirstname() + " " + client.getLastname() + " of " + client.getDepartment().getName() + " has created a new idea with title " + newIdea.getName() + " at " + " " + timeStamp);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return ideaRepo.save(newIdea);
     }
@@ -113,22 +124,44 @@ public class IdeaService {
         newComment.setIdea(idea.get());
         newComment.setComment(commentRequest.getComment());
         newComment.setModify_date(timeStamp);
-
         newComment.setIsAnonymous(commentRequest.getIsAnonymous());
-
+        Notification notification = new Notification();
+        notification.setIsDelete(false);
+        notification.setStatus(false);
+        notification.setCreatedAt(timeStamp);
+        notification.setClient_id(commentRequest.getClient_id());
+        notification.setContent(client.get().getFirstname() + " has commented on your idea :" + idea.get().getName());
+        notificationRepo.save(notification);
         return commentRepo.save(newComment);
     }
 
 
     //Add reaction to idea
     public Reaction insertReaction(ReactionRequest reactionRequest) {
-
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(reactionRequest.getIdea_id());
         Reaction newReaction = new Reaction();
         newReaction.setIdea(idea.get());
         newReaction.setClient(client.get());
         newReaction.setReaction(reactionRequest.getReaction());
+        String status = "";
+        if (reactionRequest.getReaction()) {
+
+            status = "up vote";
+        } else {
+            status = "down vote";
+        }
+
+
+        Notification notification = new Notification();
+        notification.setIsDelete(false);
+        notification.setStatus(false);
+        notification.setCreatedAt(timeStamp);
+        notification.setClient_id(reactionRequest.getClient_id());
+        notification.setContent(client.get().getFirstname() + " has " + status + " on your idea : " + idea.get().getName());
+        notificationRepo.save(notification);
+
         return reactionRepo.save(newReaction);
 
     }
@@ -153,7 +186,7 @@ public class IdeaService {
 
 
     //get idea name with ID
-    public String getideaname(Long id) {
+    public String getIdeaName(Long id) {
 
         return ideaRepo.getideaname(id);
     }

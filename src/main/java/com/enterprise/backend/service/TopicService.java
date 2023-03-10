@@ -36,10 +36,8 @@ public class TopicService {
         newtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
         newtopic.setModifyDate(timeStamp);
         newtopic.setImageURL(topicRequest.getImageURL());
-        if (topicRequest.getIsDeleted() == null) {
-            newtopic.setIsDeleted(false);
-        }
-
+        newtopic.setIsDeleted(false);
+        newtopic.setDescription(topicRequest.getDescription());
 
         return topicRepo.save(newtopic);
     }
@@ -57,13 +55,9 @@ public class TopicService {
         existtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
         existtopic.setFinal_closure_date(topicRequest.getFinal_closure_date());
         existtopic.setModifyDate(timeStamp);
-        if (topicRequest.getIsDeleted() == null) {
-            existtopic.setIsDeleted(false);
-        } else {
-
-            existtopic.setIsDeleted(topicRequest.getIsDeleted());
-        }
-
+        existtopic.setDescription(topicRequest.getDescription());
+        existtopic.setIsDeleted(topicRequest.getIsDeleted());
+        
         return topicRepo.save(existtopic);
     }
 

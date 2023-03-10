@@ -4,6 +4,7 @@ package com.enterprise.backend.service;
 import com.enterprise.backend.DTO.Client.ClientDepartmentRequest;
 
 import com.enterprise.backend.DTO.Client.ClientUpdateRequest;
+import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.DTO.Client.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
@@ -71,9 +72,13 @@ public class ClientService {
         return clientRepo.findById(id);
     }
 
-    public String getClientname(String id) {
+    public String getClientLastName(String id) {
 
-        return clientRepo.getClientname(id);
+        return clientRepo.getClientLastName(id);
+    }
+
+    public String getClientFirstName(String id){
+        return clientRepo.getClientFirstName(id);
     }
 
 
@@ -142,5 +147,11 @@ public class ClientService {
 
     public List<ClientReaction> getClientReaction(String id) {
         return clientRepo.findClientReaction(id);
+    }
+
+
+    public  Client getClientQA (Long id){
+
+        return clientRepo.getClientQA(id);
     }
 }

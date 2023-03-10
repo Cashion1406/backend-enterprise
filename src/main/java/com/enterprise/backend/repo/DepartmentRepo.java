@@ -15,4 +15,6 @@ public interface DepartmentRepo extends JpaRepository<Department, Long> {
     String departmentnamebyid(@Param("id") Long id);
 
     List<Department> findByisDeletedFalse();
+
+
 }
