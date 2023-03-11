@@ -86,6 +86,11 @@ public class ClientController {
 
     }
 
+    @DeleteMapping("/topic/delete")
+    public String removeFollowTopic (@RequestBody Client_Topic_Request clientTopicRequest){
+        return clientService.removeTopic(clientTopicRequest.getClient_id(),clientTopicRequest.getTopic_id());
+    }
+
     @GetMapping("/reaction/{id}")
     public List<ClientReaction> getReactionWithClient(@PathVariable String id) {
 
