@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -22,5 +23,8 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
     void softdeletetopic(@Param("id") Long id);
 
     List<Topic> findByisDeletedFalse();
+
+    @Query("select t from Topic t where t.topic_closure_date < :date")
+    List<Topic> getclosureTopic(@Param("date") String date);
 
 }
