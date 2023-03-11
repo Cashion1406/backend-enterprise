@@ -71,7 +71,7 @@ public class IdeaController {
 
         ideaService.insertIdeaCate(ideaCateRequest);
 
-        return "Added Category to Idea: " + ideaService.getideaname(ideaCateRequest.getIdea_id());
+        return "Added Category to Idea: " + ideaService.getIdeaName(ideaCateRequest.getIdea_id());
     }
     @PutMapping("/update")
     public Idea updateIdea(@RequestBody IdeaRequest idea){
