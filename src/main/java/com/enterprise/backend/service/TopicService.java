@@ -39,8 +39,6 @@ public class TopicService {
         newtopic.setIsDeleted(false);
         newtopic.setDescription(topicRequest.getDescription());
 
-
-
         return topicRepo.save(newtopic);
     }
 

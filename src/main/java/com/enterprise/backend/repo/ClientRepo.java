@@ -5,10 +5,12 @@ import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.FollowTopic;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.enterprise.backend.model.Client;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +28,10 @@ public interface ClientRepo extends JpaRepository<Client, String> {
     @Query(value = "insert into follow_tbl values (:topic_id, :client_id)", nativeQuery = true)
     void insertfollowtopic(@Param("topic_id") long topic_id, @Param("client_id") String client_id);
 
+    @Transactional
+    @Modifying
+    @Query(value = "delete from follow_tbl f where f.topic_id =:topic_id and f.client_id =:client_id",nativeQuery = true)
+    void removeFollowTopic(@Param("topic_id") Long topic_id,@Param("client_id") String client_id);
 
     @Query(value = "select c.client_lastname from client_tbl c where c.id = :id", nativeQuery = true)
     String getClientLastName(@Param("id") String id);

@@ -25,6 +25,7 @@ public class IdeaService {
     Logger logger = LoggerFactory.getLogger(IdeaService.class);
     @Autowired
     private MailService mailService;
+
     @Autowired
     private IdeaRepo ideaRepo;
     @Autowired

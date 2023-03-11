@@ -16,6 +16,7 @@ insert into client_tbl(
 	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
 	values ('1', '21', 'Student', 'ipad7383@gmail.com','DOAN' ,'FALSE', 'AN', 'HE_HIM','ROLE_USER' , '2');
 
+
 insert into client_tbl(
 	id, client_age, client_info, client_email,client_firstname, client_is_deleted, client_lastname, client_pronoun, client_role, department_id)
 	values ('2', '21', 'Student','cashion1406@gmail.com' ,'NGUYEN', 'FALSE', 'LAM', 'SHE_HER','ROLE_ADMIN' , '1');
@@ -65,6 +66,7 @@ insert into topic_tbl(
 insert into topic_tbl(
 	id, topic_final_date, topic_closure_date,image_url ,is_deleted, modify_date, topic_name,topic_description)
 	values (3, '2023-04-29 15:25:15', '2023-02-28 15:25:15','/download/imageURL' ,'FALSE', '02/20/2023', 'Deploy handwritten OCR', 'Handwritten OCR discussion');
+
 commit;
 
 insert into idea_tbl(
