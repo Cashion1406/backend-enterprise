@@ -81,7 +81,8 @@ public class ClientService {
         return clientRepo.getClientLastName(id);
     }
 
-    public String getClientFirstName(String id) {
+    public String getClientFirstName(String id){
+
         return clientRepo.getClientFirstName(id);
     }
 
@@ -163,11 +164,8 @@ public class ClientService {
         return clientRepo.findClientReaction(id);
     }
 
-
-    public Client getClientQA(Long id) {
+    public  Client getClientQA (Long id){
 
         return clientRepo.getClientQA(id);
     }
-
-
 }

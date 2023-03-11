@@ -24,7 +24,8 @@ import java.util.Optional;
 public class IdeaService {
     Logger logger = LoggerFactory.getLogger(IdeaService.class);
     @Autowired
-    MailService mailService;
+    private MailService mailService;
+
     @Autowired
     private IdeaRepo ideaRepo;
     @Autowired
@@ -153,7 +154,6 @@ public class IdeaService {
             status = "down vote";
         }
 
-
         Notification notification = new Notification();
         notification.setIsDelete(false);
         notification.setStatus(false);
@@ -161,7 +161,6 @@ public class IdeaService {
         notification.setClient_id(reactionRequest.getClient_id());
         notification.setContent(client.get().getFirstname() + " has " + status + " on your idea : " + idea.get().getName());
         notificationRepo.save(notification);
-
         return reactionRepo.save(newReaction);
 
     }

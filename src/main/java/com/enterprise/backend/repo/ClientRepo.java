@@ -17,8 +17,11 @@ import java.util.List;
 @Repository
 public interface ClientRepo extends JpaRepository<Client, String> {
 
-    @Query(value = "select * from client_tbl c where c.department_id = :id and c.client_role = 'ROLE_QA_DE'",nativeQuery = true)
+    @Query("select c from Client c where c.department.id = :id and c.role = 'ROLE_QA_DE'")
     Client getClientQA(@Param("id") Long id);
+
+    @Query("select c from Client c inner join Client_Topic f on c.id = f.client_id.id where f.topic_id.id = :id")
+    List<Client> getAllClientWithTopic(@Param("id") Long id);
 
     List<Client> findBylastnameContaining(String firstname);
 

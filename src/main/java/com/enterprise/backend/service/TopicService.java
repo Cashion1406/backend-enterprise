@@ -27,7 +27,7 @@ public class TopicService {
     }
 
     public Topic createTopic(TopicRequest topicRequest) {
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
 
         Topic newtopic = new Topic();
         newtopic.setName(topicRequest.getName());
