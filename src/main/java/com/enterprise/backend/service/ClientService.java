@@ -13,6 +13,7 @@ import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.repo.ClientRepo;
 import com.enterprise.backend.repo.DepartmentRepo;
 import com.enterprise.backend.repo.IdeaRepo;
+import com.enterprise.backend.repo.TopicRepo;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
@@ -35,6 +36,9 @@ public class ClientService {
 
     @Autowired
     private IdeaRepo ideaRepo;
+
+    @Autowired
+    private TopicRepo topicRepo;
 
     //Create User
     public Client saveClient(ClientDepartmentRequest clientDepartmentRequest) {
@@ -77,7 +81,7 @@ public class ClientService {
         return clientRepo.getClientLastName(id);
     }
 
-    public String getClientFirstName(String id){
+    public String getClientFirstName(String id) {
         return clientRepo.getClientFirstName(id);
     }
 
@@ -134,6 +138,16 @@ public class ClientService {
 
     }
 
+    public String removeTopic(String clientId, Long topicId) {
+        try {
+            clientRepo.removeFollowTopic(topicId, clientId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "Unfollowed Topic : " +topicRepo.getTopicname(topicId);
+    }
+
     public List<FollowTopic> followTopic(String client_id) {
 
         return clientRepo.findfollowtopic(client_id);
@@ -150,8 +164,10 @@ public class ClientService {
     }
 
 
-    public  Client getClientQA (Long id){
+    public Client getClientQA(Long id) {
 
         return clientRepo.getClientQA(id);
     }
+
+
 }
