@@ -46,7 +46,7 @@ public class IdeaService {
 
     public List<Idea> getAllIdea() {
 
-        return ideaRepo.findAll();
+        return ideaRepo.findByisDeletedFalse();
     }
 
     public Idea createIdea(IdeaRequest idea) {
@@ -63,6 +63,17 @@ public class IdeaService {
         newIdea.setClient(client);
         newIdea.setTopic(topic);
         newIdea.setIsAnonymous(idea.getIsAnonymous());
+        ideaRepo.save(newIdea);
+
+        for (long cateid : idea.getCategories()) {
+
+            try {
+                ideaRepo.insertideacatev2(cateid, newIdea.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
         try {
             //sendmail( String toEmailAddress, String Subject , String body )
             Client client_QA = clientService.getClientQA(client.getDepartment().getId());
@@ -72,7 +83,8 @@ public class IdeaService {
             e.printStackTrace();
         }
 
-        return ideaRepo.save(newIdea);
+
+        return newIdea;
     }
 
 
@@ -96,7 +108,6 @@ public class IdeaService {
 
         return ideaRepo.findById(id);
     }
-
 
 
     //Add category to idea
@@ -146,12 +157,12 @@ public class IdeaService {
 
     }
 
-    public DeleteResponse deleteComment(Long id){
+    public DeleteResponse deleteComment(Long id) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         commentRepo.deleteById(id);
 
-        return new DeleteResponse("Deleted comment ",timestamp,true);
+        return new DeleteResponse("Deleted comment ", timestamp, true);
     }
 
 
@@ -210,7 +221,7 @@ public class IdeaService {
 
 
     //get top 7 ideas each department
-    public List<IdeasPerDepartment> ideasPerDepartment(){
+    public List<IdeasPerDepartment> ideasPerDepartment() {
 
         return ideaRepo.ideasPerDepartment();
     }
@@ -219,7 +230,7 @@ public class IdeaService {
         return ideaRepo.top7ideas();
     }
 
-    public List<Idea> top5views(){
+    public List<Idea> top5views() {
 
         return ideaRepo.top5Ideas();
     }

@@ -4,6 +4,7 @@ import com.enterprise.backend.DTO.Idea.IdeasPerCate;
 import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.model.Idea_cate;
+import com.enterprise.backend.model.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -48,5 +49,7 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
 
     @Query(nativeQuery = true)
     List<IdeasPerCate> top7ideas();
+
+    List<Idea> findByisDeletedFalse();
 
 }

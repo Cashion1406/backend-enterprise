@@ -91,4 +91,7 @@ public class Idea {
 
     @Column(name = "isAnonymous")
     private Boolean isAnonymous;
+
+    @Column(name = "isDeleted")
+    private Boolean isDeleted;
 }
