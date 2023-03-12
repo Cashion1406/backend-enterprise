@@ -1,6 +1,7 @@
 package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.Topic.TopicRequest;
+import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
 import com.enterprise.backend.response.DeleteResponse;
@@ -75,5 +76,10 @@ public class TopicService {
 
         topicRepo.softdeletetopic(id);
         return "Temporary deleted " + topicname;
+    }
+
+    public List<TopicWithMostFollowers>  top7follower() {
+
+        return topicRepo.top7followers();
     }
 }

@@ -1,5 +1,7 @@
 package com.enterprise.backend.model;
 
+import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
+import com.enterprise.backend.response.ClientReaction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -10,6 +12,20 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+
+@NamedNativeQuery(name = "Topic.top7followers",
+        query = "select t.id as topic_id , t.topic_name as topic_name, t.image_url as image_url,count(*) as numOfFollowers, t.topic_closure_date as idea_closure_date, t.topic_final_date as final_closure_date from follow_tbl f inner join topic_tbl t on t.id =f.topic_id group by t.id order by count(f.topic_id) desc limit 7",
+        resultSetMapping = "Mapping.MostFollowedTopic"
+)
+
+@SqlResultSetMapping(name = "Mapping.MostFollowedTopic",classes = @ConstructorResult(targetClass = TopicWithMostFollowers.class, columns = {
+        @ColumnResult(name = "topic_id"),
+        @ColumnResult(name = "topic_name"),
+        @ColumnResult(name = "image_url"),
+        @ColumnResult(name = "numOfFollowers"),
+        @ColumnResult(name = "idea_closure_date"),
+        @ColumnResult(name = "final_closure_date"),
+}))
 
 @Getter
 @Setter

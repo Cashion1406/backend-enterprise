@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 
+import com.enterprise.backend.DTO.Client.ClientNotification;
 import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.FollowTopic;
@@ -38,6 +39,18 @@ import java.util.Set;
         @ColumnResult(name = "idea_id"),
         @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "reaction")
+}))
+
+@NamedNativeQuery(name = "Client.findClientNotification",
+        query = "select n.id as noti_id ,n.noti_content as content, n.noti_time as noti_time, n.noti_status as status from notification_tbl n where n.client_id = :id order by n.noti_time desc",
+        resultSetMapping = "Mapping.ClientNotification"
+)
+
+@SqlResultSetMapping(name = "Mapping.ClientNotification",classes = @ConstructorResult(targetClass = ClientNotification.class, columns = {
+        @ColumnResult(name = "noti_id"),
+        @ColumnResult(name = "content"),
+        @ColumnResult(name = "noti_time"),
+        @ColumnResult(name = "status")
 }))
 
 @Getter
@@ -85,13 +98,13 @@ public class Client {
     //@JsonView(View.Sum.class)
     private Boolean isDeleted;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @JsonManagedReference(value = "client_department")
     //@JsonView(View.SumwithDepartment.class)
     private Department department;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "client")
     @JsonManagedReference(value = "client_idea")
     private Set<Idea> ideas = new HashSet<>();
 
@@ -100,7 +113,7 @@ public class Client {
     //@JsonView(View.SumwithDepartment.class)
     private Set<Reaction> reactions = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     @JsonManagedReference(value = "client_comment")
     //@JsonView(View.SumwithDepartment.class)
     private Set<Comment> comments = new HashSet<>();

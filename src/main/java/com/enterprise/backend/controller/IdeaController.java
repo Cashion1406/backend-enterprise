@@ -4,6 +4,8 @@ import com.enterprise.backend.DTO.CommentRequest;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
 
+import com.enterprise.backend.DTO.Idea.IdeasPerCate;
+import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.response.DeleteResponse;
@@ -47,7 +49,7 @@ public class IdeaController {
 
 
     @DeleteMapping("/delete/{id}")
-    public DeleteResponse deleteIdea(@PathVariable Long id){
+    public DeleteResponse deleteIdea(@PathVariable Long id) {
 
         return ideaService.deleteIdea(id);
     }
@@ -73,8 +75,9 @@ public class IdeaController {
 
         return "Added Category to Idea: " + ideaService.getIdeaName(ideaCateRequest.getIdea_id());
     }
+
     @PutMapping("/update")
-    public Idea updateIdea(@RequestBody IdeaRequest idea){
+    public Idea updateIdea(@RequestBody IdeaRequest idea) {
 
         return ideaService.updateIdea(idea);
     }
@@ -86,17 +89,43 @@ public class IdeaController {
         return ideaService.insertComment(commentRequest);
     }
 
+    @PutMapping("/comment/update")
+    public Comment updateComment(@RequestBody CommentRequest commentRequest) {
+        return ideaService.updateComment(commentRequest);
+    }
+
+    @DeleteMapping("/comment/delete/{id}")
+    public DeleteResponse deleteComment(@PathVariable Long id) {
+        return ideaService.deleteComment(id);
+    }
+
     @PostMapping("/reaction")
-    public  Reaction addReaction (@RequestBody ReactionRequest reactionRequest){
+    public Reaction addReaction(@RequestBody ReactionRequest reactionRequest) {
 
         return ideaService.insertReaction(reactionRequest);
     }
 
     @PutMapping("/reaction/update")
-    public Reaction updateReaction(@RequestBody ReactionRequest reactionRequest){
+    public Reaction updateReaction(@RequestBody ReactionRequest reactionRequest) {
 
         return ideaService.updateReaction(reactionRequest);
     }
 
+    @GetMapping("/department")
+    public List<IdeasPerDepartment> ideasPerDepartment() {
+        return ideaService.ideasPerDepartment();
+    }
+
+
+    @GetMapping("/top7ideas")
+    public List<IdeasPerCate> ideasPerCates() {
+        return ideaService.ideasPerCate();
+    }
+
+    @GetMapping("/top5views")
+    public List<Idea> top5views() {
+
+        return ideaService.top5views();
+    }
 
 }

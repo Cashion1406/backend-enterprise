@@ -6,6 +6,8 @@ import com.enterprise.backend.DTO.EmailMessage;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 
 import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
+import com.enterprise.backend.DTO.Idea.IdeasPerCate;
+import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.DTO.ReactionRequest;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.repo.*;
@@ -13,6 +15,7 @@ import com.enterprise.backend.response.DeleteResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -94,10 +97,6 @@ public class IdeaService {
         return ideaRepo.findById(id);
     }
 
-    public int gettotalview(Long id) {
-
-        return ideaRepo.gettotalview(id);
-    }
 
 
     //Add category to idea
@@ -119,7 +118,7 @@ public class IdeaService {
 
         Optional<Client> client = clientService.getClientByid(commentRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(commentRequest.getIdea_id());
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
         Comment newComment = new Comment();
         newComment.setClient(client.get());
         newComment.setIdea(idea.get());
@@ -136,10 +135,29 @@ public class IdeaService {
         return commentRepo.save(newComment);
     }
 
+    public Comment updateComment(CommentRequest commentRequest) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+
+        Comment existComment = commentRepo.findById(commentRequest.getId()).get();
+        existComment.setComment(commentRequest.getComment());
+        existComment.setModify_date(timeStamp);
+        existComment.setIsAnonymous(commentRequest.getIsAnonymous());
+        return commentRepo.save(existComment);
+
+    }
+
+    public DeleteResponse deleteComment(Long id){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        commentRepo.deleteById(id);
+
+        return new DeleteResponse("Deleted comment ",timestamp,true);
+    }
+
 
     //Add reaction to idea
     public Reaction insertReaction(ReactionRequest reactionRequest) {
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
         Optional<Client> client = clientService.getClientByid(reactionRequest.getClient_id());
         Optional<Idea> idea = ideaRepo.findById(reactionRequest.getIdea_id());
         Reaction newReaction = new Reaction();
@@ -191,4 +209,18 @@ public class IdeaService {
     }
 
 
+    //get top 7 ideas each department
+    public List<IdeasPerDepartment> ideasPerDepartment(){
+
+        return ideaRepo.ideasPerDepartment();
+    }
+
+    public List<IdeasPerCate> ideasPerCate() {
+        return ideaRepo.top7ideas();
+    }
+
+    public List<Idea> top5views(){
+
+        return ideaRepo.top5Ideas();
+    }
 }

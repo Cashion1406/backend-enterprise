@@ -1,5 +1,6 @@
 package com.enterprise.backend.repo;
 
+import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,4 +28,7 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
     @Query("select t from Topic t where t.topic_closure_date < :date")
     List<Topic> getclosureTopic(@Param("date") String date);
 
+
+    @Query(nativeQuery = true)
+    List<TopicWithMostFollowers> top7followers();
 }
