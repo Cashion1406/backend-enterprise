@@ -104,16 +104,16 @@ public class Client {
     //@JsonView(View.SumwithDepartment.class)
     private Department department;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "client")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "client", orphanRemoval = true)
     @JsonManagedReference(value = "client_idea")
     private Set<Idea> ideas = new HashSet<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonManagedReference
     //@JsonView(View.SumwithDepartment.class)
     private Set<Reaction> reactions = new HashSet<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "client", orphanRemoval = true,cascade = CascadeType.PERSIST)
     @JsonManagedReference(value = "client_comment")
     //@JsonView(View.SumwithDepartment.class)
     private Set<Comment> comments = new HashSet<>();

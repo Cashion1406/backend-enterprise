@@ -57,15 +57,12 @@ public class SceduleEx {
         System.out.println(dateTimeFormatter.format(today));
         for (Topic topic : list) {
 
-            System.out.println(topic);
-
             List<Client> clientList = clientRepo.getAllClientWithTopic(topic.getId());
-            System.out.println(clientList);
 
             for (Client client : clientList) {
 
                 try {
-                    mailService.sendMail(client.getEmail(), topic.getName() + " closure date is due on " + topic.getTopic_closure_date(), client.getFirstname() +" "+ client.getLastname() + " of "+ client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date());
+                    mailService.sendMail(client.getEmail(), topic.getName() + " closure date is due on " + topic.getTopic_closure_date(), client.getFirstname() +" "+ client.getLastname() + " of department  "+ client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date());
                     Notification notification = new Notification();
                     notification.setIsDelete(false);
                     notification.setStatus(false);
@@ -75,7 +72,6 @@ public class SceduleEx {
                     notification.setIsDelete(false);
                     notification.setStatus(true);
                     notificationRepo.save(notification);
-                    System.out.println(client.getEmail());
 
                 } catch (Exception e) {
                     e.printStackTrace();

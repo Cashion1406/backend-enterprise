@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class IdeaService {
@@ -91,7 +90,42 @@ public class IdeaService {
     //Update Idea
     public Idea updateIdea(IdeaRequest ideaUpdateRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+
+        List<Long> newCate = ideaUpdateRequest.getCategories();
+
+        List<Long> existCate = ideaRepo.getIdeaCate(ideaUpdateRequest.getId());
+
         Idea existIdea = ideaRepo.findById(ideaUpdateRequest.getId()).get();
+
+        Collection<Long> addThis = new HashSet<>();
+
+
+        for (Long cate_id : newCate) {
+
+            if (existCate.contains(cate_id)) {
+                existCate.remove(cate_id);
+
+            } else {
+                addThis.add(cate_id);
+            }
+        }
+        for (Long new_cate_id : addThis) {
+            try {
+                ideaRepo.insertideacatev2(new_cate_id, ideaUpdateRequest.getId());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (Long old_cate_id : existCate) {
+            try {
+                ideaRepo.deleteIdeaCate(old_cate_id, ideaUpdateRequest.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         existIdea.setBody(ideaUpdateRequest.getBody());
         existIdea.setName(ideaUpdateRequest.getName());
         existIdea.setModify_date(timeStamp);
@@ -111,18 +145,18 @@ public class IdeaService {
 
 
     //Add category to idea
-    public void insertIdeaCate(Idea_Cate_Request ideaCateRequest) {
-
-        for (long cateid : ideaCateRequest.getCategories()) {
-
-            try {
-                ideaRepo.insertideacatev2(cateid, ideaCateRequest.getIdea_id());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
+//    public void insertIdeaCate(Idea_Cate_Request ideaCateRequest) {
+//
+//        for (long cateid : ideaCateRequest.getCategories()) {
+//
+//            try {
+//                ideaRepo.insertideacatev2(cateid, ideaCateRequest.getIdea_id());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
 
     //Add comment to Idea
     public Comment insertComment(CommentRequest commentRequest) {
@@ -211,6 +245,7 @@ public class IdeaService {
         ideaRepo.deleteById(id);
         return new DeleteResponse("Delete idea " + name, timestamp, true);
     }
+
     public DeleteResponse softDeleteIdea(Long id) {
         String name = ideaRepo.getideaname(id);
         //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
@@ -219,8 +254,6 @@ public class IdeaService {
         ideaRepo.softdeleteidea(id);
         return new DeleteResponse("Soft delete idea " + name, timestamp, true);
     }
-
-
 
 
     //get idea name with ID

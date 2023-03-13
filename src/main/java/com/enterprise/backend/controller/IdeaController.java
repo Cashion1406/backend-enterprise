@@ -55,15 +55,17 @@ public class IdeaController {
     }
 
 
-    @PostMapping("/cate_idea")
-    public String addCateToIdea(@RequestBody Idea_Cate_Request ideaCateRequest) {
+//    @PostMapping("/cate_idea")
+//    public String addCateToIdea(@RequestBody Idea_Cate_Request ideaCateRequest) {
+//
+//
+//        ideaService.insertIdeaCate(ideaCateRequest);
+//
+//        return "Added Category to Idea: " + ideaService.getIdeaName(ideaCateRequest.getIdea_id());
+//    }
 
 
-        ideaService.insertIdeaCate(ideaCateRequest);
-
-        return "Added Category to Idea: " + ideaService.getIdeaName(ideaCateRequest.getIdea_id());
-    }
-
+    //Update Idea
     @PutMapping("/update")
     public Idea updateIdea(@RequestBody IdeaRequest idea) {
 
@@ -71,45 +73,60 @@ public class IdeaController {
     }
 
 
+
+    //Insert comment to Idea
     @PostMapping("/comment")
     public Comment addComment(@RequestBody CommentRequest commentRequest) {
 
         return ideaService.insertComment(commentRequest);
     }
 
+    //Update comment
     @PutMapping("/comment/update")
     public Comment updateComment(@RequestBody CommentRequest commentRequest) {
         return ideaService.updateComment(commentRequest);
     }
 
+
+    //Delete comment from IDea
     @DeleteMapping("/comment/delete/{id}")
     public DeleteResponse deleteComment(@PathVariable Long id) {
         return ideaService.deleteComment(id);
     }
 
+
+    //Insert reaction
     @PostMapping("/reaction")
     public Reaction addReaction(@RequestBody ReactionRequest reactionRequest) {
 
         return ideaService.insertReaction(reactionRequest);
     }
 
+
+    //Update Reaction
     @PutMapping("/reaction/update")
     public Reaction updateReaction(@RequestBody ReactionRequest reactionRequest) {
 
         return ideaService.updateReaction(reactionRequest);
     }
 
+
+    //Get Nums of Idea for each Department
     @GetMapping("/department")
     public List<IdeasPerDepartment> ideasPerDepartment() {
         return ideaService.ideasPerDepartment();
     }
 
 
+
+    //Get top 7 idea for each Category
     @GetMapping("/top7ideas")
     public List<IdeasPerCate> ideasPerCates() {
         return ideaService.ideasPerCate();
     }
 
+
+    //Get top 5 Ideas with Most view
     @GetMapping("/top5views")
     public List<Idea> top5views() {
 

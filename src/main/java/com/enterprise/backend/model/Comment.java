@@ -25,7 +25,7 @@ public class Comment {
     @Column(name = "comment_body")
     private String comment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @JsonIncludeProperties({"id","lastname","firstname"})
     private Client client;
