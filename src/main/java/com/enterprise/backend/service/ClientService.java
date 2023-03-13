@@ -94,6 +94,7 @@ public class ClientService {
         Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
         existClient.setClient_info(client.getClient_info());
         existClient.setAge(client.getAge());
+        existClient.setRole(client.getRole());
         existClient.setEmail(client.getEmail());
         existClient.setFirstname(client.getFirstname());
         existClient.setLastname(client.getLastname());

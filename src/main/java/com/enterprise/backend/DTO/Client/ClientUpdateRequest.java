@@ -1,5 +1,6 @@
 package com.enterprise.backend.DTO.Client;
 
+import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.view.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Column;
@@ -26,6 +27,8 @@ public class ClientUpdateRequest {
     private String email;
 
     private String client_info;
+
+    private ERole role;
 
 
 }

@@ -51,20 +51,8 @@ public class IdeaController {
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteIdea(@PathVariable Long id) {
 
-        return ideaService.deleteIdea(id);
+        return ideaService.softDeleteIdea(id);
     }
-
-/*    @GetMapping("/gettotalview/{id}")
-    public Integer getallidea(@PathVariable Long id) {
-
-        return ideaService.gettotalview(id);
-    }
-
-    @GetMapping("/getupvote")
-    public List<Idea> upvote() {
-
-        return ideaService.getupvote();
-    }*/
 
 
     @PostMapping("/cate_idea")

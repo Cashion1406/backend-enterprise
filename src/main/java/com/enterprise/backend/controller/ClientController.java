@@ -34,7 +34,6 @@ public class ClientController {
 
 
     //get list of all user
-
     @GetMapping()
     public List<Client> getAllClient() {
 
@@ -98,7 +97,6 @@ public class ClientController {
         return clientService.followTopic(id);
 
     }
-
 
     //user unfollow topic
     @DeleteMapping("/topic/delete")

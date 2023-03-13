@@ -62,6 +62,7 @@ public class IdeaService {
         newIdea.setModify_date(timeStamp);
         newIdea.setClient(client);
         newIdea.setTopic(topic);
+        newIdea.setIsDeleted(false);
         newIdea.setIsAnonymous(idea.getIsAnonymous());
         ideaRepo.save(newIdea);
 
@@ -82,7 +83,6 @@ public class IdeaService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return newIdea;
     }
@@ -211,6 +211,16 @@ public class IdeaService {
         ideaRepo.deleteById(id);
         return new DeleteResponse("Delete idea " + name, timestamp, true);
     }
+    public DeleteResponse softDeleteIdea(Long id) {
+        String name = ideaRepo.getideaname(id);
+        //String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        ideaRepo.softdeleteidea(id);
+        return new DeleteResponse("Soft delete idea " + name, timestamp, true);
+    }
+
+
 
 
     //get idea name with ID

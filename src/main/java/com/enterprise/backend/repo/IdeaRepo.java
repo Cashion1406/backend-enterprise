@@ -38,6 +38,8 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     List<Idea> getdownvote();
 
 
+    @Transactional
+    @Modifying
     @Query(value = "insert into idea_cate_tbl (cate_id,idea_id) values (:cate_id,:idea_id)", nativeQuery = true)
     void insertideacatev2(@Param("cate_id") long cate_id, @Param("idea_id") long idea_id);
 
@@ -51,5 +53,10 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     List<IdeasPerCate> top7ideas();
 
     List<Idea> findByisDeletedFalse();
+
+    @Transactional
+    @Modifying
+    @Query("update Idea i set i.isDeleted = true where i.id = :id")
+    void softdeleteidea(@Param("id") Long id);
 
 }

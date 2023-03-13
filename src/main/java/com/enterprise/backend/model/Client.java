@@ -22,7 +22,7 @@ import java.util.Set;
         resultSetMapping = "Mapping.ClientTopic"
 )
 
-@SqlResultSetMapping(name = "Mapping.ClientTopic",classes = @ConstructorResult(targetClass = FollowTopic.class, columns = {
+@SqlResultSetMapping(name = "Mapping.ClientTopic", classes = @ConstructorResult(targetClass = FollowTopic.class, columns = {
         @ColumnResult(name = "client_role"),
         @ColumnResult(name = "client_id"),
         @ColumnResult(name = "topic_name"),
@@ -35,7 +35,7 @@ import java.util.Set;
         resultSetMapping = "Mapping.ClientReaction"
 )
 
-@SqlResultSetMapping(name = "Mapping.ClientReaction",classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
+@SqlResultSetMapping(name = "Mapping.ClientReaction", classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
         @ColumnResult(name = "idea_id"),
         @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "reaction")
@@ -46,7 +46,7 @@ import java.util.Set;
         resultSetMapping = "Mapping.ClientNotification"
 )
 
-@SqlResultSetMapping(name = "Mapping.ClientNotification",classes = @ConstructorResult(targetClass = ClientNotification.class, columns = {
+@SqlResultSetMapping(name = "Mapping.ClientNotification", classes = @ConstructorResult(targetClass = ClientNotification.class, columns = {
         @ColumnResult(name = "noti_id"),
         @ColumnResult(name = "content"),
         @ColumnResult(name = "noti_time"),
@@ -62,19 +62,19 @@ import java.util.Set;
 public class Client {
 
     @Id
-  //  @JsonView(View.Sum.class)
+    //  @JsonView(View.Sum.class)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
-   // @JsonView(View.Sum.class)
+    // @JsonView(View.Sum.class)
     private String firstname;
 
     @Column(name = "client_lastname", length = 45)
-  //  @JsonView(View.Sum.class)
+    //  @JsonView(View.Sum.class)
     private String lastname;
 
     @Column(name = "client_age", length = 45)
-   // @JsonView(View.Sum.class)
+    // @JsonView(View.Sum.class)
     private String age;
 
     @Column(name = "client_info")
@@ -83,7 +83,7 @@ public class Client {
 
     @Column(name = "client_role")
     @Enumerated(EnumType.STRING)
-   //@JsonView(View.Sum.class)
+    //@JsonView(View.Sum.class)
     private ERole role;
 
     @Column(name = "client_pronoun")
@@ -104,11 +104,11 @@ public class Client {
     //@JsonView(View.SumwithDepartment.class)
     private Department department;
 
-    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "client")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "client")
     @JsonManagedReference(value = "client_idea")
     private Set<Idea> ideas = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     @JsonManagedReference
     //@JsonView(View.SumwithDepartment.class)
     private Set<Reaction> reactions = new HashSet<>();
