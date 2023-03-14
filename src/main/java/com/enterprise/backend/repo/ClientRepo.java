@@ -1,5 +1,6 @@
 package com.enterprise.backend.repo;
 
+import com.enterprise.backend.DTO.Client.ClientNotification;
 import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.response.ClientReaction;
@@ -53,5 +54,7 @@ public interface ClientRepo extends JpaRepository<Client, String> {
     @Query(value = "select c.client_role as client_role, c.id as client_id, t.topic_name as topic_name, t.image_URL as image_url, t.id as topic_id from client_tbl c inner join follow_tbl f on c.id = f.client_id inner join topic_tbl t on f.topic_id = t.id where f.client_id =:client_id", nativeQuery = true)
     List<FollowTopic> findv2(@Param("client_id") String client_id);
 
+    @Query(nativeQuery = true)
+    List<ClientNotification> findClientNotification(@Param("id") String id);
 
 }

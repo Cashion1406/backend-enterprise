@@ -1,6 +1,7 @@
 package com.enterprise.backend.controller;
 
 import com.enterprise.backend.DTO.Topic.TopicRequest;
+import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.response.DeleteResponse;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/topic")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TopicController {
 
     @Autowired
@@ -53,5 +55,12 @@ public class TopicController {
     public String softDeleteTopic(@PathVariable Long id) {
 
         return topicServce.softDeleteTopic(id);
+    }
+
+    @GetMapping("/top7followers")
+    public List<TopicWithMostFollowers> topicWithMostFollowers (){
+
+        return topicServce.top7follower();
+
     }
 }

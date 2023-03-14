@@ -70,16 +70,16 @@ insert into topic_tbl(
 commit;
 
 insert into idea_tbl(
-	id, is_anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('1', 'false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing flutter', '1','2');
+	id, is_anonymous,is_deleted ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('1', 'false',false ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing flutter', '1','2');
 
 insert into idea_tbl(
-	id, is_anonymous,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('2','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing Spring boot ', '3','1');
+	id, is_anonymous,is_deleted,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('2','false',false ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing Spring boot ', '3','1');
 
 insert into idea_tbl(
-	id,is_anonymous ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
-	values ('3','false' ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing React', '2','3');
+	id,is_anonymous,is_deleted ,attached_path, idea_body, date, modify_date, idea_title, client_id, topic_id)
+	values ('3','false', false ,'/download/file', 'Just fixed','2023-02-27 15:25', '2023-02-27 15:25', 'Fixing React', '2','3');
 
 commit ;
 

@@ -18,7 +18,6 @@ public class CateCotroller {
     @Autowired
     private CateService cateService;
 
-
     @GetMapping()
     public List<Category> getAllCate() {
 

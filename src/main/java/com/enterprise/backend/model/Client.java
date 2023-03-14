@@ -1,6 +1,7 @@
 package com.enterprise.backend.model;
 
 
+import com.enterprise.backend.DTO.Client.ClientNotification;
 import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.FollowTopic;
@@ -21,7 +22,7 @@ import java.util.Set;
         resultSetMapping = "Mapping.ClientTopic"
 )
 
-@SqlResultSetMapping(name = "Mapping.ClientTopic",classes = @ConstructorResult(targetClass = FollowTopic.class, columns = {
+@SqlResultSetMapping(name = "Mapping.ClientTopic", classes = @ConstructorResult(targetClass = FollowTopic.class, columns = {
         @ColumnResult(name = "client_role"),
         @ColumnResult(name = "client_id"),
         @ColumnResult(name = "topic_name"),
@@ -34,10 +35,22 @@ import java.util.Set;
         resultSetMapping = "Mapping.ClientReaction"
 )
 
-@SqlResultSetMapping(name = "Mapping.ClientReaction",classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
+@SqlResultSetMapping(name = "Mapping.ClientReaction", classes = @ConstructorResult(targetClass = ClientReaction.class, columns = {
         @ColumnResult(name = "idea_id"),
         @ColumnResult(name = "reaction_id"),
         @ColumnResult(name = "reaction")
+}))
+
+@NamedNativeQuery(name = "Client.findClientNotification",
+        query = "select n.id as noti_id ,n.noti_content as content, n.noti_time as noti_time, n.noti_status as status from notification_tbl n where n.client_id = :id order by n.noti_time desc",
+        resultSetMapping = "Mapping.ClientNotification"
+)
+
+@SqlResultSetMapping(name = "Mapping.ClientNotification", classes = @ConstructorResult(targetClass = ClientNotification.class, columns = {
+        @ColumnResult(name = "noti_id"),
+        @ColumnResult(name = "content"),
+        @ColumnResult(name = "noti_time"),
+        @ColumnResult(name = "status")
 }))
 
 @Getter
@@ -49,19 +62,19 @@ import java.util.Set;
 public class Client {
 
     @Id
-  //  @JsonView(View.Sum.class)
+    //  @JsonView(View.Sum.class)
     private String id;
 
     @Column(name = "client_firstname", length = 45)
-   // @JsonView(View.Sum.class)
+    // @JsonView(View.Sum.class)
     private String firstname;
 
     @Column(name = "client_lastname", length = 45)
-  //  @JsonView(View.Sum.class)
+    //  @JsonView(View.Sum.class)
     private String lastname;
 
     @Column(name = "client_age", length = 45)
-   // @JsonView(View.Sum.class)
+    // @JsonView(View.Sum.class)
     private String age;
 
     @Column(name = "client_info")
@@ -70,7 +83,7 @@ public class Client {
 
     @Column(name = "client_role")
     @Enumerated(EnumType.STRING)
-   //@JsonView(View.Sum.class)
+    //@JsonView(View.Sum.class)
     private ERole role;
 
     @Column(name = "client_pronoun")
@@ -85,22 +98,22 @@ public class Client {
     //@JsonView(View.Sum.class)
     private Boolean isDeleted;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     @JsonManagedReference(value = "client_department")
     //@JsonView(View.SumwithDepartment.class)
     private Department department;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "client", orphanRemoval = true)
     @JsonManagedReference(value = "client_idea")
     private Set<Idea> ideas = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonManagedReference
     //@JsonView(View.SumwithDepartment.class)
     private Set<Reaction> reactions = new HashSet<>();
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", orphanRemoval = true,cascade = CascadeType.PERSIST)
     @JsonManagedReference(value = "client_comment")
     //@JsonView(View.SumwithDepartment.class)
     private Set<Comment> comments = new HashSet<>();

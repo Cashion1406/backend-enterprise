@@ -1,19 +1,13 @@
 package com.enterprise.backend.service;
 
 
-import com.enterprise.backend.DTO.Client.ClientDepartmentRequest;
+import com.enterprise.backend.DTO.Client.*;
 
-import com.enterprise.backend.DTO.Client.ClientUpdateRequest;
-import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
-import com.enterprise.backend.DTO.Client.Client_Topic_Request;
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Department;
 import com.enterprise.backend.model.ERole;
 import com.enterprise.backend.model.Idea;
-import com.enterprise.backend.repo.ClientRepo;
-import com.enterprise.backend.repo.DepartmentRepo;
-import com.enterprise.backend.repo.IdeaRepo;
-import com.enterprise.backend.repo.TopicRepo;
+import com.enterprise.backend.repo.*;
 import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
@@ -81,7 +75,7 @@ public class ClientService {
         return clientRepo.getClientLastName(id);
     }
 
-    public String getClientFirstName(String id){
+    public String getClientFirstName(String id) {
 
         return clientRepo.getClientFirstName(id);
     }
@@ -100,6 +94,7 @@ public class ClientService {
         Client existClient = clientRepo.findById(String.valueOf(client.getId())).get();
         existClient.setClient_info(client.getClient_info());
         existClient.setAge(client.getAge());
+        existClient.setRole(client.getRole());
         existClient.setEmail(client.getEmail());
         existClient.setFirstname(client.getFirstname());
         existClient.setLastname(client.getLastname());
@@ -146,7 +141,7 @@ public class ClientService {
             e.printStackTrace();
         }
 
-        return "Unfollowed Topic : " +topicRepo.getTopicname(topicId);
+        return "Unfollowed Topic : " + topicRepo.getTopicname(topicId);
     }
 
     public List<FollowTopic> followTopic(String client_id) {
@@ -164,8 +159,12 @@ public class ClientService {
         return clientRepo.findClientReaction(id);
     }
 
-    public  Client getClientQA (Long id){
+    public Client getClientQA(Long id) {
 
         return clientRepo.getClientQA(id);
+    }
+
+    public List<ClientNotification> clientNotifications(String id) {
+        return clientRepo.findClientNotification(id);
     }
 }

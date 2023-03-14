@@ -41,7 +41,7 @@ public class    Department {
     @JsonView(View.SumwithDepartment.class)
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy = "department",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
     @JsonBackReference(value = "client_department")
     @JsonView(View.SumwithDepartment.class)
     private Set<Client> clients = new HashSet<>();

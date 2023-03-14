@@ -21,6 +21,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    //TESTING PUSH MASTER BRANCH
     @Column(name = "cate_name", length = 45)
     private String name;
 

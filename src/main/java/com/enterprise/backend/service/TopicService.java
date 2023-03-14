@@ -1,6 +1,7 @@
 package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.Topic.TopicRequest;
+import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.repo.TopicRepo;
 import com.enterprise.backend.response.DeleteResponse;
@@ -23,7 +24,7 @@ public class TopicService {
 
         //use topicRepo.findAll() to get all current topic
 
-        return topicRepo.findAll();
+        return topicRepo.findByisDeletedFalse();
     }
 
     public Topic createTopic(TopicRequest topicRequest) {
@@ -55,9 +56,10 @@ public class TopicService {
         existtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
         existtopic.setFinal_closure_date(topicRequest.getFinal_closure_date());
         existtopic.setModifyDate(timeStamp);
+        existtopic.setImageURL(topicRequest.getImageURL());
         existtopic.setDescription(topicRequest.getDescription());
         existtopic.setIsDeleted(topicRequest.getIsDeleted());
-        
+
         return topicRepo.save(existtopic);
     }
 
@@ -75,5 +77,10 @@ public class TopicService {
 
         topicRepo.softdeletetopic(id);
         return "Temporary deleted " + topicname;
+    }
+
+    public List<TopicWithMostFollowers> top7follower() {
+
+        return topicRepo.top7followers();
     }
 }
