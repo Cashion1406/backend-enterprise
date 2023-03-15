@@ -66,6 +66,7 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     @Query(value = "insert into comment_tbl (comment, client_id, idea_id) values (:cate_id,:idea_id)", nativeQuery = true)
     void insertcomment(@Param("cate_id") long cate_id, @Param("idea_id") long idea_id);
 
+
     @Query(nativeQuery = true)
     List<IdeasPerDepartment> ideasPerDepartment();
 
@@ -78,7 +79,6 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     @Modifying
     @Query("update Idea i set i.isDeleted = true where i.id = :id")
     void softdeleteidea(@Param("id") Long id);
-
 
     @Query(nativeQuery = true)
     List<IdeaAnalytics> ideasAnalytics();

@@ -85,7 +85,6 @@ public class IdeaService {
             e.printStackTrace();
         }
 
-
         return newIdea;
     }
 
@@ -184,6 +183,25 @@ public class IdeaService {
         notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has commented on your idea : " + idea.get().getName());
         notificationRepo.save(notification);
         return newComment;
+    }
+
+    public Comment updateComment(CommentRequest commentRequest) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
+
+        Comment existComment = commentRepo.findById(commentRequest.getId()).get();
+        existComment.setComment(commentRequest.getComment());
+        existComment.setModify_date(timeStamp);
+        existComment.setIsAnonymous(commentRequest.getIsAnonymous());
+        return commentRepo.save(existComment);
+
+    }
+
+    public DeleteResponse deleteComment(Long id) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        commentRepo.deleteById(id);
+
+        return new DeleteResponse("Deleted comment ", timestamp, true);
     }
 
     public Comment updateComment(CommentRequest commentRequest) {

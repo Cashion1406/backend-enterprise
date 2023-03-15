@@ -132,9 +132,11 @@ public class IdeaController {
         return ideaService.top5views();
     }
 
+
     @GetMapping("/analytics")
     public List<IdeaAnalytics> ideaAnalytics() {
         return ideaService.ideaAnalytics();
     }
+
 
 }

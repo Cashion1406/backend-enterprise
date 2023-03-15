@@ -162,5 +162,4 @@ public class ClientService {
     public List<ClientNotification> clientNotifications(String id) {
         return clientRepo.findClientNotification(id);
     }
-
 }
