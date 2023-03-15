@@ -42,7 +42,7 @@ import java.util.Set;
 }))
 
 @NamedNativeQuery(name = "Client.findClientNotification",
-        query = "select n.id as noti_id ,n.noti_content as content, n.noti_time as noti_time, n.noti_status as status from notification_tbl n where n.client_id = :id order by n.noti_time desc",
+        query = "select n.id as noti_id ,n.noti_content as content, n.noti_time as noti_time, n.noti_status as status, n.noti_title as client_noti_title from notification_tbl n where n.client_id = :id order by n.noti_time desc",
         resultSetMapping = "Mapping.ClientNotification"
 )
 
@@ -50,7 +50,8 @@ import java.util.Set;
         @ColumnResult(name = "noti_id"),
         @ColumnResult(name = "content"),
         @ColumnResult(name = "noti_time"),
-        @ColumnResult(name = "status")
+        @ColumnResult(name = "status"),
+        @ColumnResult(name = "client_noti_title")
 }))
 
 @Getter

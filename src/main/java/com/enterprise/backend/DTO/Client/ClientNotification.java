@@ -17,4 +17,6 @@ public class ClientNotification {
     private String noti_time;
 
     private Boolean status;
+
+    private String client_noti_title;
 }
