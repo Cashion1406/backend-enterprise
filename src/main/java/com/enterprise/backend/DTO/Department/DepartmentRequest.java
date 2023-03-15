@@ -17,4 +17,6 @@ public class DepartmentRequest {
 
     private String department_info;
 
+    private Boolean isDeleted;
+
 }

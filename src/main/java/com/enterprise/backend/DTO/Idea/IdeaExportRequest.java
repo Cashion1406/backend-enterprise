@@ -1,16 +1,9 @@
 package com.enterprise.backend.DTO.Idea;
 
-import com.enterprise.backend.model.*;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -32,10 +25,10 @@ public class IdeaExportRequest {
 
     private String topic_name;
 
-    private String client_lastname;
-    private String client_firstname;
+    private String client_name;
 
-    private String category_name ;
+    private String category_name;
 
-    private Boolean isAnonymous;
+    private String client_id;
+
 }

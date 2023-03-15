@@ -83,4 +83,5 @@ public class TopicService {
 
         return topicRepo.top7followers();
     }
+
 }

@@ -14,7 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommentRequest {
 
-
     private Long id;
     private String comment;
     private Long idea_id;

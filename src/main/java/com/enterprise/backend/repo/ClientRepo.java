@@ -31,14 +31,14 @@ public interface ClientRepo extends JpaRepository<Client, String> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from follow_tbl f where f.topic_id =:topic_id and f.client_id =:client_id",nativeQuery = true)
-    void removeFollowTopic(@Param("topic_id") Long topic_id,@Param("client_id") String client_id);
+    @Query(value = "delete from follow_tbl f where f.topic_id =:topic_id and f.client_id =:client_id", nativeQuery = true)
+    void removeFollowTopic(@Param("topic_id") Long topic_id, @Param("client_id") String client_id);
 
     @Query(value = "select c.client_lastname from client_tbl c where c.id = :id", nativeQuery = true)
     String getClientLastName(@Param("id") String id);
 
-    @Query(value = "select c.client_firstname from client_tbl c where c.id = :id", nativeQuery = true)
-    String getClientFirstName(String id);
+    @Query(value = "select concat (c.client_firstname,' ',c.client_lastname ) from client_tbl c where c.id = :id", nativeQuery = true)
+    String getClientName(@Param("id") String id);
 
     @Query(nativeQuery = true)
     List<FollowTopic> findfollowtopic(String client_id);

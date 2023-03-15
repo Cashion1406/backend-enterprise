@@ -9,6 +9,7 @@ import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
 import com.enterprise.backend.DTO.Idea.IdeasPerCate;
 import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.DTO.ReactionRequest;
+import com.enterprise.backend.DTO.Topic.IdeaAnalytics;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.repo.*;
 import com.enterprise.backend.response.DeleteResponse;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -82,6 +84,7 @@ public class IdeaService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         return newIdea;
     }
@@ -170,14 +173,17 @@ public class IdeaService {
         newComment.setComment(commentRequest.getComment());
         newComment.setModify_date(timeStamp);
         newComment.setIsAnonymous(commentRequest.getIsAnonymous());
+        commentRepo.save(newComment);
+
         Notification notification = new Notification();
         notification.setIsDelete(false);
         notification.setStatus(false);
         notification.setCreatedAt(timeStamp);
         notification.setClient_id(commentRequest.getClient_id());
-        notification.setContent(client.get().getFirstname() + " has commented on your idea :" + idea.get().getName());
+        notification.setTitle("Your idea " + idea.get().getName() + " has a new comment");
+        notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has commented on your idea : " + idea.get().getName());
         notificationRepo.save(notification);
-        return commentRepo.save(newComment);
+        return newComment;
     }
 
     public Comment updateComment(CommentRequest commentRequest) {
@@ -209,6 +215,7 @@ public class IdeaService {
         newReaction.setIdea(idea.get());
         newReaction.setClient(client.get());
         newReaction.setReaction(reactionRequest.getReaction());
+        reactionRepo.save(newReaction);
         String status = "";
         if (reactionRequest.getReaction()) {
 
@@ -222,9 +229,10 @@ public class IdeaService {
         notification.setStatus(false);
         notification.setCreatedAt(timeStamp);
         notification.setClient_id(reactionRequest.getClient_id());
-        notification.setContent(client.get().getFirstname() + " has " + status + " on your idea : " + idea.get().getName());
+        notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has " + status + " on your idea : " + idea.get().getName());
+        notification.setTitle("Your idea " + idea.get().getName() + " has new vote");
         notificationRepo.save(notification);
-        return reactionRepo.save(newReaction);
+        return newReaction;
 
     }
 
@@ -277,4 +285,10 @@ public class IdeaService {
 
         return ideaRepo.top5Ideas();
     }
+
+
+    public List<IdeaAnalytics> ideaAnalytics() {
+        return ideaRepo.ideasAnalytics();
+    }
+
 }

@@ -2,7 +2,6 @@ package com.enterprise.backend.controller;
 
 
 import com.enterprise.backend.DTO.Client.ClientDepartmentRequest;
-
 import com.enterprise.backend.DTO.Client.ClientNotification;
 import com.enterprise.backend.DTO.Client.ClientUpdateRequest;
 import com.enterprise.backend.DTO.Client.Client_Topic_Request;
@@ -12,12 +11,9 @@ import com.enterprise.backend.response.ClientReaction;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.response.FollowTopic;
 import com.enterprise.backend.service.ClientService;
-import com.enterprise.backend.service.ExportDataService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +24,6 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
-
-    @Autowired
-    private ExportDataService exportDataService;
 
 
     //get list of all user
@@ -123,9 +116,5 @@ public class ClientController {
         return clientService.clientNotifications(id);
     }
 
-    //testing
-    @GetMapping("/export")
-    public void export(HttpServletResponse response) throws IOException {
-        exportDataService.downloadtoCSV(response);
-    }
+
 }

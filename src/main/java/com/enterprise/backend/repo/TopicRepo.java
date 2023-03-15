@@ -1,5 +1,7 @@
 package com.enterprise.backend.repo;
 
+import com.enterprise.backend.DTO.Topic.IdeaAnalytics;
+
 import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -33,4 +34,5 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
 
     @Query(nativeQuery = true)
     List<TopicWithMostFollowers> top7followers();
+
 }

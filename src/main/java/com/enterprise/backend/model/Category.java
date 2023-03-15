@@ -26,7 +26,7 @@ public class Category {
     private String name;
 
 
-    @OneToMany(mappedBy = "cate_id", orphanRemoval = true,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cate_id",cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonIgnore
     private  Set<Idea_cate> idea_cate = new HashSet<>();
 
