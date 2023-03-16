@@ -123,10 +123,4 @@ public class ClientController {
     }
 
 
-
-    //testing
-    @GetMapping("/export")
-    public void export(HttpServletResponse response) throws IOException {
-        exportDataService.downloadtoCSV(response);
-    }
 }

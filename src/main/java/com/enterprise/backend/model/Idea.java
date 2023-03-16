@@ -108,9 +108,6 @@ public class Idea {
     @JsonManagedReference(value = "idea_comment")
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "idea", cascade = CascadeType.PERSIST,orphanRemoval = true)
-    @JsonManagedReference(value = "idea_comment")
-    private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "idea_id",orphanRemoval = true ,cascade = CascadeType.PERSIST)
     private Set<Idea_cate> idea_cate = new HashSet<>();

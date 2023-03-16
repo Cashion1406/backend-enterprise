@@ -47,8 +47,6 @@ public class SceduleEx {
 
     public void notificationIdeaClosureDate() {
 
-    public void test() {
-
 
 
         LocalDateTime today = LocalDateTime.now();
