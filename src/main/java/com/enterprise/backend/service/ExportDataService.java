@@ -33,9 +33,11 @@ public class ExportDataService {
 
     //IN PROGRESS//
     public void downloadtoCSV(HttpServletResponse response, Long id) throws IOException {
+
         response.setContentType("text/csv");
 
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
+
 
         String filename = "Idea_" + topicRepo.getTopicname(id) + "_" + timeStamp + ".csv";
 

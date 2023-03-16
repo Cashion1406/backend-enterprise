@@ -69,12 +69,11 @@ public class TopicController {
         return topicServce.top7follower();
 
     }
+
     //testing
     @GetMapping("/export/{id}")
     public void export(HttpServletResponse response,@PathVariable Long id) throws IOException {
         exportDataService.downloadtoCSV(response,id);
     }
-
-
 
 }
