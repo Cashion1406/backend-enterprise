@@ -75,11 +75,6 @@ public class ClientService {
         return clientRepo.getClientLastName(id);
     }
 
-    public String getClientFirstName(String id) {
-
-        return clientRepo.getClientFirstName(id);
-    }
-
 
     //Delete User by Id
     public DeleteResponse deleteClient(String id) {

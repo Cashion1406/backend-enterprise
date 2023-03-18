@@ -16,7 +16,9 @@ public class CommentRequest {
 
 
     private Long id;
+    
     private String comment;
+    
     private Long idea_id;
 
     private String client_id;

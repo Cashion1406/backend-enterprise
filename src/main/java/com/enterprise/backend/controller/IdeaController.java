@@ -7,6 +7,7 @@ import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
 import com.enterprise.backend.DTO.Idea.IdeasPerCate;
 import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.DTO.ReactionRequest;
+import com.enterprise.backend.DTO.Topic.IdeaAnalytics;
 import com.enterprise.backend.model.*;
 import com.enterprise.backend.response.DeleteResponse;
 import com.enterprise.backend.service.IdeaService;
@@ -73,7 +74,6 @@ public class IdeaController {
     }
 
 
-
     //Insert comment to Idea
     @PostMapping("/comment")
     public Comment addComment(@RequestBody CommentRequest commentRequest) {
@@ -118,7 +118,6 @@ public class IdeaController {
     }
 
 
-
     //Get top 7 idea for each Category
     @GetMapping("/top7ideas")
     public List<IdeasPerCate> ideasPerCates() {
@@ -132,5 +131,12 @@ public class IdeaController {
 
         return ideaService.top5views();
     }
+
+
+    @GetMapping("/analytics")
+    public List<IdeaAnalytics> ideaAnalytics() {
+        return ideaService.ideaAnalytics();
+    }
+
 
 }

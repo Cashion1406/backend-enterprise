@@ -5,10 +5,13 @@ import com.enterprise.backend.DTO.Topic.TopicWithMostFollowers;
 import com.enterprise.backend.model.Topic;
 import com.enterprise.backend.response.DeleteResponse;
 
+import com.enterprise.backend.service.ExportDataService;
 import com.enterprise.backend.service.TopicService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,9 @@ public class TopicController {
 
     @Autowired
     private TopicService topicServce;
+
+    @Autowired
+    private ExportDataService exportDataService;
 
     @GetMapping()
     public List<Topic> getAllTopic() {
@@ -63,4 +69,11 @@ public class TopicController {
         return topicServce.top7follower();
 
     }
+
+    //testing
+    @GetMapping("/export/{id}")
+    public void export(HttpServletResponse response,@PathVariable Long id) throws IOException {
+        exportDataService.downloadtoCSV(response,id);
+    }
+
 }

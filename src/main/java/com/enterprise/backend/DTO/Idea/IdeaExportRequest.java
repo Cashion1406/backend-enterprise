@@ -1,5 +1,6 @@
 package com.enterprise.backend.DTO.Idea;
 
+
 import com.enterprise.backend.model.*;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,10 +33,10 @@ public class IdeaExportRequest {
 
     private String topic_name;
 
-    private String client_lastname;
-    private String client_firstname;
+    private String client_name;
 
-    private String category_name ;
+    private String category_name;
 
-    private Boolean isAnonymous;
+    private String client_id;
+
 }

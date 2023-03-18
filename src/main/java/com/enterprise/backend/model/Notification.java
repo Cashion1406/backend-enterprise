@@ -19,7 +19,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "noti_content")
+    @Column(name = "noti_content",length = 60)
     private String content;
 
     @Column(name = "client_id")
@@ -33,4 +33,7 @@ public class Notification {
 
     @Column(name = "isDeleted")
     private Boolean isDelete;
+
+    @Column(name = "noti_title")
+    private String title;
 }

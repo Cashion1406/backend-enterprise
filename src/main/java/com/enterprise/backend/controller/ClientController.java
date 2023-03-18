@@ -32,7 +32,6 @@ public class ClientController {
     @Autowired
     private ExportDataService exportDataService;
 
-
     //get list of all user
     @GetMapping()
     public List<Client> getAllClient() {
@@ -123,9 +122,5 @@ public class ClientController {
         return clientService.clientNotifications(id);
     }
 
-    //testing
-    @GetMapping("/export")
-    public void export(HttpServletResponse response) throws IOException {
-        exportDataService.downloadtoCSV(response);
-    }
+
 }
