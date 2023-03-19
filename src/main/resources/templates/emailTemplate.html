@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dead line Notification</title>
+    <style type="text/css">
+    body {
+      font-family: calibri, 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    }
+    a.link {
+      border: solid 1px #000;
+      background-color: #000;
+      text-decoration: none;
+       border-radius: 25px;
+      color: #fff;
+      font-weight: bold;
+      display: block;
+      width: 360px;
+      text-align: center;
+      padding: 10px 0;
+    }
+    p{
+    font-size: 15px
+    }
+
+
+
+    </style>
+</head>
+
+</head>
+<body>
+
+<h2 th:text="${user_id}"></h2>
+<div>Hi <b th:text="${name}">name</b>,</div>
+<br><br/>
+
+<b th:text="${context}" style="  font-size: 16px">
+    <br><br/>
+
+</b>
+
+<p>
+    <span th:text="${header1}"></span>
+
+    <b th:text="${email}"></b>
+
+</p>
+
+<p>
+    <span th:text="${header2}"></span>
+    <b th:text="${date}"></b>
+    <br><br/>
+
+</p>
+<p style="text-align: center;">
+    <a class="link" href="#" th:href="${url}" th:text="${button}"></a>
+</p>
+<br>
+
+<p>
+    Regards, <br/>
+    &emsp; <em>LAMIAN</em>
+</p>
+</body>
+</html>

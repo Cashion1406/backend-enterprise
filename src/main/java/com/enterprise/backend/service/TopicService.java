@@ -47,6 +47,10 @@ public class TopicService {
         return topicRepo.findById(id);
     }
 
+    public Optional<Topic> getTopDetail(Long id) {
+        return topicRepo.findByIdAndIdeasIsDeletedFalse(id);
+    }
+
 
     public Topic updateTopic(TopicRequest topicRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date());
@@ -58,6 +62,7 @@ public class TopicService {
         existtopic.setModifyDate(timeStamp);
         existtopic.setImageURL(topicRequest.getImageURL());
         existtopic.setDescription(topicRequest.getDescription());
+        existtopic.setIsDeleted(false);
         existtopic.setIsDeleted(topicRequest.getIsDeleted());
 
         return topicRepo.save(existtopic);

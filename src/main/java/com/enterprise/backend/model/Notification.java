@@ -19,7 +19,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "noti_content",length = 60)
+    @Column(name = "noti_content")
     private String content;
 
     @Column(name = "client_id")
