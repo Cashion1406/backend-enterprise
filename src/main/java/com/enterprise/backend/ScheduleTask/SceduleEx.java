@@ -40,11 +40,11 @@ public class SceduleEx {
     // "0 0 0/12 * * *" = Every 12 hours//
     // "0/30 0/1 * * * *" = Every 30 second
     @Async
-    @Scheduled(cron = "0/15 0/1 * * * *")
+    @Scheduled(cron = "0 0 0/12 * * *")
     public void notificationIdeaClosureDate() {
 
         LocalDateTime today = LocalDateTime.now();
-        LocalDateTime tmr = today.plusDays(2);
+        LocalDateTime tmr = today.plusDays(3);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         DateTimeFormatter remainTime = DateTimeFormatter.ofPattern("EEEE, MMMM dd yyyy, hh:mm a");
@@ -54,14 +54,12 @@ public class SceduleEx {
         for (Topic topic : closureTopic) {
 
             LocalDateTime convert = LocalDateTime.parse(topic.getTopic_closure_date(), dateTimeFormatter);
-
             List<Client> clientList = clientRepo.getAllClientWithTopic(topic.getId());
             System.out.println("Topic closure date " + topic.getTopic_closure_date());
-
             for (Client client : clientList) {
 
                 try {
-                    mailService.sendMail( client.getEmail(), topic.getName() + "Topic closure date is due on " + topic.getTopic_closure_date(), client.getFirstname() + " " + client.getLastname() + " of department  " + client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date(), client,null,null,topic);
+                    mailService.sendMail(client.getEmail(), topic.getName() + "Topic closure date is due on " + topic.getTopic_closure_date(), client.getFirstname() + " " + client.getLastname() + " of department  " + client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date(), client, null, null, topic);
                     Notification notification = new Notification();
                     notification.setIsDelete(false);
                     notification.setStatus(false);
@@ -84,7 +82,7 @@ public class SceduleEx {
     }
 
     @Async
-    @Scheduled(cron = "0/15 0/1 * * * *")
+    @Scheduled(cron =" 0 0 0/12 * * *")
     public void notificationFinalClosureDate() {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime tmr = today.plusDays(4);
@@ -106,10 +104,10 @@ public class SceduleEx {
             for (Client client : clientList) {
 
                 try {
-                    mailService.sendMail( client.getEmail(), topic.getName() + " Final date is due on " + topic.getTopic_closure_date(), client.getFirstname() + " " + client.getLastname() + " of department  " + client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date(), client,null,null, topic);
+                    mailService.sendMail(client.getEmail(), topic.getName() + " Final date is due on " + topic.getTopic_closure_date(), client.getFirstname() + " " + client.getLastname() + " of department  " + client.getDepartment().getName() + " has incoming deadline at " + topic.getTopic_closure_date(), client, null, null, topic);
                     Notification notification = new Notification();
                     notification.setIsDelete(false);
-                    notification.setStatus(false);
+                    notification.setStatus(true);
                     notification.setCreatedAt(dateTimeFormatter.format(today));
                     notification.setClient_id(client.getId());
                     notification.setContent("Final date is due on  " + remainTime.format(convert) + " for topic : " + topic.getName());

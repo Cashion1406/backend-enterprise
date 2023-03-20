@@ -57,25 +57,25 @@ public class MailService {
                 ctx.setVariable("name", client.getFirstname() + " " + client.getLastname());
                 ctx.setVariable("header2", "Closure Date");
                 ctx.setVariable("context", body);
-                ctx.setVariable("email"," : " + topic.getName());
-                ctx.setVariable("date", " : " +remainTime.format(convert));
+                ctx.setVariable("email", " : " + topic.getName());
+                ctx.setVariable("date", " : " + remainTime.format(convert));
             } else {
                 LocalDateTime convert = LocalDateTime.parse(topic.getFinal_closure_date(), dateTimeFormatter);
                 ctx.setVariable("user_id", client.getId());
                 ctx.setVariable("name", client.getFirstname() + " " + client.getLastname());
                 ctx.setVariable("context", body);
                 ctx.setVariable("header2", "Final Date ");
-                ctx.setVariable("email"," : " + topic.getName());
+                ctx.setVariable("email", " : " + topic.getName());
                 ctx.setVariable("date", " : " + remainTime.format(convert));
             }
             ctx.setVariable("header1", "Topic");
-            ctx.setVariable("url", "http://localhost:8080/topic/" + topic.getId());
+            ctx.setVariable("url", "http://localhost:3000/" + topic.getId());
             ctx.setVariable("button", "Check out this Topic");
             String html = templateEngine.process("emailTemplate", ctx);
             helper.setText(html, true);
         } else {
             ctx.setVariable("name", client_QA.getFirstname() + " " + client_QA.getLastname());
-            ctx.setVariable("url", "http://localhost:8080/idea/" + idea.getId());
+            ctx.setVariable("url", "http://localhost:3000/" + idea.getId());
             ctx.setVariable("context", body);
             ctx.setVariable("header1", "Client email address");
             ctx.setVariable("header2", "Idea created date");
