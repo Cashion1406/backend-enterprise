@@ -1,11 +1,9 @@
 package com.enterprise.backend.service;
 
-import com.enterprise.backend.DTO.Client.Client_Department_QA_DE;
 import com.enterprise.backend.DTO.CommentRequest;
-import com.enterprise.backend.DTO.EmailMessage;
 import com.enterprise.backend.DTO.Idea.IdeaRequest;
 
-import com.enterprise.backend.DTO.Idea.Idea_Cate_Request;
+
 import com.enterprise.backend.DTO.Idea.IdeasPerCate;
 import com.enterprise.backend.DTO.Idea.IdeasPerDepartment;
 import com.enterprise.backend.DTO.ReactionRequest;
@@ -16,9 +14,9 @@ import com.enterprise.backend.response.DeleteResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -79,7 +77,15 @@ public class IdeaService {
         try {
             //sendmail( String toEmailAddress, String Subject , String body )
             Client client_QA = clientService.getClientQA(client.getDepartment().getId());
-            mailService.sendMail(client_QA.getEmail(), topic.getName(), client.getFirstname() + " " + client.getLastname() + " of " + client.getDepartment().getName() + " has created a new idea with title " + newIdea.getName() + " at " + " " + timeStamp);
+            Notification notification = new Notification();
+            notification.setIsDelete(false);
+            notification.setStatus(true);
+            notification.setClient_id(client_QA.getId());
+            notification.setContent(client.getFirstname() + " " + client.getLastname() + " has created a new idea with title " + newIdea.getName());
+            notification.setTitle("Your member created new idea in topic :" + topic.getName());
+            notification.setCreatedAt(timeStamp);
+            notificationRepo.save(notification);
+            mailService.sendMail(client_QA.getEmail(), topic.getName(), client.getFirstname() + " " + client.getLastname() + " of " + client.getDepartment().getName() + " has created a new idea with title " + newIdea.getName() , client, client_QA,newIdea,null );
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,11 +182,11 @@ public class IdeaService {
 
         Notification notification = new Notification();
         notification.setIsDelete(false);
-        notification.setStatus(false);
+        notification.setStatus(true);
         notification.setCreatedAt(timeStamp);
         notification.setClient_id(commentRequest.getClient_id());
         notification.setTitle("Your idea " + idea.get().getName() + " has a new comment");
-        notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has commented on your idea : " + idea.get().getName());
+        notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has commented: " + " ' " + newComment.getComment() + " ' " + " on your idea :  " + idea.get().getName());
         notificationRepo.save(notification);
         return newComment;
     }
@@ -205,8 +211,6 @@ public class IdeaService {
     }
 
 
-
-
     //Add reaction to idea
     public Reaction insertReaction(ReactionRequest reactionRequest) {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
@@ -217,17 +221,13 @@ public class IdeaService {
         newReaction.setClient(client.get());
         newReaction.setReaction(reactionRequest.getReaction());
         reactionRepo.save(newReaction);
-        String status = "";
-        if (reactionRequest.getReaction()) {
 
-            status = "up vote";
-        } else {
-            status = "down vote";
-        }
+        String status = reactionRequest.getReaction() ? "up vote" : "down vote";
+
 
         Notification notification = new Notification();
         notification.setIsDelete(false);
-        notification.setStatus(false);
+        notification.setStatus(true);
         notification.setCreatedAt(timeStamp);
         notification.setClient_id(reactionRequest.getClient_id());
         notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has " + status + " on your idea : " + idea.get().getName());

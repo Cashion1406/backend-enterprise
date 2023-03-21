@@ -12,11 +12,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TopicRepo extends JpaRepository<Topic, Long> {
 
-    @Query(value = "select t.topic_name from topic_tbl t where t.id = :id",nativeQuery = true)
+    @Query(value = "select t.topic_name from topic_tbl t where t.id = :id", nativeQuery = true)
     String getTopicname(@Param("id") Long id);
 
     @Transactional
@@ -27,8 +28,14 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
 
     List<Topic> findByisDeletedFalse();
 
-    @Query("select t from Topic t where t.topic_closure_date < :date")
-    List<Topic> getclosureTopic(@Param("date") String date);
+
+    Optional<Topic> findByIdAndIdeasIsDeletedFalse(Long id);
+
+    @Query("select t from Topic t where t.topic_closure_date between :today and :date")
+    List<Topic> getclosureTopic(@Param("date") String date, @Param("today") String today);
+
+    @Query("select t from Topic t where t.final_closure_date between :today and :date ")
+    List<Topic> getFinalClosureTopic(@Param("date") String date, @Param("today") String today);
 
 
     @Query(nativeQuery = true)

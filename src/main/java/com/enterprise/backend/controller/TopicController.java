@@ -40,7 +40,7 @@ public class TopicController {
 
     @GetMapping("/{id}")
     public Optional<Topic> getTopic(@PathVariable Long id) {
-        return topicServce.getTopicById(id);
+        return topicServce.getTopDetail(id);
     }
 
 
