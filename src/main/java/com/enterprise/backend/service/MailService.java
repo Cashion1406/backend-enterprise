@@ -1,6 +1,5 @@
 package com.enterprise.backend.service;
 
-
 import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.model.Topic;
@@ -26,6 +25,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import java.io.UnsupportedEncodingException;
 
 @Service
 public class MailService {
