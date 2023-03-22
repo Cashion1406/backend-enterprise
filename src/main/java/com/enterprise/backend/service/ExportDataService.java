@@ -64,7 +64,7 @@ public class ExportDataService {
             ideaExportRequest.setAttached_path(ideas.getAttached_path());
             ideaExportRequest.setClient_name((clientRepo.getClientName(ideas.getClient().getId())));
             ideaExportRequest.setCategory_name(ideaRepo.getCateName(ideas.getId()).toString());
-            ideaExportRequest.setModify_date(ideas.getModifydate());
+            ideaExportRequest.setModify_date(ideas.getModify_date());
             ideaExportRequest.setTopic_name(ideaRepo.getTopicNameEachIdea(ideas.getId()));
             ideaExportRequest.setClient_id(ideas.getClient().getId());
             ideaExportRequest.setClient_email(ideas.getClient().getEmail());
