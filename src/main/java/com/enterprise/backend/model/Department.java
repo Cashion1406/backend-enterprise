@@ -44,6 +44,7 @@ public class    Department {
     @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
     @JsonBackReference(value = "client_department")
     @JsonView(View.SumwithDepartment.class)
+    @JsonIgnore
     private Set<Client> clients = new HashSet<>();
 
 }

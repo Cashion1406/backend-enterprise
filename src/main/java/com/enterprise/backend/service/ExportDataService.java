@@ -39,7 +39,7 @@ public class ExportDataService {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 
 
-        String filename = "Idea_" + topicRepo.getTopicname(id) + "_" + timeStamp + ".csv";
+        String filename = "Idea_" + topicRepo.getTopicname( id) + "_" + timeStamp + ".csv";
 
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename = " + filename;
@@ -50,8 +50,8 @@ public class ExportDataService {
 
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
-        String[] csvHeader = {"Idea ID", "Idea Name", "Idea content", "Created on", "Modify date", "attached_path", "Topic", "Category", "Client Name", "Client Id"};
-        String[] mapping = {"id", "name", "body", "date", "modify_date", "attached_path", "topic_name", "category_name", "client_name", "client_id"};
+        String[] csvHeader = {"Idea ID", "Idea Name", "Idea content", "Created on", "Modify date", "attached_path", "Topic", "Category", "Client Name", "Client Id","Client Email"};
+        String[] mapping = {"id", "name", "body", "date", "modify_date", "attached_path", "topic_name", "category_name", "client_name", "client_id","client_email"};
         csvBeanWriter.writeHeader(csvHeader);
         for (Idea ideas : ideaList) {
 
@@ -64,9 +64,10 @@ public class ExportDataService {
             ideaExportRequest.setAttached_path(ideas.getAttached_path());
             ideaExportRequest.setClient_name((clientRepo.getClientName(ideas.getClient().getId())));
             ideaExportRequest.setCategory_name(ideaRepo.getCateName(ideas.getId()).toString());
-            ideaExportRequest.setModify_date(ideas.getModify_date());
+            ideaExportRequest.setModify_date(ideas.getModifydate());
             ideaExportRequest.setTopic_name(ideaRepo.getTopicNameEachIdea(ideas.getId()));
             ideaExportRequest.setClient_id(ideas.getClient().getId());
+            ideaExportRequest.setClient_email(ideas.getClient().getEmail());
 
             try {
                 csvBeanWriter.write(ideaExportRequest, mapping);
