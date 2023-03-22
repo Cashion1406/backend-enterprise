@@ -40,7 +40,7 @@ public class SceduleEx {
     // "0 0 0/12 * * *" = Every 12 hours//
     // "0/30 0/1 * * * *" = Every 30 second
     @Async
-    @Scheduled(cron = "0 0 0/12 * * *")
+    @Scheduled(cron = "0 0 06,18 * * *")
     public void notificationIdeaClosureDate() {
 
         LocalDateTime today = LocalDateTime.now();
@@ -82,7 +82,7 @@ public class SceduleEx {
     }
 
     @Async
-    @Scheduled(cron =" 0 0 0/12 * * *")
+    @Scheduled(cron = " 0 0 06,18 * * *")
     public void notificationFinalClosureDate() {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime tmr = today.plusDays(4);
