@@ -69,13 +69,13 @@ public class MailService {
                 ctx.setVariable("date", " : " + remainTime.format(convert));
             }
             ctx.setVariable("header1", "Topic");
-            ctx.setVariable("url", "http://localhost:3000/topic/" + topic.getId());
+            ctx.setVariable("url", "https://backend-2tza.onrender.com/topic/" + topic.getId());
             ctx.setVariable("button", "Check out this Topic");
             String html = templateEngine.process("emailTemplate", ctx);
             helper.setText(html, true);
         } else {
             ctx.setVariable("name", client_QA.getFirstname() + " " + client_QA.getLastname());
-            ctx.setVariable("url", "http://localhost:3000/idea/" + idea.getId());
+            ctx.setVariable("url", "https://backend-2tza.onrender.com/idea/" + idea.getId());
             ctx.setVariable("context", body);
             ctx.setVariable("header1", "Client email address");
             ctx.setVariable("header2", "Idea created date");
