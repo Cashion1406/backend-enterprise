@@ -52,7 +52,7 @@ public class IdeaController {
     @DeleteMapping("/delete/{id}")
     public DeleteResponse deleteIdea(@PathVariable Long id) {
 
-        return ideaService.softDeleteIdea(id);
+        return ideaService.deleteIdea(id);
     }
 
 

@@ -1,23 +1,29 @@
 package com.enterprise.backend.service;
 
 import com.enterprise.backend.DTO.Idea.IdeaExportRequest;
-import com.enterprise.backend.model.Client;
 import com.enterprise.backend.model.Idea;
 import com.enterprise.backend.repo.ClientRepo;
 import com.enterprise.backend.repo.IdeaRepo;
 import com.enterprise.backend.repo.TopicRepo;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
-
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 public class ExportDataService {
@@ -30,6 +36,7 @@ public class ExportDataService {
 
     @Autowired
     private TopicRepo topicRepo;
+
 
     //IN PROGRESS//
     public void downloadtoCSV(HttpServletResponse response, Long id) throws IOException {
@@ -80,4 +87,67 @@ public class ExportDataService {
         csvBeanWriter.close();
 
     }
+
+    private byte[] downloadFile(String url) throws IOException {
+        URL fileUrl = new URL(url);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        InputStream inputStream = fileUrl.openStream();
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        return outputStream.toByteArray();
+    }
+
+    private String getFileNameFromUrl(String url) {
+        int index = url.lastIndexOf("/") + 1;
+
+        //extract file name from first string url after the "/" character
+        String first_string = url.substring(index);
+
+        int index2 = first_string.lastIndexOf("?");
+
+        //remove every character after character "?" to get the file name with proper file extension
+        String output_String = first_string.substring(0, index2);
+
+        int index3 = output_String.indexOf("F");
+        //if the string contain folder name on firestorage, remove the boiler character
+        if (index3 != -1) {
+            return output_String.substring(index3 + 1);
+        } else {
+            return output_String;
+        }
+
+    }
+
+    public ResponseEntity<Resource> downloadToZip(Long id) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+
+
+        List<Idea> ideaList = ideaRepo.getIdeaWithTopic(id);
+        for (Idea idea : ideaList) {
+            byte[] fileBytes = downloadFile(idea.getAttached_path());
+            ZipEntry zipEntry = new ZipEntry(getFileNameFromUrl(idea.getAttached_path()));
+            zipOutputStream.putNextEntry(zipEntry);
+            zipOutputStream.write(fileBytes);
+            zipOutputStream.closeEntry();
+        }
+        zipOutputStream.close();
+        ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
+        String filename = "Documents for Topic " + topicRepo.getTopicname(id) + ".zip";
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentLength(resource.contentLength())
+                .body(resource);
+
+    }
+
+
 }

@@ -36,7 +36,6 @@ public class TopicService {
         newtopic.setFinal_closure_date(topicRequest.getFinal_closure_date());
         newtopic.setTopic_closure_date(topicRequest.getTopic_closure_date());
         newtopic.setModifyDate(timeStamp);
-        newtopic.setImageURL(topicRequest.getImageURL());
         newtopic.setIsDeleted(false);
         newtopic.setDescription(topicRequest.getDescription());
 

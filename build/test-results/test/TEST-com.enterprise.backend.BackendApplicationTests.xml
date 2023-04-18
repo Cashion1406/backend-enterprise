@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.enterprise.backend.BackendApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-22T10:29:47" hostname="CASHIONLMAO" time="0.366">
+<testsuite name="com.enterprise.backend.BackendApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-28T12:02:21" hostname="CASHIONLMAO" time="0.285">
   <properties/>
-  <testcase name="contextLoads()" classname="com.enterprise.backend.BackendApplicationTests" time="0.366"/>
-  <system-out><![CDATA[17:29:34.043 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [BackendApplicationTests]: using SpringBootContextLoader
-17:29:34.055 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.enterprise.backend.BackendApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-17:29:34.056 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.enterprise.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:29:34.103 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [BackendApplicationTests]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
-17:29:34.230 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [D:\Testing API\backend\build\classes\java\main\com\enterprise\backend\BackendApplication.class]
-17:29:34.232 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.enterprise.backend.BackendApplication for test class com.enterprise.backend.BackendApplicationTests
-17:29:34.458 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [BackendApplicationTests]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
-17:29:34.461 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [BackendApplicationTests], class annotated with @DirtiesContext [false] with mode [null]
+  <testcase name="contextLoads()" classname="com.enterprise.backend.BackendApplicationTests" time="0.285"/>
+  <system-out><![CDATA[19:02:13.297 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [BackendApplicationTests]: using SpringBootContextLoader
+19:02:13.304 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.enterprise.backend.BackendApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+19:02:13.306 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.enterprise.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:02:13.340 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [BackendApplicationTests]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+19:02:13.435 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [D:\Testing API\backend\build\classes\java\main\com\enterprise\backend\BackendApplication.class]
+19:02:13.437 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.enterprise.backend.BackendApplication for test class com.enterprise.backend.BackendApplicationTests
+19:02:13.607 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [BackendApplicationTests]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+19:02:13.608 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [BackendApplicationTests], class annotated with @DirtiesContext [false] with mode [null]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -19,53 +19,25 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.0.2)
 
-2023-03-22T17:29:34.967+07:00  INFO 30848 --- [    Test worker] c.e.backend.BackendApplicationTests      : Starting BackendApplicationTests using Java 18.0.2 with PID 30848 (started by Cashion in D:\Testing API\backend)
-2023-03-22T17:29:34.970+07:00  INFO 30848 --- [    Test worker] c.e.backend.BackendApplicationTests      : No active profile set, falling back to 1 default profile: "default"
-2023-03-22T17:29:36.272+07:00  INFO 30848 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-22T17:29:36.472+07:00  INFO 30848 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 8 JPA repository interfaces.
-2023-03-22T17:29:37.748+07:00  INFO 30848 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-22T17:29:37.848+07:00  INFO 30848 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
-2023-03-22T17:29:38.188+07:00  WARN 30848 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2023-03-22T17:29:38.463+07:00  INFO 30848 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-03-22T17:29:40.232+07:00  INFO 30848 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d66502
-2023-03-22T17:29:40.235+07:00  INFO 30848 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-03-22T17:29:40.352+07:00  INFO 30848 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2023-03-22T17:29:41.274+07:00  WARN 30848 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.enterprise.backend.model.Idea_cate
-2023-03-22T17:29:41.275+07:00  WARN 30848 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.enterprise.backend.model.Idea_cate
-2023-03-22T17:29:41.276+07:00  WARN 30848 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.enterprise.backend.model.Client_Topic
-2023-03-22T17:29:41.277+07:00  WARN 30848 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.enterprise.backend.model.Client_Topic
-Hibernate: create table cate_tbl (id bigint not null, cate_name varchar(45), primary key (id))
-Hibernate: create table client_tbl (id varchar(255) not null, client_age varchar(45), client_info varchar(255), client_email varchar(255), client_firstname varchar(45), client_is_deleted boolean, client_lastname varchar(45), client_pronoun varchar(255), client_role varchar(255), department_id bigint, primary key (id))
-Hibernate: create table comment_tbl (id bigint not null, comment_body varchar(255), is_anonymous boolean, modify_date varchar(255), client_id varchar(255), idea_id bigint, primary key (id))
-Hibernate: create table department_tbl (id bigint not null, department_info varchar(255), is_deleted boolean, depart_name varchar(30), primary key (id))
-Hibernate: create table follow_tbl (topic_id bigint not null, client_id varchar(255) not null, primary key (client_id, topic_id))
-Hibernate: create table idea_cate_tbl (cate_id bigint not null, idea_id bigint not null, primary key (cate_id, idea_id))
-Hibernate: create table idea_tbl (id bigint not null, attached_path varchar(255), idea_body varchar(255), date varchar(255), is_anonymous boolean, is_deleted boolean, modify_date varchar(255), idea_title varchar(255), client_id varchar(255), topic_id bigint, primary key (id))
-Hibernate: create table notification_tbl (id bigint not null, client_id varchar(255), noti_content varchar(255), noti_time varchar(255), is_deleted boolean, noti_status boolean, noti_title varchar(255), primary key (id))
-Hibernate: create table reaction_tbl (id bigint not null, reaction boolean, client_id varchar(255), idea_id bigint, primary key (id))
-Hibernate: create table topic_tbl (id bigint not null, topic_description varchar(255), topic_final_date varchar(50), image_url varchar(255), is_deleted boolean, modify_date varchar(255), topic_name varchar(45), topic_closure_date varchar(50), primary key (id))
-Hibernate: create sequence cate_tbl_seq start with 1 increment by 50
-Hibernate: create sequence comment_tbl_seq start with 1 increment by 50
-Hibernate: create sequence department_tbl_seq start with 1 increment by 50
-Hibernate: create sequence idea_tbl_seq start with 1 increment by 50
-Hibernate: create sequence notification_tbl_seq start with 1 increment by 50
-Hibernate: create sequence reaction_tbl_seq start with 1 increment by 50
-Hibernate: create sequence topic_tbl_seq start with 1 increment by 50
-Hibernate: alter table if exists client_tbl add constraint FKrxx6pvh6ps19ctqnic1ecvpxt foreign key (department_id) references department_tbl
-Hibernate: alter table if exists comment_tbl add constraint FK60tyiq1xifk9pei11rvc5f60o foreign key (client_id) references client_tbl
-Hibernate: alter table if exists comment_tbl add constraint FKld1gelbur5jsmnwwprrl27ex2 foreign key (idea_id) references idea_tbl
-Hibernate: alter table if exists follow_tbl add constraint FKkdu4r2vyhxpryea8g3n4oue3k foreign key (topic_id) references topic_tbl
-Hibernate: alter table if exists follow_tbl add constraint FKefw3816xw9hswmfpt45chqto5 foreign key (client_id) references client_tbl
-Hibernate: alter table if exists idea_cate_tbl add constraint FKpn7p7s3kclfycxppsr47ph9qq foreign key (cate_id) references cate_tbl
-Hibernate: alter table if exists idea_cate_tbl add constraint FKh0o9gbu8vdw6odl66oej3j62m foreign key (idea_id) references idea_tbl
-Hibernate: alter table if exists idea_tbl add constraint FKbyohycjvmcxjd1k4jgvh3iwir foreign key (client_id) references client_tbl
-Hibernate: alter table if exists idea_tbl add constraint FKmw7t5g2kl93m9jm1jalhcn49v foreign key (topic_id) references topic_tbl
-Hibernate: alter table if exists reaction_tbl add constraint FK1apuix9j2mn7plhdvk1uam9q9 foreign key (client_id) references client_tbl
-Hibernate: alter table if exists reaction_tbl add constraint FK9h0tgix0y8wr004lnideu25yn foreign key (idea_id) references idea_tbl
-2023-03-22T17:29:44.238+07:00  INFO 30848 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-22T17:29:44.256+07:00  INFO 30848 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-22T17:29:46.711+07:00  WARN 30848 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-22T17:29:47.670+07:00  INFO 30848 --- [    Test worker] c.e.backend.BackendApplicationTests      : Started BackendApplicationTests in 13.119 seconds (process running for 18.063)
+2023-03-28T19:02:13.999+07:00  INFO 10700 --- [    Test worker] c.e.backend.BackendApplicationTests      : Starting BackendApplicationTests using Java 18.0.2 with PID 10700 (started by Cashion in D:\Testing API\backend)
+2023-03-28T19:02:14.001+07:00  INFO 10700 --- [    Test worker] c.e.backend.BackendApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2023-03-28T19:02:14.988+07:00  INFO 10700 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-28T19:02:15.122+07:00  INFO 10700 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 109 ms. Found 8 JPA repository interfaces.
+2023-03-28T19:02:15.824+07:00  INFO 10700 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-28T19:02:15.902+07:00  INFO 10700 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-28T19:02:16.141+07:00  WARN 10700 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-28T19:02:16.317+07:00  INFO 10700 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-28T19:02:16.699+07:00  INFO 10700 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@451816fd
+2023-03-28T19:02:16.702+07:00  INFO 10700 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-28T19:02:16.762+07:00  INFO 10700 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-28T19:02:17.412+07:00  WARN 10700 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.enterprise.backend.model.Idea_cate
+2023-03-28T19:02:17.413+07:00  WARN 10700 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.enterprise.backend.model.Idea_cate
+2023-03-28T19:02:17.413+07:00  WARN 10700 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.enterprise.backend.model.Client_Topic
+2023-03-28T19:02:17.414+07:00  WARN 10700 --- [    Test worker] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.enterprise.backend.model.Client_Topic
+2023-03-28T19:02:18.639+07:00  INFO 10700 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-28T19:02:18.650+07:00  INFO 10700 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-28T19:02:20.301+07:00  WARN 10700 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-28T19:02:21.032+07:00  INFO 10700 --- [    Test worker] c.e.backend.BackendApplicationTests      : Started BackendApplicationTests in 7.376 seconds (process running for 9.032)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

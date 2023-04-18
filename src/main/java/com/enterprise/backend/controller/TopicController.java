@@ -9,6 +9,8 @@ import com.enterprise.backend.service.ExportDataService;
 import com.enterprise.backend.service.TopicService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -72,8 +74,15 @@ public class TopicController {
 
     //testing
     @GetMapping("/export/{id}")
-    public void export(HttpServletResponse response,@PathVariable Long id) throws IOException {
-        exportDataService.downloadtoCSV(response,id);
+    public void export(HttpServletResponse response, @PathVariable Long id) throws IOException {
+        exportDataService.downloadtoCSV(response, id);
     }
+
+
+    @GetMapping("/export_zip/{id}")
+    public ResponseEntity<Resource> exportZip(@PathVariable Long id) throws IOException {
+         return exportDataService.downloadToZip(id);
+    }
+
 
 }

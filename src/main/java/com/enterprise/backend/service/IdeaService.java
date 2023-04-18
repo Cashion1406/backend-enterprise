@@ -183,7 +183,7 @@ public class IdeaService {
         notification.setIsDelete(false);
         notification.setStatus(true);
         notification.setCreatedAt(timeStamp);
-        notification.setClient_id(commentRequest.getClient_id());
+        notification.setClient_id(idea.get().getClient().getId());
         notification.setTitle("Your idea " + idea.get().getName() + " has a new comment");
         notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has commented: " + " ' " + newComment.getComment() + " ' " + " on your idea :  " + idea.get().getName());
         notificationRepo.save(notification);
