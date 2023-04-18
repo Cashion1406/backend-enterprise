@@ -25,8 +25,8 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
     @Query("update Topic t set t.isDeleted = true where t.id = :id")
     void softdeletetopic(@Param("id") Long id);
 
-
-    List<Topic> findByisDeletedFalse();
+    @Query("select t from Topic t where t.isDeleted = false order by modifyDate desc")
+    List<Topic> getAllTopic();
 
 
     Optional<Topic> findByIdAndIdeasIsDeletedFalse(Long id);

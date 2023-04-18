@@ -44,7 +44,7 @@ public class IdeaService {
 
     public List<Idea> getAllIdea() {
 
-        return ideaRepo.findByisDeletedFalse();
+        return ideaRepo.getIdeas();
     }
 
     public Idea createIdea(IdeaRequest idea) {

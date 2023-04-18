@@ -73,7 +73,8 @@ public interface IdeaRepo extends JpaRepository<Idea, Long> {
     @Query(nativeQuery = true)
     List<IdeasPerCate> top7ideas();
 
-    List<Idea> findByisDeletedFalse();
+    @Query("select i from Idea i where i.isDeleted = false order by modify_date desc ")
+    List<Idea> getIdeas();
 
     @Transactional
     @Modifying
