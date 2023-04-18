@@ -228,7 +228,7 @@ public class IdeaService {
         notification.setIsDelete(false);
         notification.setStatus(true);
         notification.setCreatedAt(timeStamp);
-        notification.setClient_id(reactionRequest.getClient_id());
+        notification.setClient_id(idea.get().getClient().getId());
         notification.setContent(client.get().getFirstname() + " " + client.get().getLastname() + " has " + status + " on your idea : " + idea.get().getName());
         notification.setTitle("Your idea " + idea.get().getName() + " has new vote");
         notificationRepo.save(notification);
